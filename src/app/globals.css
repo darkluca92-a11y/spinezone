@@ -46,14 +46,113 @@
     animation: fadeIn 0.6s ease-in-out;
   }
   
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+  
   /* Performance optimizations */
   .will-change-transform {
     will-change: transform;
   }
   
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
   .gpu-accelerated {
     transform: translateZ(0);
     backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
+  /* Optimize paint and composite layers */
+  .isolate {
+    isolation: isolate;
+  }
+  
+  .contain-layout {
+    contain: layout;
+  }
+  
+  .contain-paint {
+    contain: paint;
+  }
+  
+  .contain-strict {
+    contain: strict;
+  }
+  
+  /* Critical rendering optimizations */
+  .critical-resource {
+    content-visibility: auto;
+    contain-intrinsic-size: 200px;
+  }
+  
+  /* Lazy loading optimization */
+  .lazy-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .lazy-section.loaded {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Image loading optimization */
+  .image-placeholder {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  
+  /* Optimize scrolling performance */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+  
+  .scroll-optimized {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  /* Optimize font rendering */
+  .text-rendering-optimized {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Enhanced mobile touch performance */
+  .mobile-touch-optimized {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  .mobile-touch-optimized:active {
+    transform: scale(0.98);
+  }
+  
+  /* Mobile animation optimization */
+  @media (hover: none) and (pointer: coarse) {
+    .mobile-animate {
+      will-change: transform;
+      transition: transform 0.15s ease-out;
+    }
+    
+    .mobile-animate:active {
+      transform: scale(0.95);
+    }
   }
 }
 
@@ -61,6 +160,17 @@
   from {
     opacity: 0;
     transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
   }
   to {
     opacity: 1;

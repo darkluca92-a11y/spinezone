@@ -1,4 +1,7 @@
-import { AlertCircle, Zap, Activity, Users, ArrowRight } from 'lucide-react';
+'use client';
+
+import { useState } from 'react';
+import { AlertCircle, Zap, Activity, Users, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
 import Image from 'next/image';
 
 const conditions = [
@@ -59,53 +62,93 @@ const getColorClasses = (color: string) => {
 };
 
 export default function ConditionsTreated() {
+  const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
+
+  const toggleCard = (index: number) => {
+    const newExpanded = new Set(expandedCards);
+    if (newExpanded.has(index)) {
+      newExpanded.delete(index);
+    } else {
+      newExpanded.add(index);
+    }
+    setExpandedCards(newExpanded);
+  };
+
   return (
     <section className="bg-gray-50 section-padding" aria-labelledby="conditions-heading">
       <div className="container-max">
-        <div className="text-center mb-16">
-          <h2 id="conditions-heading" className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 id="conditions-heading" className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             San Diego Physical Therapy 2025: All Joint Pain Conditions Treated
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-6 sm:mb-8">
             Our specialized San Diego physical therapy 2025 team treats ALL joint pain conditions - spine, hips, shoulders, knees - with advanced non-invasive methods. 1M+ patient encounters of proven experience.
           </p>
           
           <div className="bg-green-100 border border-green-200 rounded-lg p-4 max-w-2xl mx-auto">
-            <p className="text-green-800 font-semibold">
+            <p className="text-green-800 font-semibold text-sm sm:text-base">
               ✓ 90% of our patients avoid surgery completely
             </p>
-            <p className="text-green-700 text-sm mt-1">
+            <p className="text-green-700 text-xs sm:text-sm mt-1">
               Most conditions respond excellently to our non-invasive treatment protocols
             </p>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-16">
+        {/* Mobile-first accordion design, desktop grid */}
+        <div className="space-y-4 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-8 mb-12 sm:mb-16">
           {conditions.map((category, categoryIndex) => {
             const Icon = category.icon;
             const colors = getColorClasses(category.color);
+            const isExpanded = expandedCards.has(categoryIndex);
             
             return (
-              <div key={categoryIndex} className={`${colors.bg} ${colors.border} border rounded-2xl p-8`}>
-                <div className="flex items-center mb-6">
-                  <div className={`p-3 rounded-lg ${colors.icon} mr-4`}>
-                    <Icon className="w-6 h-6" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900">{category.category}</h3>
-                </div>
-                
-                <div className="space-y-4">
-                  {category.conditions.map((condition, conditionIndex) => (
-                    <div key={conditionIndex} className="bg-white p-4 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
-                      <div className="flex items-start justify-between mb-2">
-                        <h4 className="font-semibold text-gray-900">{condition.name}</h4>
-                        <span className={`text-xs px-2 py-1 rounded-full ${colors.accent} bg-white font-medium`}>
-                          {condition.severity}
-                        </span>
+              <div key={categoryIndex} className={`${colors.bg} ${colors.border} border rounded-2xl overflow-hidden`}>
+                {/* Header - always visible, clickable on mobile */}
+                <button
+                  className="w-full p-4 sm:p-6 lg:p-8 text-left lg:cursor-default"
+                  onClick={() => toggleCard(categoryIndex)}
+                  aria-expanded={isExpanded}
+                  aria-controls={`category-${categoryIndex}`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className={`p-2 sm:p-3 rounded-lg ${colors.icon} mr-3 sm:mr-4 flex-shrink-0`}>
+                        <Icon className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
                       </div>
-                      <p className="text-gray-600 text-sm leading-relaxed">{condition.description}</p>
+                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{category.category}</h3>
                     </div>
-                  ))}
+                    <div className="lg:hidden">
+                      {isExpanded ? (
+                        <ChevronUp className="w-5 h-5 text-gray-500" aria-hidden="true" />
+                      ) : (
+                        <ChevronDown className="w-5 h-5 text-gray-500" aria-hidden="true" />
+                      )}
+                    </div>
+                  </div>
+                </button>
+                
+                {/* Content - collapsible on mobile, always expanded on desktop */}
+                <div 
+                  id={`category-${categoryIndex}`}
+                  className={`
+                    px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8 
+                    lg:block ${isExpanded ? 'block' : 'hidden'}
+                  `}
+                >
+                  <div className="space-y-3 sm:space-y-4">
+                    {category.conditions.map((condition, conditionIndex) => (
+                      <div key={conditionIndex} className="bg-white p-3 sm:p-4 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+                        <div className="flex items-start justify-between mb-2">
+                          <h4 className="font-semibold text-gray-900 text-sm sm:text-base pr-2">{condition.name}</h4>
+                          <span className={`text-xs px-2 py-1 rounded-full ${colors.accent} bg-white font-medium flex-shrink-0`}>
+                            {condition.severity}
+                          </span>
+                        </div>
+                        <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">{condition.description}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             );
@@ -113,48 +156,49 @@ export default function ConditionsTreated() {
         </div>
 
         {/* Visual Treatment Success */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 lg:p-12">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
+        <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-12">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 items-center">
             <div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
                 Don't See Your Condition Listed?
               </h3>
-              <p className="text-lg text-gray-700 mb-6">
+              <p className="text-base sm:text-lg text-gray-700 mb-4 sm:mb-6">
                 We treat many more conditions beyond what's listed here. Our comprehensive evaluation process allows us to create personalized treatment plans for virtually any musculoskeletal condition.
               </p>
               
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                  <span className="text-gray-700">Comprehensive diagnostic evaluation</span>
+              <div className="space-y-2 sm:space-y-3 mb-6">
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm sm:text-base">Comprehensive diagnostic evaluation</span>
                 </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                  <span className="text-gray-700">Personalized treatment protocols</span>
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm sm:text-base">Personalized treatment protocols</span>
                 </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                  <span className="text-gray-700">Evidence-based treatment approaches</span>
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm sm:text-base">Evidence-based treatment approaches</span>
                 </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                  <span className="text-gray-700">Ongoing progress monitoring</span>
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm sm:text-base">Ongoing progress monitoring</span>
                 </div>
               </div>
               
-              <button className="btn-primary flex items-center group">
-                Schedule Free Assessment
+              <button className="btn-primary w-full sm:w-auto flex items-center justify-center group min-h-[48px]">
+                <span className="text-sm sm:text-base">Schedule Free Assessment</span>
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
               </button>
             </div>
             
-            <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg">
+            <div className="relative h-64 sm:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-lg order-first lg:order-last">
               <Image
                 src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                 alt="Physical therapist conducting comprehensive patient assessment and treatment planning"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
+                loading="lazy"
               />
             </div>
           </div>

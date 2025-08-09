@@ -141,13 +141,29 @@ export default function OptimizedCTAButton({
         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
         flex items-center justify-center
         shadow-lg hover:shadow-xl
+        will-change-transform will-change-auto
+        gpu-accelerated mobile-touch-optimized mobile-animate
         ${className}
       `}
       aria-label={selectedVariant.text}
       data-variant={selectedVariant.id}
+      style={{
+        // Enhanced mobile touch performance
+        WebkitTapHighlightColor: 'transparent',
+        touchAction: 'manipulation',
+        willChange: loading ? 'transform, opacity' : 'auto'
+      }}
     >
-      {selectedVariant.icon}
-      {selectedVariant.text}
+      <span className={`flex items-center justify-center transition-opacity duration-200 ${
+        loading ? 'opacity-70' : 'opacity-100'
+      }`}>
+        {loading ? (
+          <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-b-transparent mr-2" />
+        ) : (
+          selectedVariant.icon
+        )}
+        {selectedVariant.text}
+      </span>
     </button>
   );
 }

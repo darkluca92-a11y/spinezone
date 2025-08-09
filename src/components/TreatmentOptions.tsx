@@ -1,3 +1,5 @@
+'use client';
+
 import { Heart, Shield, Activity, Zap, CheckCircle, ArrowRight, Clock } from 'lucide-react';
 import Image from 'next/image';
 
@@ -102,11 +104,11 @@ export default function TreatmentOptions() {
   return (
     <section className="bg-white section-padding" aria-labelledby="treatments-heading">
       <div className="container-max">
-        <div className="text-center mb-16">
-          <h2 id="treatments-heading" className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 id="treatments-heading" className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             Comprehensive Treatment Options
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
             We offer a complete spectrum of evidence-based treatments, from traditional manual therapy to cutting-edge technologies, all designed to achieve optimal outcomes
           </p>
         </div>
@@ -165,56 +167,107 @@ export default function TreatmentOptions() {
         </div>
 
         {/* Treatment Phases */}
-        <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-8 lg:p-12 mb-16">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+        <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-6 sm:p-8 lg:p-12 mb-12 sm:mb-16">
+          <div className="text-center mb-8 sm:mb-12">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
               Your Treatment Journey
             </h3>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
               Our systematic, phase-based approach ensures optimal recovery at every stage of your healing process
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {treatmentPhases.map((phase, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold mr-3">
-                    {index + 1}
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-gray-900">{phase.phase}</h4>
-                    <p className="text-blue-600 font-semibold">{phase.title}</p>
-                  </div>
-                </div>
-                
-                <div className="mb-4">
-                  <div className="flex items-center text-sm text-gray-600 mb-3">
-                    <Clock className="w-4 h-4 mr-2" aria-hidden="true" />
-                    <span>Duration: {phase.duration}</span>
+          {/* Mobile horizontal scroll, desktop grid */}
+          <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+            <div className="flex space-x-4 overflow-x-auto pb-4 lg:hidden">
+              {treatmentPhases.map((phase, index) => (
+                <div key={index} className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow flex-shrink-0 w-72">
+                  <div className="flex items-center mb-4">
+                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold mr-3 text-sm">
+                      {index + 1}
+                    </div>
+                    <div>
+                      <h4 className="text-base font-bold text-gray-900">{phase.phase}</h4>
+                      <p className="text-blue-600 font-semibold text-sm">{phase.title}</p>
+                    </div>
                   </div>
                   
-                  <h5 className="font-semibold text-gray-900 mb-2">Primary Goals:</h5>
-                  <ul className="space-y-1 mb-4">
-                    {phase.goals.map((goal, goalIndex) => (
-                      <li key={goalIndex} className="flex items-start text-sm">
-                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2 mt-2"></div>
-                        <span className="text-gray-700">{goal}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <h5 className="font-semibold text-gray-900 mb-2">Key Treatments:</h5>
-                  <div className="flex flex-wrap gap-2">
-                    {phase.treatments.map((treatment, treatmentIndex) => (
-                      <span key={treatmentIndex} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-                        {treatment}
-                      </span>
-                    ))}
+                  <div className="mb-4">
+                    <div className="flex items-center text-xs text-gray-600 mb-3">
+                      <Clock className="w-3 h-3 mr-2" aria-hidden="true" />
+                      <span>Duration: {phase.duration}</span>
+                    </div>
+                    
+                    <h5 className="font-semibold text-gray-900 mb-2 text-sm">Primary Goals:</h5>
+                    <ul className="space-y-1 mb-4">
+                      {phase.goals.map((goal, goalIndex) => (
+                        <li key={goalIndex} className="flex items-start text-xs">
+                          <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2 mt-1.5 flex-shrink-0"></div>
+                          <span className="text-gray-700">{goal}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <h5 className="font-semibold text-gray-900 mb-2 text-sm">Key Treatments:</h5>
+                    <div className="flex flex-wrap gap-1">
+                      {phase.treatments.map((treatment, treatmentIndex) => (
+                        <span key={treatmentIndex} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                          {treatment}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Desktop grid layout */}
+            <div className="hidden lg:contents">
+              {treatmentPhases.map((phase, index) => (
+                <div key={index} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                  <div className="flex items-center mb-4">
+                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold mr-3">
+                      {index + 1}
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-gray-900">{phase.phase}</h4>
+                      <p className="text-blue-600 font-semibold">{phase.title}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mb-4">
+                    <div className="flex items-center text-sm text-gray-600 mb-3">
+                      <Clock className="w-4 h-4 mr-2" aria-hidden="true" />
+                      <span>Duration: {phase.duration}</span>
+                    </div>
+                    
+                    <h5 className="font-semibold text-gray-900 mb-2">Primary Goals:</h5>
+                    <ul className="space-y-1 mb-4">
+                      {phase.goals.map((goal, goalIndex) => (
+                        <li key={goalIndex} className="flex items-start text-sm">
+                          <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2 mt-2"></div>
+                          <span className="text-gray-700">{goal}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <h5 className="font-semibold text-gray-900 mb-2">Key Treatments:</h5>
+                    <div className="flex flex-wrap gap-2">
+                      {phase.treatments.map((treatment, treatmentIndex) => (
+                        <span key={treatmentIndex} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                          {treatment}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile scroll indicator */}
+          <div className="lg:hidden mt-4 text-center">
+            <p className="text-xs text-gray-500">← Scroll to see all phases →</p>
           </div>
         </div>
 

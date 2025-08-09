@@ -421,15 +421,54 @@ export default function ContactPage() {
                 <p className="text-gray-600">Select your preferred date and time</p>
               </div>
               
-              {/* Calendly Widget Placeholder */}
-              <div className="bg-gray-100 h-96 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
-                <div className="text-center">
-                  <Calendar className="w-16 h-16 text-gray-400 mx-auto mb-4" aria-hidden="true" />
-                  <h4 className="text-lg font-semibold text-gray-700 mb-2">Calendly Booking Widget</h4>
-                  <p className="text-gray-500 mb-4">Interactive calendar would be embedded here</p>
-                  <button className="btn-primary">
-                    Open Booking Calendar
+              {/* Enhanced Calendly Widget Placeholder */}
+              <div className="bg-gradient-to-br from-blue-50 to-green-50 h-96 rounded-lg border border-gray-200 p-8">
+                <div className="text-center h-full flex flex-col justify-center">
+                  <Calendar className="w-16 h-16 text-blue-600 mx-auto mb-4" aria-hidden="true" />
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Online Booking System</h4>
+                  <p className="text-gray-600 mb-6">
+                    Our Calendly integration allows you to book appointments instantly across all San Diego locations
+                  </p>
+                  
+                  {/* Mock Calendar Preview */}
+                  <div className="bg-white rounded-lg p-4 mb-6 mx-auto max-w-md">
+                    <div className="grid grid-cols-7 gap-1 text-center text-xs mb-2">
+                      {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
+                        <div key={day} className="font-semibold text-gray-600 p-1">{day}</div>
+                      ))}
+                    </div>
+                    <div className="grid grid-cols-7 gap-1">
+                      {Array.from({ length: 35 }, (_, i) => {
+                        const isAvailable = [4, 5, 6, 11, 12, 13, 18, 19, 20, 25, 26, 27].includes(i);
+                        const isSelected = i === 12;
+                        return (
+                          <div 
+                            key={i} 
+                            className={`aspect-square text-xs flex items-center justify-center rounded ${
+                              isSelected ? 'bg-blue-600 text-white' : 
+                              isAvailable ? 'bg-green-100 text-green-800 cursor-pointer hover:bg-green-200' : 
+                              'text-gray-400'
+                            }`}
+                          >
+                            {i > 5 && i < 30 ? i - 5 : ''}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  
+                  <button 
+                    onClick={() => {
+                      alert('Demo Mode: In production, this would open the full Calendly booking widget with:\n\n• Real-time availability across 10 locations\n• Provider selection\n• Service type selection\n• Automatic confirmations\n• Calendar integration\n\nFor now, please call (858) 555-0123 to schedule!');
+                    }}
+                    className="btn-primary mb-3"
+                  >
+                    Launch Booking System
                   </button>
+                  
+                  <p className="text-xs text-gray-500">
+                    🚀 Demo Mode - Click to see what the full system would include
+                  </p>
                 </div>
               </div>
               

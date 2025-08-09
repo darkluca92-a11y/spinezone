@@ -59,3 +59,61 @@ logs
 
 # Cache
 .cache/
+
+# Deployment and build artifacts
+*.tgz
+*.tar.gz
+*.zip
+.vercel/
+.netlify/
+
+# Performance and bundle analysis
+bundle-analysis.json
+.bundle-analyzer/
+analyze/
+
+# TypeScript incremental compilation
+*.tsbuildinfo
+
+# ESLint cache
+.eslintcache
+
+# Turbo
+.turbo
+
+# Storybook
+storybook-static/
+
+# Backup files
+*.backup
+*.bak
+.env.backup
+.claude.json.backup
+
+# Database files (if any)
+*.sqlite
+*.sqlite3
+*.db
+
+# Personal notes and temporary files
+TODO.md
+NOTES.md
+scratch/
+temp/
+
+# Documentation files (keep only essential ones)
+AB_TESTING_STRATEGY.md
+BUG_FIXES_REPORT.md
+CODE_REVIEW_FIXES.md
+IMAGE_ANALYSIS_REPORT.md
+INTERACTIVE_MAP_SETUP.md
+NETLIFY_TROUBLESHOOTING_GUIDE.md
+PERFORMANCE_OPTIMIZATION_SUMMARY.md
+PERFORMANCE_REPORT.md
+SECURITY_IMPLEMENTATION.md
+WEBSITE_AUDIT_REPORT.md
+WEBSITE_QA_REPORT.md
+
+# Sitemap and robots (generated files)
+public/sitemap.xml
+public/robots.txt

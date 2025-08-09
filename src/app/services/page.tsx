@@ -1,24 +1,31 @@
 import Image from 'next/image';
 import { Zap, Heart, Monitor, Leaf, CheckCircle, ArrowRight, Award, Target } from 'lucide-react';
 import type { Metadata } from 'next';
+import { generateSEOMetadata } from '@/lib/seo-utils';
+import StructuredData from '@/components/StructuredData';
+import Breadcrumb from '@/components/Breadcrumb';
+import { breadcrumbConfigs } from '@/lib/breadcrumb-config';
+import InternalLinks from '@/components/InternalLinks';
 
-export const metadata: Metadata = {
-  title: 'San Diego Physical Therapy 2025 Services - Advanced Joint Pain Treatment',
-  description: 'San Diego physical therapy 2025 services: Advanced joint pain treatment for back, neck, hips, shoulders, knees. 1M+ patient encounters, 100K+ visits, 90% success rate.',
+export const metadata: Metadata = generateSEOMetadata({
+  title: 'San Diego Physical Therapy Services 2025 | Advanced Joint Pain Treatment | SpineZone',
+  description: 'Comprehensive San Diego physical therapy 2025 services: Advanced joint pain treatment for back, neck, hips, shoulders, knees. 90% success rate, proven non-invasive methods.',
   keywords: [
-    'San Diego physical therapy 2025',
-    'SpineZone services',
-    'non-invasive back pain treatment San Diego',
-    'neck pain treatment San Diego',
-    'joint pain relief San Diego',
-    'online physical therapy programs',
-    'wellness physical therapy San Diego'
+    'physical therapy services San Diego 2025',
+    'comprehensive joint pain treatment',
+    'spine treatment programs',
+    'sports injury rehabilitation services',
+    'non-invasive pain management',
+    'La Jolla physical therapy services',
+    'Hillcrest spine treatment programs',
+    'Pacific Beach PT services',
+    'intensive rehabilitation programs',
+    'maintenance therapy programs'
   ],
-  openGraph: {
-    title: 'SpineZone Services - Comprehensive Non-Invasive Pain Treatment',
-    description: 'Back/Neck Pain, Joint Pain, Online Programs, and Wellness services with proven results.',
-  },
-};
+  category: 'spine',
+  location: 'San Diego',
+  priority: 'high'
+});
 
 const services = [
   {
@@ -116,6 +123,15 @@ const comparisonData = [
 export default function ServicesPage() {
   return (
     <main>
+      <StructuredData type="services" />
+      
+      {/* Breadcrumb Navigation */}
+      <section className="bg-white border-b border-gray-100">
+        <div className="container-max py-4">
+          <Breadcrumb items={breadcrumbConfigs.services} />
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 to-green-50 section-padding">
         <div className="container-max text-center">
@@ -389,6 +405,9 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* Internal Links for SEO */}
+      <InternalLinks currentPage="services" showLocalSEO={true} />
     </main>
   );
 }

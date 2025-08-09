@@ -56,10 +56,11 @@ export default function TrustIndicators() {
         {/* Trust Statistics */}
         <div className="text-center mb-16">
           <h2 id="trust-heading" className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Trusted by Thousands of Patients
+            San Diego's Most Trusted Physical Therapy 2025
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Our track record speaks for itself - delivering exceptional spine care results since 2008
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Our proven track record speaks for itself - delivering exceptional joint pain treatment results to over 
+            100,000 San Diego patients since 2008. See why we're rated #1 for physical therapy in San Diego.
           </p>
         </div>
 

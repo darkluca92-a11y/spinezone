@@ -23,7 +23,18 @@ import {
   AlertCircle,
   BarChart3
 } from 'lucide-react';
-import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import dynamic from 'next/dynamic';
+
+// Dynamic import for Recharts to reduce bundle size
+const LineChart = dynamic(() => import('recharts').then(mod => ({ default: mod.LineChart })), { ssr: false });
+const Line = dynamic(() => import('recharts').then(mod => ({ default: mod.Line })), { ssr: false });
+const AreaChart = dynamic(() => import('recharts').then(mod => ({ default: mod.AreaChart })), { ssr: false });
+const Area = dynamic(() => import('recharts').then(mod => ({ default: mod.Area })), { ssr: false });
+const XAxis = dynamic(() => import('recharts').then(mod => ({ default: mod.XAxis })), { ssr: false });
+const YAxis = dynamic(() => import('recharts').then(mod => ({ default: mod.YAxis })), { ssr: false });
+const CartesianGrid = dynamic(() => import('recharts').then(mod => ({ default: mod.CartesianGrid })), { ssr: false });
+const Tooltip = dynamic(() => import('recharts').then(mod => ({ default: mod.Tooltip })), { ssr: false });
+const ResponsiveContainer = dynamic(() => import('recharts').then(mod => ({ default: mod.ResponsiveContainer })), { ssr: false });
 
 interface PatientDashboardProps {
   user: User;
@@ -358,7 +369,13 @@ export default function PatientDashboard({ user }: PatientDashboardProps) {
                 {/* Progress Chart */}
                 <div className="bg-white rounded-xl shadow-lg p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-6">Progress Over Time</h3>
-                  <div className="h-80">
+                  <div className="h-80 relative">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gray-50 rounded-lg">
+                      <div className="text-center">
+                        <div className="animate-pulse bg-gray-300 h-6 w-32 mx-auto mb-4 rounded"></div>
+                        <div className="animate-pulse bg-gray-300 h-40 w-full rounded"></div>
+                      </div>
+                    </div>
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={progressData}>
                         <CartesianGrid strokeDasharray="3 3" />
@@ -479,7 +496,13 @@ export default function PatientDashboard({ user }: PatientDashboardProps) {
                 <div className="bg-white rounded-xl shadow-lg p-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-6">Progress Tracking</h2>
                   
-                  <div className="h-96 mb-8">
+                  <div className="h-96 mb-8 relative">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gray-50 rounded-lg">
+                      <div className="text-center">
+                        <div className="animate-pulse bg-gray-300 h-8 w-48 mx-auto mb-6 rounded"></div>
+                        <div className="animate-pulse bg-gray-300 h-64 w-full rounded"></div>
+                      </div>
+                    </div>
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={progressData}>
                         <CartesianGrid strokeDasharray="3 3" />

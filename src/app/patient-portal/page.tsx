@@ -3,9 +3,32 @@
 import { useState, useEffect } from 'react';
 import { supabase, isSupabaseEnabled } from '@/lib/supabase';
 import { User, Session } from '@supabase/supabase-js';
-import PatientDashboard from '@/components/PatientDashboard';
-import AuthForm from '@/components/AuthForm';
+import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
+
+// Dynamic imports for heavy components to reduce initial bundle size
+const PatientDashboard = dynamic(() => import('@/components/PatientDashboard'), {
+  loading: () => (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+        <p className="text-gray-600">Loading dashboard...</p>
+      </div>
+    </div>
+  ),
+  ssr: false // Dashboard contains charts and interactive elements
+});
+
+const AuthForm = dynamic(() => import('@/components/AuthForm'), {
+  loading: () => (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+        <p className="text-gray-600">Loading authentication...</p>
+      </div>
+    </div>
+  )
+});
 
 export default function PatientPortalPage() {
   const [user, setUser] = useState<User | null>(null);
