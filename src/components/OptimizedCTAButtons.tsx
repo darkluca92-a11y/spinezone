@@ -12,23 +12,23 @@ interface CTAVariant {
 }
 
 const ctaVariants: CTAVariant[] = [
-  // Variant A: Original Blue
+  // Variant A: Primary Appointment Booking
   {
     id: 'variant-a',
-    text: 'Book Free Consultation',
+    text: 'Schedule Your Appointment',
     style: 'bg-blue-600 hover:bg-blue-700 text-white',
     icon: <Calendar className="w-5 h-5 mr-2" aria-hidden="true" />,
     size: 'large'
   },
-  // Variant B: Green with Urgency
+  // Variant B: Urgent Appointment Booking
   {
     id: 'variant-b',
-    text: 'Get Pain Relief Now',
+    text: 'Book Appointment Now',
     style: 'bg-green-600 hover:bg-green-700 text-white',
     icon: <ArrowRight className="w-5 h-5 mr-2" aria-hidden="true" />,
     size: 'large'
   },
-  // Variant C: Orange with Call Focus
+  // Variant C: Phone Call Focus
   {
     id: 'variant-c',
     text: 'Call (858) 555-0123',
@@ -36,12 +36,12 @@ const ctaVariants: CTAVariant[] = [
     icon: <Phone className="w-5 h-5 mr-2" aria-hidden="true" />,
     size: 'medium'
   },
-  // Variant D: Purple with Chat Focus
+  // Variant D: Schedule Assessment Appointment
   {
     id: 'variant-d',
-    text: 'Start Free Consultation',
+    text: 'Schedule Assessment Appointment',
     style: 'bg-purple-600 hover:bg-purple-700 text-white',
-    icon: <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />,
+    icon: <Calendar className="w-5 h-5 mr-2" aria-hidden="true" />,
     size: 'large'
   }
 ];

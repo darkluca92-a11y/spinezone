@@ -9,29 +9,95 @@
   --light-green: #ecfdf5;
   --dark-blue: #1e40af;
   --dark-green: #047857;
+  
+  /* Performance-optimized variables */
+  --animation-duration: 0.3s;
+  --transition-duration: 0.2s;
+  --transition-timing: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --scroll-y: 0px;
+  
+  /* Mobile-optimized spacing */
+  --mobile-padding: 1rem;
+  --desktop-padding: 2rem;
+  
+  /* Core Web Vitals optimized values */
+  --loading-skeleton-speed: 1.5s;
+  --intersection-threshold: 0.1;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Optimize font rendering */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   body {
     @apply text-gray-900 antialiased;
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+    /* Optimize touch interactions */
+    touch-action: manipulation;
   }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold leading-tight;
+    /* Optimize heading rendering */
+    text-wrap: balance;
+  }
+  
+  /* Optimize image loading */
+  img {
+    height: auto;
+    max-width: 100%;
+    /* Prevent layout shift */
+    aspect-ratio: attr(width) / attr(height);
+  }
+  
+  /* Optimize focus visibility */
+  :focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+    transition: all var(--transition-duration) var(--transition-timing);
+    /* Optimize for mobile touch */
+    min-height: 44px;
+    touch-action: manipulation;
+    /* GPU acceleration for smoother animations */
+    transform: translateZ(0);
+    will-change: transform, background-color;
+  }
+  
+  .btn-primary:hover {
+    transform: translateZ(0) translateY(-1px);
+  }
+  
+  .btn-primary:active {
+    transform: translateZ(0) translateY(0);
   }
   
   .btn-secondary {
-    @apply bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2;
+    @apply bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2;
+    transition: all var(--transition-duration) var(--transition-timing);
+    min-height: 44px;
+    touch-action: manipulation;
+    transform: translateZ(0);
+    will-change: transform, background-color;
+  }
+  
+  .btn-secondary:hover {
+    transform: translateZ(0) translateY(-1px);
+  }
+  
+  .btn-secondary:active {
+    transform: translateZ(0) translateY(0);
   }
   
   .section-padding {
@@ -43,11 +109,20 @@
   }
   
   .fade-in {
-    animation: fadeIn 0.6s ease-in-out;
+    animation: fadeIn var(--animation-duration) ease-in-out;
   }
   
   .animate-slide-up {
-    animation: slideUp 0.4s ease-out;
+    animation: slideUp calc(var(--animation-duration) * 1.33) ease-out;
+  }
+  
+  /* Performance-optimized animations */
+  .animate-pulse-fast {
+    animation: pulse-fast 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-bounce-subtle {
+    animation: bounce-subtle 2s infinite;
   }
   
   /* Performance optimizations */
@@ -85,19 +160,69 @@
   /* Critical rendering optimizations */
   .critical-resource {
     content-visibility: auto;
-    contain-intrinsic-size: 200px;
+    contain-intrinsic-size: 400px;
   }
   
-  /* Lazy loading optimization */
+  /* Enhanced lazy loading optimization */
   .lazy-section {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity var(--animation-duration) var(--transition-timing), 
+                transform var(--animation-duration) var(--transition-timing);
   }
   
-  .lazy-section.loaded {
+  .lazy-section.loaded,
+  .lazy-section.in-viewport {
     opacity: 1;
     transform: translateY(0);
+  }
+  
+  /* Viewport-based animations */
+  .viewport-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s var(--transition-timing), 
+                transform 0.6s var(--transition-timing);
+  }
+  
+  .viewport-section.in-viewport {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Mobile scroll optimizations */
+  .is-scrolling {
+    pointer-events: none;
+  }
+  
+  .is-scrolling * {
+    animation-play-state: paused;
+  }
+  
+  /* Enhanced loading skeleton */
+  .loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading var(--loading-skeleton-speed) infinite;
+  }
+  
+  /* Touch-optimized interactions */
+  @media (hover: none) and (pointer: coarse) {
+    .hover\:scale-105:hover {
+      transform: none;
+    }
+    
+    .hover\:shadow-xl:hover {
+      box-shadow: none;
+    }
+    
+    /* Optimize touch targets */
+    button, a[role="button"], .btn {
+      min-height: 44px;
+      min-width: 44px;
+      touch-action: manipulation;
+    }
+  }
   }
   
   /* Image loading optimization */
@@ -175,6 +300,34 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes pulse-fast {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bounce-subtle {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+  60% {
+    transform: translateY(-2px);
   }
 }
 

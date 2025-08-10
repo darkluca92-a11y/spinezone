@@ -1,0 +1,780 @@
+{
+  "projectName": "SpineZone Website Restructuring - Wireframes",
+  "designDate": "2025-01-09",
+  "mobileFirstApproach": true,
+  "primaryObjective": "Shorten homepage, improve conversion with appointment-focused CTAs",
+  
+  "designSystem": {
+    "breakpoints": {
+      "mobile": "320px-768px",
+      "tablet": "768px-1024px", 
+      "desktop": "1024px+"
+    },
+    "touchTargets": {
+      "minimum": "44px",
+      "recommended": "48px",
+      "ctaButtons": "56px"
+    },
+    "spacing": {
+      "mobile": "16px",
+      "tablet": "20px",
+      "desktop": "24px"
+    },
+    "colors": {
+      "primary": "#2563EB",
+      "secondary": "#059669",
+      "accent": "#DC2626",
+      "neutral": "#374151",
+      "background": "#F9FAFB"
+    },
+    "ctaVariations": [
+      "Schedule Your Appointment",
+      "Book Appointment Now",
+      "Make an Appointment", 
+      "Reserve Your Appointment",
+      "Schedule Assessment"
+    ]
+  },
+
+  "pages": {
+    "homepage": {
+      "title": "Shortened Homepage - Mobile-First Design",
+      "objective": "Focus conversion, reduce length by 40%",
+      "structure": {
+        "header": {
+          "height": "64px",
+          "sticky": true,
+          "components": ["logo", "mobileMenuToggle", "primaryCTA"]
+        },
+        "heroSection": {
+          "heightMobile": "100vh",
+          "heightDesktop": "80vh",
+          "layout": "singleColumn",
+          "components": [
+            {
+              "element": "heroHeading",
+              "content": "Heal Naturally: 90% Success Rate",
+              "subheading": "Without Surgery, Injections, or Opioids",
+              "emphasis": "Now for All Joint Pain Including Hips, Shoulders, and Knees",
+              "styling": {
+                "mobile": "text-3xl font-bold leading-tight",
+                "desktop": "text-6xl font-bold"
+              }
+            },
+            {
+              "element": "statsGrid",
+              "layout": "3-column",
+              "stats": [
+                {"value": "1M+", "label": "Patient Encounters"},
+                {"value": "100K+", "label": "Patient Visits"}, 
+                {"value": "90%", "label": "Success Rate"}
+              ]
+            },
+            {
+              "element": "urgencyNotice",
+              "content": "URGENT: Limited New Patient Openings This Month",
+              "styling": "gradient-banner with-icon",
+              "placement": "below-stats"
+            },
+            {
+              "element": "primaryCTA",
+              "text": "Schedule Your Appointment",
+              "size": "large",
+              "minHeight": "56px",
+              "width": "100% mobile, auto desktop",
+              "placement": "hero-bottom",
+              "scrollTrigger": false
+            },
+            {
+              "element": "trustIndicators",
+              "content": "FREE assessment • Most insurance accepted • Same-day appointments",
+              "placement": "below-cta"
+            }
+          ]
+        },
+        "conditionsTreated": {
+          "title": "San Diego Physical Therapy 2025: All Joint Pain Conditions Treated",
+          "layout": "enhancedTable",
+          "components": [
+            {
+              "element": "conditionsTable",
+              "categories": [
+                {
+                  "name": "Spine Conditions",
+                  "conditions": [
+                    {"name": "Herniated Discs", "severity": "Common", "treatmentApproach": "Non-invasive decompression"},
+                    {"name": "Sciatica", "severity": "Painful", "treatmentApproach": "Nerve mobilization"},
+                    {"name": "Spinal Stenosis", "severity": "Progressive", "treatmentApproach": "Joint mobilization"},
+                    {"name": "Chronic Back Pain", "severity": "Persistent", "treatmentApproach": "Comprehensive rehabilitation"}
+                  ]
+                },
+                {
+                  "name": "Joint Conditions", 
+                  "conditions": [
+                    {"name": "Hip Arthritis", "severity": "Degenerative", "treatmentApproach": "Movement restoration"},
+                    {"name": "Shoulder Impingement", "severity": "Limiting", "treatmentApproach": "Manual therapy"},
+                    {"name": "Knee Pain", "severity": "Variable", "treatmentApproach": "Functional training"}
+                  ]
+                }
+              ],
+              "interactivity": {
+                "mobile": "accordion-style",
+                "desktop": "hover-effects"
+              }
+            },
+            {
+              "element": "scrollTriggeredCTA",
+              "triggerPoint": "50% scroll",
+              "text": "Find Treatment for My Condition",
+              "placement": "sticky-bottom mobile",
+              "behavior": "fade-in-up"
+            }
+          ]
+        },
+        "treatmentOptions": {
+          "title": "Comprehensive Treatment Options",
+          "layout": "cardGrid",
+          "objective": "Replace full journey with overview cards",
+          "components": [
+            {
+              "element": "treatmentCards",
+              "layout": {
+                "mobile": "vertical-scroll",
+                "tablet": "2-column-grid",
+                "desktop": "3-column-grid"
+              },
+              "cards": [
+                {
+                  "title": "Manual Therapy",
+                  "icon": "Heart",
+                  "keyBenefits": ["Immediate pain relief", "Improved mobility", "Enhanced circulation"],
+                  "ctaText": "Learn More About Manual Therapy",
+                  "ctaAction": "navigate:/services#manual-therapy"
+                },
+                {
+                  "title": "Advanced Therapies",
+                  "icon": "Zap",
+                  "keyBenefits": ["Accelerated healing", "Reduced inflammation", "Nerve regeneration"],
+                  "ctaText": "Explore Advanced Treatments", 
+                  "ctaAction": "navigate:/services#advanced"
+                },
+                {
+                  "title": "Exercise Therapy",
+                  "icon": "Activity",
+                  "keyBenefits": ["Long-term stability", "Injury prevention", "Functional improvement"],
+                  "ctaText": "Start Exercise Program",
+                  "ctaAction": "navigate:/services#exercise"
+                }
+              ],
+              "cardInteraction": {
+                "hover": "lift-shadow",
+                "mobile": "tap-feedback"
+              }
+            },
+            {
+              "element": "treatmentCTA",
+              "text": "Not Sure Which Treatment is Right?",
+              "subtext": "Take our assessment to get personalized recommendations",
+              "ctaText": "Take Assessment",
+              "ctaAction": "navigate:/assessment",
+              "placement": "cards-bottom"
+            }
+          ]
+        },
+        "compactLocalSEO": {
+          "title": "San Diego Locations",
+          "objective": "Compact version, full details moved to /locations",
+          "components": [
+            {
+              "element": "neighborhoodLinks",
+              "layout": "horizontal-scroll mobile, grid desktop",
+              "neighborhoods": ["La Jolla", "Hillcrest", "Pacific Beach", "Mission Valley", "Downtown"],
+              "linkAction": "navigate:/locations#neighborhood"
+            },
+            {
+              "element": "networkCTA",
+              "text": "View All Locations & Network",
+              "ctaAction": "navigate:/locations",
+              "styling": "secondary-button"
+            }
+          ]
+        },
+        "faqSection": {
+          "title": "Physical Therapy FAQ - San Diego 2025",
+          "layout": "accordion",
+          "maxVisible": 6,
+          "foldLine": "above-footer"
+        },
+        "finalCTA": {
+          "title": "Ready to Start Your Recovery?",
+          "text": "Make Your Appointment Today",
+          "subtext": "Join thousands of San Diego patients who chose natural healing",
+          "ctaSize": "large",
+          "placement": "full-width-section"
+        }
+      },
+      "removedSections": [
+        "Full Treatment Journey (moved to /treatment-journey)",
+        "Don't See Your Condition Listed (moved to /services)",
+        "Network Trust Indicators (moved to /locations)",
+        "Detailed Local SEO content"
+      ],
+      "mobileOptimizations": {
+        "stickyNavigation": true,
+        "scrollTriggeredCTAs": true,
+        "touchFriendlySpacing": true,
+        "minimumTouchTargets": "44px",
+        "stackedLayouts": true
+      }
+    },
+
+    "treatmentJourneyPage": {
+      "route": "/treatment-journey",
+      "title": "Your Treatment Journey - What to Expect",
+      "objective": "Dedicated page for treatment process education",
+      "structure": {
+        "heroSection": {
+          "title": "Your Path to Recovery",
+          "subtitle": "Understanding the 3-Phase Treatment Process",
+          "ctaText": "Start My Journey",
+          "ctaAction": "scroll-to-booking"
+        },
+        "phaseTimeline": {
+          "layout": "vertical-timeline mobile, horizontal desktop",
+          "phases": [
+            {
+              "phase": "Phase 1",
+              "title": "Pain Relief & Protection",
+              "duration": "1-2 weeks",
+              "goals": ["Reduce acute pain", "Protect injured tissues", "Restore basic function"],
+              "treatments": ["Manual therapy", "Pain management", "Gentle mobilization"],
+              "expectedOutcomes": "60-80% pain reduction",
+              "visualIndicator": "progress-bar-20"
+            },
+            {
+              "phase": "Phase 2", 
+              "title": "Mobility & Strength",
+              "duration": "2-4 weeks",
+              "goals": ["Improve range of motion", "Build foundational strength", "Address movement patterns"],
+              "treatments": ["Progressive exercises", "Manual therapy", "Movement training"],
+              "expectedOutcomes": "Functional improvement, return to daily activities",
+              "visualIndicator": "progress-bar-60"
+            },
+            {
+              "phase": "Phase 3",
+              "title": "Function & Performance", 
+              "duration": "2-6 weeks",
+              "goals": ["Return to activities", "Optimize performance", "Prevent recurrence"],
+              "treatments": ["Advanced exercises", "Functional training", "Sport-specific prep"],
+              "expectedOutcomes": "Full activity resumption, injury prevention",
+              "visualIndicator": "progress-bar-100"
+            }
+          ]
+        },
+        "expectationsSection": {
+          "title": "What to Expect During Treatment",
+          "layout": "info-cards",
+          "cards": [
+            {
+              "title": "Average Treatment Length",
+              "content": "4-8 weeks depending on condition severity",
+              "icon": "Calendar"
+            },
+            {
+              "title": "Session Frequency",
+              "content": "2-3 times per week initially, reducing as you improve", 
+              "icon": "Clock"
+            },
+            {
+              "title": "Success Rate",
+              "content": "90% of patients achieve their treatment goals",
+              "icon": "TrendingUp"
+            }
+          ]
+        },
+        "progressTracking": {
+          "title": "How We Track Your Progress",
+          "components": [
+            "Initial assessment and baseline measurements",
+            "Weekly progress evaluations",
+            "Functional outcome assessments", 
+            "Patient-reported outcome measures"
+          ]
+        },
+        "ctaSections": [
+          {
+            "placement": "after-phases",
+            "text": "Ready to Begin Phase 1?",
+            "ctaText": "Schedule Your Assessment"
+          },
+          {
+            "placement": "after-expectations", 
+            "text": "Have Questions About Your Journey?",
+            "ctaText": "Speak with a Specialist"
+          },
+          {
+            "placement": "page-bottom",
+            "text": "Start Your Recovery Journey Today",
+            "ctaText": "Book Your First Appointment"
+          }
+        ]
+      }
+    },
+
+    "enhancedLocationsPage": {
+      "route": "/locations",
+      "title": "San Diego Physical Therapy Locations",
+      "objective": "Network trust indicators, interactive map, individual clinic CTAs",
+      "structure": {
+        "heroSection": {
+          "title": "San Diego's Most Trusted Physical Therapy Network", 
+          "subtitle": "8 locations serving San Diego & Orange County",
+          "networkStats": {
+            "layout": "4-column mobile-stack",
+            "stats": [
+              {"value": "8", "label": "Clinic Locations"},
+              {"value": "1M+", "label": "Patient Encounters"},
+              {"value": "90%", "label": "Success Rate"},
+              {"value": "24hr", "label": "Response Time"}
+            ]
+          }
+        },
+        "trustIndicators": {
+          "title": "Why Patients Choose Our Network",
+          "layout": "icon-with-text-grid",
+          "indicators": [
+            {
+              "icon": "Shield",
+              "title": "All Major Insurance Accepted",
+              "description": "Direct billing and pre-authorization handling"
+            },
+            {
+              "icon": "Clock",
+              "title": "24-Hour Appointment Confirmation", 
+              "description": "Quick scheduling across all locations"
+            },
+            {
+              "icon": "Users",
+              "title": "Consistent Quality Standards",
+              "description": "Same proven protocols at every clinic"
+            },
+            {
+              "icon": "MapPin",
+              "title": "Convenient Locations",
+              "description": "Easy access throughout San Diego County"
+            }
+          ]
+        },
+        "interactiveMap": {
+          "mapProvider": "Google Maps",
+          "features": [
+            "Clinic location markers",
+            "Real-time hours display", 
+            "Driving directions",
+            "Parking information"
+          ],
+          "mapHeight": {
+            "mobile": "300px",
+            "desktop": "500px"
+          }
+        },
+        "locationCards": {
+          "layout": "responsive-grid",
+          "cardStructure": {
+            "clinicName": "string",
+            "address": "string", 
+            "phone": "string",
+            "hours": "object",
+            "specialties": "array",
+            "availableToday": "boolean",
+            "ctaText": "Schedule at This Location",
+            "ctaAction": "booking-modal-with-location-preset"
+          },
+          "locations": [
+            {
+              "name": "SpineZone La Jolla",
+              "address": "8950 Villa La Jolla Dr, La Jolla, CA 92037",
+              "specialties": ["Spine Care", "Sports Rehab"],
+              "features": ["Parking Available", "Wheelchair Accessible"]
+            },
+            {
+              "name": "SpineZone Hillcrest", 
+              "address": "1234 University Ave, San Diego, CA 92103",
+              "specialties": ["Manual Therapy", "Joint Pain"],
+              "features": ["Public Transit", "Evening Hours"]
+            }
+          ]
+        },
+        "serviceAreaMap": {
+          "title": "Complete San Diego Coverage",
+          "neighborhoods": {
+            "layout": "interactive-area-map",
+            "areas": [
+              "La Jolla", "Pacific Beach", "Mission Beach", "Hillcrest", 
+              "Mission Valley", "Downtown", "Point Loma", "Clairemont"
+            ]
+          }
+        }
+      }
+    },
+
+    "enhancedServicesPage": {
+      "route": "/services", 
+      "title": "Physical Therapy Services - San Diego 2025",
+      "objective": "Comprehensive service details + migrated content",
+      "structure": {
+        "heroSection": {
+          "title": "Comprehensive Physical Therapy Services",
+          "subtitle": "Advanced treatments for all musculoskeletal conditions"
+        },
+        "serviceCategories": {
+          "layout": "expandable-cards",
+          "categories": [
+            {
+              "name": "Spine & Back Pain Treatment",
+              "services": ["Herniated Disc Therapy", "Sciatica Treatment", "Spinal Stenosis Care"],
+              "ctaText": "Book Spine Assessment"
+            },
+            {
+              "name": "Joint Pain Treatment",
+              "services": ["Hip Pain Relief", "Shoulder Rehabilitation", "Knee Pain Treatment"],
+              "ctaText": "Schedule Joint Evaluation"
+            },
+            {
+              "name": "Sports Injury Rehabilitation", 
+              "services": ["Athletic Recovery", "Performance Optimization", "Injury Prevention"],
+              "ctaText": "Book Sports Assessment"
+            }
+          ]
+        },
+        "conditionAssessment": {
+          "title": "Don't See Your Condition Listed?",
+          "content": "Comprehensive evaluation for any musculoskeletal condition",
+          "features": [
+            "Comprehensive diagnostic evaluation",
+            "Personalized treatment protocols",
+            "Evidence-based approaches", 
+            "Ongoing progress monitoring"
+          ],
+          "ctaText": "Schedule Comprehensive Assessment",
+          "styling": "highlighted-section"
+        },
+        "treatmentSelection": {
+          "title": "Not Sure Which Treatment is Right for You?",
+          "content": "Expert team conducts comprehensive evaluation",
+          "process": [
+            "Initial consultation and examination",
+            "Movement and function assessment",
+            "Treatment plan development", 
+            "Progress tracking and adjustments"
+          ],
+          "ctaText": "Schedule Treatment Consultation",
+          "styling": "step-by-step-visual"
+        },
+        "treatmentApproaches": {
+          "title": "Our Treatment Methods",
+          "layout": "detailed-cards",
+          "approaches": [
+            {
+              "name": "Manual Therapy",
+              "techniques": ["Joint mobilization", "Soft tissue therapy", "Spinal manipulation"],
+              "benefits": ["Immediate pain relief", "Improved mobility"]
+            },
+            {
+              "name": "Exercise Therapy", 
+              "techniques": ["Therapeutic exercise", "Functional training", "Strength building"],
+              "benefits": ["Long-term recovery", "Injury prevention"]
+            }
+          ]
+        }
+      }
+    },
+
+    "enhancedAssessmentPage": {
+      "route": "/assessment",
+      "title": "Free Physical Therapy Assessment", 
+      "objective": "Streamlined flow with appointment integration",
+      "structure": {
+        "heroSection": {
+          "title": "Get Your Personalized Treatment Plan",
+          "subtitle": "Take our 2-minute assessment for instant recommendations",
+          "trustIndicators": "Based on 10,000+ patient assessments"
+        },
+        "assessmentFlow": {
+          "totalSteps": 6,
+          "progressIndicator": "visual-progress-bar",
+          "questions": [
+            {
+              "step": 1,
+              "type": "body-diagram",
+              "question": "Where is your pain located?",
+              "inputType": "interactive-body-map"
+            },
+            {
+              "step": 2,
+              "type": "pain-scale", 
+              "question": "Rate your pain level (1-10)",
+              "inputType": "visual-pain-scale"
+            },
+            {
+              "step": 3,
+              "type": "duration",
+              "question": "How long have you had this pain?",
+              "options": ["Less than 1 week", "1-4 weeks", "1-6 months", "More than 6 months"]
+            },
+            {
+              "step": 4,
+              "type": "radiation",
+              "question": "Does your pain radiate or spread?",
+              "inputType": "yes-no-with-details"
+            },
+            {
+              "step": 5,
+              "type": "aggravating-factors",
+              "question": "What makes your pain worse?",
+              "inputType": "multi-select-checkboxes"
+            },
+            {
+              "step": 6,
+              "type": "previous-treatment",
+              "question": "Have you tried treatment before?",
+              "inputType": "treatment-history-selector"
+            }
+          ]
+        },
+        "resultsPage": {
+          "layout": "instant-results",
+          "components": [
+            {
+              "element": "conditionPrediction",
+              "title": "Likely Condition",
+              "accuracy": "90% accuracy rate",
+              "recommendation": "Based on your responses..."
+            },
+            {
+              "element": "urgencyLevel",
+              "categories": {
+                "highUrgency": "Pain level 8+ or radiation present - Schedule within 24 hours",
+                "moderateUrgency": "Pain level 5+ or chronic - Schedule within 1 week",
+                "preventiveCare": "Mild symptoms - Consider evaluation and education"
+              }
+            },
+            {
+              "element": "treatmentPlan",
+              "components": ["Recommended treatments", "Expected timeline", "Success probability"]
+            },
+            {
+              "element": "appointmentBooking",
+              "title": "Schedule Your Assessment Appointment",
+              "integration": "direct-scheduling-widget",
+              "ctaText": "Book My Assessment Now"
+            }
+          ]
+        }
+      }
+    }
+  },
+
+  "globalComponents": {
+    "navigation": {
+      "mobile": {
+        "type": "hamburger-menu",
+        "height": "64px",
+        "items": ["Home", "Services", "Treatment Journey", "Assessment", "Locations", "About", "Contact"],
+        "ctaButton": {
+          "text": "Book Appointment", 
+          "placement": "top-nav",
+          "prominence": "primary"
+        }
+      },
+      "desktop": {
+        "type": "horizontal-nav",
+        "height": "80px", 
+        "items": ["Services", "Treatment Journey", "Assessment", "Locations", "About", "Blog", "Contact"],
+        "ctaButton": {
+          "text": "Schedule Appointment",
+          "size": "large",
+          "prominence": "primary"
+        }
+      }
+    },
+    "scrollTriggeredCTAs": {
+      "mobileStrategy": "sticky-bottom-bar",
+      "desktopStrategy": "floating-button-bottom-right",
+      "triggers": [
+        {
+          "elementId": "conditions-section",
+          "threshold": "50%",
+          "text": "Find Treatment for My Condition",
+          "action": "navigate:/assessment"
+        },
+        {
+          "elementId": "treatments-section", 
+          "threshold": "75%",
+          "text": "Start My Treatment Plan",
+          "action": "navigate:/assessment"
+        }
+      ],
+      "styling": {
+        "animation": "slide-up-fade-in",
+        "dismissible": true,
+        "maxDisplayTime": "30s"
+      }
+    },
+    "footer": {
+      "sections": [
+        "Quick Links",
+        "Services", 
+        "Locations",
+        "Contact Info",
+        "Legal"
+      ],
+      "appointmentCTA": {
+        "placement": "footer-top",
+        "text": "Ready to Get Started?",
+        "ctaText": "Schedule Your Appointment"
+      }
+    }
+  },
+
+  "ctaStrategy": {
+    "primaryObjective": "Transform 'consultation' language to 'appointment'",
+    "ctaHierarchy": {
+      "primary": "Schedule Your Appointment",
+      "secondary": "Book Appointment Now", 
+      "tertiary": "Make an Appointment",
+      "assessment": "Take Assessment",
+      "service-specific": "Schedule [Service] Appointment"
+    },
+    "placementStrategy": {
+      "hero": "Above fold, prominent",
+      "sections": "After value propositions", 
+      "scrollTrigger": "50% and 75% page scroll",
+      "sticky": "Mobile bottom bar",
+      "exit-intent": "Desktop only"
+    },
+    "colorCoding": {
+      "primary": "#2563EB (blue)",
+      "secondary": "#059669 (green)",
+      "urgent": "#DC2626 (red)"
+    }
+  },
+
+  "mobileOptimizations": {
+    "touchTargets": {
+      "minimum": "44px",
+      "recommended": "48px", 
+      "ctaButtons": "56px"
+    },
+    "scrollBehavior": {
+      "stickyNavigation": true,
+      "stickyBottomCTA": true,
+      "smoothScrolling": true,
+      "snapPoints": false
+    },
+    "layoutPrinciples": {
+      "stackedComponents": true,
+      "singleColumnDefault": true,
+      "verticalSpacing": "24px minimum",
+      "cardSpacing": "16px",
+      "contentPadding": "20px"
+    },
+    "interactionPatterns": {
+      "tapFeedback": "0.1s scale animation",
+      "loadingStates": "skeleton screens",
+      "errorStates": "inline messaging",
+      "formInputs": "large touch targets"
+    }
+  },
+
+  "performanceOptimizations": {
+    "lazyLoading": {
+      "images": "intersection-observer",
+      "components": "below-fold-only",
+      "maps": "user-interaction-triggered"
+    },
+    "criticalPath": {
+      "aboveFold": ["hero", "navigation", "primaryCTA"],
+      "belowFold": ["conditions", "treatments", "footer"]
+    },
+    "loadingStrategy": {
+      "homepage": "SSR + hydration",
+      "assessmentPage": "CSR for interactivity",
+      "staticPages": "SSG"
+    }
+  },
+
+  "accessibilityFeatures": {
+    "colorContrast": {
+      "minimum": "4.5:1 for normal text",
+      "large": "3:1 for large text",
+      "uiElements": "3:1 minimum"
+    },
+    "keyboardNavigation": {
+      "focusIndicators": "visible outline",
+      "skipLinks": "main content navigation",
+      "tabOrder": "logical flow"
+    },
+    "screenReaderSupport": {
+      "altText": "descriptive for all images", 
+      "ariaLabels": "all interactive elements",
+      "headingStructure": "semantic hierarchy"
+    },
+    "reducedMotion": {
+      "respectPreferences": true,
+      "alternativeAnimations": "fade-only options"
+    }
+  },
+
+  "conversionOptimizations": {
+    "urgencyTactics": {
+      "limitedSlots": "Only 12 new patient slots remaining this month",
+      "sameDay": "Same-day appointments available",
+      "responseTime": "24-hour appointment confirmation"
+    },
+    "trustSignals": {
+      "statistics": "1M+ patient encounters, 90% success rate",
+      "insurance": "All major plans accepted", 
+      "credentials": "Licensed physical therapists",
+      "reviews": "Patient testimonials and ratings"
+    },
+    "frictionReduction": {
+      "singleClickBooking": "Streamlined appointment process",
+      "noFormFields": "Minimal required information",
+      "instantConfirmation": "Immediate booking confirmation"
+    }
+  },
+
+  "implementationNotes": {
+    "developmentPriority": [
+      "1. Shortened homepage with new component structure",
+      "2. New /treatment-journey page with phase timeline",
+      "3. Enhanced /locations page with network trust indicators", 
+      "4. CTA language updates across all components",
+      "5. Enhanced /services and /assessment pages",
+      "6. Mobile optimizations and scroll-triggered CTAs"
+    ],
+    "componentArchitecture": {
+      "newComponents": [
+        "TreatmentJourney.tsx",
+        "PhaseTimeline.tsx", 
+        "NetworkTrustIndicators.tsx",
+        "ConditionAssessment.tsx",
+        "InteractiveLocationMap.tsx"
+      ],
+      "modifiedComponents": [
+        "TreatmentOptions.tsx (card overview only)",
+        "LocalSEO.tsx (compact version)",
+        "OptimizedCTAButtons.tsx (new variants)",
+        "HeroSection.tsx (CTA language)",
+        "ConditionsTreated.tsx (enhanced table)"
+      ]
+    },
+    "routingUpdates": [
+      "Add /treatment-journey route",
+      "Update navigation menus",
+      "Add internal linking structure", 
+      "Update sitemap.xml"
+    ]
+  }
+}

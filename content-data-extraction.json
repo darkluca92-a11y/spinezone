@@ -1,0 +1,447 @@
+{
+  "spineZoneContentRestructuring": {
+    "projectDetails": {
+      "projectName": "Homepage Restructuring & Content Migration",
+      "analysisDate": "2025-01-09",
+      "goal": "Shorten homepage, enhance dedicated pages, transform CTAs",
+      "scope": "Content migration, CTA optimization, page structure enhancement"
+    },
+    
+    "currentHomepageSections": {
+      "keepAndEnhance": [
+        {
+          "section": "HeroSection",
+          "component": "src/components/HeroSection.tsx",
+          "status": "keep",
+          "content": {
+            "mainHeadline": "Heal Naturally: 90% Success Rate",
+            "subHeadline": "Without Surgery, Injections, or Opioids",
+            "expansionMessage": "Now for All Joint Pain Including Hips, Shoulders, and Knees",
+            "stats": {
+              "patientEncounters": "1M+",
+              "patientVisits": "100K+", 
+              "successRate": "90%"
+            },
+            "urgencyNotice": "URGENT: Limited New Patient Openings This Month",
+            "currentCTA": "Book Free Consultation",
+            "proposedCTA": "Schedule Your Appointment"
+          }
+        },
+        {
+          "section": "ConditionsTreated",
+          "component": "src/components/ConditionsTreated.tsx", 
+          "status": "keep-partial",
+          "content": {
+            "title": "San Diego Physical Therapy 2025: All Joint Pain Conditions Treated",
+            "categories": [
+              {
+                "category": "Spine Conditions",
+                "icon": "AlertCircle",
+                "color": "blue",
+                "conditions": [
+                  {"name": "Herniated Discs", "severity": "Common", "description": "Bulging or ruptured spinal discs causing nerve compression"},
+                  {"name": "Sciatica", "severity": "Painful", "description": "Radiating pain from lower back down the leg"},
+                  {"name": "Spinal Stenosis", "severity": "Progressive", "description": "Narrowing of spinal canal causing pressure on nerves"},
+                  {"name": "Chronic Back Pain", "severity": "Persistent", "description": "Long-term pain affecting daily activities and quality of life"}
+                ]
+              },
+              {
+                "category": "Neck & Cervical",
+                "icon": "Zap", 
+                "color": "green",
+                "conditions": [
+                  {"name": "Whiplash", "severity": "Acute", "description": "Neck injury from rapid back-and-forth movement"},
+                  {"name": "Cervical Radiculopathy", "severity": "Radiating", "description": "Pinched nerve in neck causing arm pain and numbness"},
+                  {"name": "Tech Neck", "severity": "Modern", "description": "Forward head posture from prolonged screen use"},
+                  {"name": "Chronic Neck Pain", "severity": "Persistent", "description": "Ongoing neck discomfort limiting range of motion"}
+                ]
+              },
+              {
+                "category": "Joint & Mobility",
+                "icon": "Activity",
+                "color": "purple", 
+                "conditions": [
+                  {"name": "Shoulder Impingement", "severity": "Limiting", "description": "Restricted shoulder movement causing pain and weakness"},
+                  {"name": "Hip Arthritis", "severity": "Degenerative", "description": "Joint cartilage breakdown causing stiffness and pain"},
+                  {"name": "Knee Pain", "severity": "Variable", "description": "Various knee conditions affecting mobility and function"},
+                  {"name": "Joint Stiffness", "severity": "Restricting", "description": "Reduced range of motion in major joints"}
+                ]
+              },
+              {
+                "category": "Sports & Activity",
+                "icon": "Users",
+                "color": "orange",
+                "conditions": [
+                  {"name": "Sports Injuries", "severity": "Acute", "description": "Activity-related injuries requiring specialized rehabilitation"},
+                  {"name": "Overuse Injuries", "severity": "Gradual", "description": "Repetitive stress injuries from training or work activities"}, 
+                  {"name": "Post-Surgery Recovery", "severity": "Rehabilitative", "description": "Recovery and strengthening after orthopedic procedures"},
+                  {"name": "Performance Optimization", "severity": "Preventive", "description": "Injury prevention and performance enhancement for athletes"}
+                ]
+              }
+            ]
+          },
+          "moveToServices": {
+            "section": "Don't See Your Condition Listed?",
+            "content": {
+              "title": "Don't See Your Condition Listed?",
+              "description": "We treat many more conditions beyond what's listed here. Our comprehensive evaluation process allows us to create personalized treatment plans for virtually any musculoskeletal condition.",
+              "features": [
+                "Comprehensive diagnostic evaluation",
+                "Personalized treatment protocols", 
+                "Evidence-based treatment approaches",
+                "Ongoing progress monitoring"
+              ],
+              "currentCTA": "Schedule Free Assessment",
+              "proposedCTA": "Schedule Comprehensive Assessment"
+            }
+          }
+        }
+      ],
+      
+      "moveToNewPages": [
+        {
+          "section": "TreatmentJourney",
+          "currentLocation": "src/components/TreatmentOptions.tsx lines 169-272",
+          "newLocation": "/treatment-journey",
+          "content": {
+            "title": "Your Treatment Journey",
+            "description": "Our systematic, phase-based approach ensures optimal recovery at every stage of your healing process",
+            "phases": [
+              {
+                "phase": "Phase 1",
+                "title": "Pain Relief & Protection",
+                "duration": "1-2 weeks", 
+                "goals": ["Reduce acute pain", "Protect injured tissues", "Restore basic function"],
+                "treatments": ["Manual therapy", "Pain management", "Gentle mobilization"],
+                "expectedOutcomes": "60-80% pain reduction, protected healing environment"
+              },
+              {
+                "phase": "Phase 2",
+                "title": "Mobility & Strength", 
+                "duration": "2-4 weeks",
+                "goals": ["Improve range of motion", "Build foundational strength", "Address movement patterns"],
+                "treatments": ["Progressive exercises", "Manual therapy", "Movement training"],
+                "expectedOutcomes": "Functional movement restoration, return to daily activities"
+              },
+              {
+                "phase": "Phase 3",
+                "title": "Function & Performance",
+                "duration": "2-6 weeks",
+                "goals": ["Return to activities", "Optimize performance", "Prevent recurrence"],
+                "treatments": ["Advanced exercises", "Functional training", "Sport-specific prep"],
+                "expectedOutcomes": "Full activity resumption, injury prevention protocols"
+              }
+            ],
+            "additionalDetails": {
+              "averageTreatmentDuration": "4-8 weeks total",
+              "sessionFrequency": "2-3x per week initially, tapering to 1x per week",
+              "successMetrics": "90% patient satisfaction, 85% return to full function",
+              "progressTracking": "Objective measurements at each phase transition"
+            }
+          }
+        },
+        {
+          "section": "NetworkTrustIndicators",
+          "currentLocation": "src/components/LocalSEO.tsx",
+          "newLocation": "/locations", 
+          "content": {
+            "title": "San Diego's Most Trusted Physical Therapy Network",
+            "description": "Serving patients across all San Diego neighborhoods with comprehensive physical therapy and pain management services",
+            "networkStats": {
+              "totalLocations": 8,
+              "serviceArea": "San Diego & Orange County",
+              "patientDatabase": "1M+ patient encounters", 
+              "successRate": "90% treatment success",
+              "responseTime": "24-hour appointment confirmation",
+              "operatingHours": "Extended hours 6 days per week"
+            },
+            "neighborhoods": [
+              {
+                "name": "La Jolla",
+                "slug": "la-jolla", 
+                "description": "Premier physical therapy clinic serving La Jolla residents with advanced spine and joint pain treatment",
+                "specialties": ["Sports Medicine", "Spine Treatment", "Luxury Care"],
+                "zipCodes": ["92037", "92093"],
+                "landmarks": ["UC San Diego", "La Jolla Cove", "Scripps Health"]
+              },
+              {
+                "name": "Hillcrest",
+                "slug": "hillcrest",
+                "description": "Central San Diego location providing comprehensive physical therapy and rehabilitation services",
+                "specialties": ["Joint Pain", "Rehabilitation", "Manual Therapy"],
+                "zipCodes": ["92103", "92104"], 
+                "landmarks": ["Balboa Park", "Hillcrest Medical Center", "University Heights"]
+              },
+              {
+                "name": "Pacific Beach", 
+                "slug": "pacific-beach",
+                "description": "Beachside physical therapy clinic specializing in active lifestyle and sports injury recovery",
+                "specialties": ["Sports Injuries", "Active Recovery", "Beach Lifestyle"],
+                "zipCodes": ["92109"],
+                "landmarks": ["Mission Bay", "Crystal Pier", "PB Boardwalk"]
+              },
+              {
+                "name": "Mission Valley",
+                "slug": "mission-valley",
+                "description": "Convenient Mission Valley location with easy access and comprehensive pain management services", 
+                "specialties": ["Pain Management", "Convenient Access", "Modern Facility"],
+                "zipCodes": ["92108", "92120"],
+                "landmarks": ["Fashion Valley", "SDSU", "Mission Center"]
+              }
+            ]
+          }
+        },
+        {
+          "section": "TreatmentSelectionGuidance",
+          "currentLocation": "src/components/TreatmentOptions.tsx lines 274-291",
+          "newLocation": "/services or /assessment",
+          "content": {
+            "title": "Not Sure Which Treatment is Right for You?",
+            "description": "Our expert team will conduct a comprehensive evaluation to determine the optimal treatment plan for your specific condition and goals",
+            "evaluationProcess": [
+              "Initial consultation and examination",
+              "Movement and functional assessment", 
+              "Pain pattern analysis and history",
+              "Treatment plan development with clear goals",
+              "Progress tracking and plan adjustments"
+            ],
+            "outcomeExpectations": {
+              "evaluationDuration": "60-90 minutes comprehensive assessment", 
+              "reportDelivery": "Same-day treatment recommendations",
+              "planCustomization": "Tailored for ages, severity, goals",
+              "followUpScheduling": "Treatment begins within 48 hours"
+            },
+            "currentCTAs": ["Schedule Free Evaluation", "Learn More About Treatments"],
+            "proposedCTAs": ["Schedule Treatment Consultation", "Book Comprehensive Assessment"]
+          }
+        }
+      ]
+    },
+    
+    "treatmentOptionsRestructure": {
+      "currentStructure": "Full detailed treatment categories + journey + selection guidance",
+      "newHomepageStructure": "Overview cards with CTAs to dedicated pages",
+      "treatmentCards": [
+        {
+          "title": "Manual Therapy",
+          "icon": "Heart",
+          "color": "blue", 
+          "description": "Hands-on techniques to restore mobility and reduce pain",
+          "keyBenefits": ["Immediate pain relief", "Improved mobility", "Enhanced circulation"],
+          "duration": "30-60 minutes per session",
+          "ctaText": "Learn About Manual Therapy",
+          "ctaDestination": "/services#manual-therapy"
+        },
+        {
+          "title": "Advanced Therapies", 
+          "icon": "Zap",
+          "color": "purple",
+          "description": "Cutting-edge treatments for optimal healing",
+          "keyBenefits": ["Accelerated healing", "Reduced inflammation", "Nerve regeneration"],
+          "duration": "20-45 minutes per session",
+          "ctaText": "Explore Advanced Treatments", 
+          "ctaDestination": "/services#advanced-therapies"
+        },
+        {
+          "title": "Exercise Therapy",
+          "icon": "Activity",
+          "color": "green",
+          "description": "Targeted exercises for strength and stability", 
+          "keyBenefits": ["Long-term stability", "Injury prevention", "Functional improvement"],
+          "duration": "45-60 minutes per session",
+          "ctaText": "Start Exercise Program",
+          "ctaDestination": "/services#exercise-therapy"
+        },
+        {
+          "title": "Holistic Wellness",
+          "icon": "Shield", 
+          "color": "orange",
+          "description": "Comprehensive approach to whole-body health",
+          "keyBenefits": ["Overall wellness", "Lifestyle improvements", "Sustained results"],
+          "duration": "60-90 minutes per session",
+          "ctaText": "Discover Holistic Care",
+          "ctaDestination": "/services#holistic-wellness"
+        }
+      ]
+    },
+    
+    "ctaLanguageTransformation": {
+      "currentInstances": {
+        "freeConsultation": 15,
+        "bookFreeConsultation": 3,
+        "startFreeConsultation": 2,
+        "scheduleConsultation": 8,
+        "freeAssessment": 4
+      },
+      "transformationMap": {
+        "Book Free Consultation": "Schedule Your Appointment",
+        "Start Free Consultation": "Make an Appointment", 
+        "Schedule Free Consultation": "Book Appointment Now",
+        "Get Free Consultation": "Reserve Your Appointment",
+        "Free Consultation": "Appointment Scheduling",
+        "Schedule Free Assessment": "Book Free Assessment",
+        "Get Pain Relief Now": "Schedule Pain Relief Appointment",
+        "Call for Consultation": "Call to Schedule: (858) 555-0123"
+      },
+      "componentsToUpdate": [
+        {
+          "file": "src/components/OptimizedCTAButtons.tsx",
+          "currentVariants": [
+            {"id": "variant-a", "current": "Book Free Consultation", "new": "Schedule Your Appointment"},
+            {"id": "variant-b", "current": "Get Pain Relief Now", "new": "Book Pain Relief Appointment"}, 
+            {"id": "variant-d", "current": "Start Free Consultation", "new": "Make an Appointment"}
+          ]
+        },
+        {
+          "file": "src/components/HeroSection.tsx",
+          "updates": [
+            {"line": 27, "current": "schedule your free consultation", "new": "schedule your appointment"},
+            {"line": 112, "current": "free consultation with our physical therapy experts", "new": "appointment with our physical therapy experts"}
+          ]
+        },
+        {
+          "file": "src/components/FinalCTA.tsx", 
+          "updates": [
+            {"line": 74, "current": "Schedule Free Consultation", "new": "Make Your Appointment"},
+            {"line": 101, "current": "Book Your Free Consultation", "new": "Book Your Appointment"}
+          ]
+        }
+      ]
+    },
+    
+    "newPageStructures": {
+      "treatmentJourneyPage": {
+        "url": "/treatment-journey",
+        "title": "Your Physical Therapy Treatment Journey - San Diego SpineZone",
+        "metaDescription": "Understand your complete physical therapy journey at SpineZone San Diego. 3-phase treatment process with 90% success rate for back pain, neck pain, and joint conditions.",
+        "content": {
+          "heroSection": {
+            "title": "Your Complete Treatment Journey",
+            "subtitle": "Understanding Every Step of Your Recovery Process",
+            "description": "Our proven 3-phase approach has helped 1M+ patients achieve lasting pain relief"
+          },
+          "phaseDetails": "// Content from extraction above",
+          "timeline": {
+            "week1-2": "Pain Relief & Protection Phase",
+            "week3-6": "Mobility & Strength Phase", 
+            "week7-12": "Function & Performance Phase",
+            "maintenance": "Ongoing wellness program available"
+          },
+          "successMetrics": {
+            "averageRecoveryTime": "6-8 weeks",
+            "patientSatisfaction": "95%",
+            "returnToFullFunction": "90%",
+            "reinjuryRate": "Less than 5%"
+          }
+        }
+      },
+      
+      "enhancedLocationsPage": {
+        "currentUrl": "/locations",
+        "addedContent": {
+          "networkOverview": {
+            "title": "San Diego's Most Trusted Physical Therapy Network",
+            "trustIndicators": [
+              {"metric": "Years of Experience", "value": "15+ years"},
+              {"metric": "Locations", "value": "8 clinics"},
+              {"metric": "Patient Encounters", "value": "1M+"},
+              {"metric": "Success Rate", "value": "90%"},
+              {"metric": "Insurance Plans", "value": "All major plans accepted"}
+            ]
+          },
+          "serviceAreaMap": {
+            "coverage": "Complete San Diego County & South Orange County",
+            "neighborhoods": "// Neighborhood data from extraction above",
+            "travelTime": "No patient more than 20 minutes from a clinic"
+          }
+        }
+      },
+      
+      "enhancedServicesPage": {
+        "currentUrl": "/services", 
+        "addedSections": [
+          {
+            "section": "conditionAssessment",
+            "title": "Don't See Your Condition Listed?",
+            "content": "// Content from extraction above"
+          },
+          {
+            "section": "treatmentSelection",
+            "title": "Not Sure Which Treatment is Right for You?",
+            "content": "// Content from extraction above"
+          }
+        ]
+      },
+      
+      "enhancedAssessmentPage": {
+        "currentUrl": "/assessment",
+        "addedFeatures": {
+          "treatmentRecommendationEngine": {
+            "description": "AI-powered recommendations based on 10,000+ patient outcomes",
+            "accuracy": "90% accuracy rate",
+            "integration": "Direct appointment scheduling from results"
+          },
+          "conditionSpecificQuestions": {
+            "spineConditions": ["pain location", "radiation pattern", "aggravating factors"],
+            "jointConditions": ["affected joints", "mobility limitations", "activity restrictions"],
+            "sportsInjuries": ["injury mechanism", "activity level", "performance goals"]
+          }
+        }
+      }
+    },
+    
+    "implementationPriorities": {
+      "phase1": {
+        "title": "Homepage Optimization",
+        "timeline": "Week 1-2",
+        "tasks": [
+          "Create /treatment-journey page", 
+          "Move treatment journey content from TreatmentOptions",
+          "Transform TreatmentOptions to overview cards",
+          "Update all homepage CTA language"
+        ]
+      },
+      "phase2": {
+        "title": "Enhanced Dedicated Pages",
+        "timeline": "Week 2-3", 
+        "tasks": [
+          "Enhance /locations with network content",
+          "Move LocalSEO detailed content",
+          "Add migrated sections to /services",
+          "Enhance /assessment with new features"
+        ]
+      },
+      "phase3": {
+        "title": "CTA Language Transformation",
+        "timeline": "Week 3-4",
+        "tasks": [
+          "Update OptimizedCTAButtons variants",
+          "Update all component CTA text",
+          "Update metadata and SEO descriptions", 
+          "Update blog post CTAs"
+        ]
+      }
+    },
+    
+    "expectedOutcomes": {
+      "homepageImprovements": {
+        "pageLengthReduction": "40%",
+        "timeToFirstInteraction": "25% improvement",
+        "decisionParalysisReduction": "Simplified choice architecture",
+        "conversionFunnelFocus": "Single primary CTA path"
+      },
+      "userExperienceEnhancements": {
+        "dedicatedJourneyEducation": "/treatment-journey page",
+        "enhancedLocationFinder": "Trust signals + interactive map",
+        "comprehensiveServices": "Assessment tools + condition guidance",
+        "clarifiedLanguage": "Appointment-focused terminology"
+      },
+      "conversionOptimization": {
+        "primaryCTA": "Schedule Your Appointment",
+        "languageConsistency": "Elimination of consultation/assessment confusion",
+        "reducedFriction": "Clear path from assessment to booking",
+        "improvedClarity": "What to expect messaging"
+      }
+    }
+  }
+}

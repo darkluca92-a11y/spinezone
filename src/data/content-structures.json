@@ -1,0 +1,346 @@
+{
+  "ctaTransformations": {
+    "appointmentVariations": [
+      "Schedule Your Appointment",
+      "Book Appointment Now", 
+      "Make an Appointment",
+      "Reserve Your Appointment",
+      "Schedule Assessment Appointment",
+      "Book Your Treatment",
+      "Secure Your Appointment"
+    ],
+    "consultationReplacements": {
+      "freeConsultation": "Schedule Your Appointment",
+      "bookFreeConsultation": "Book Appointment Now",
+      "startFreeConsultation": "Make an Appointment", 
+      "scheduleConsultation": "Reserve Your Appointment",
+      "getFreeConsultation": "Schedule Assessment",
+      "freeAssessment": "Book Assessment Appointment"
+    }
+  },
+  
+  "treatmentJourney": {
+    "phases": [
+      {
+        "phase": "Phase 1",
+        "title": "Pain Relief & Protection",
+        "duration": "1-2 weeks",
+        "timeframe": "Sessions 1-6",
+        "goals": [
+          "Reduce acute pain by 60-80%",
+          "Protect injured tissues from further damage",
+          "Restore basic functional movements",
+          "Establish baseline measurements"
+        ],
+        "treatments": [
+          "Manual therapy and soft tissue mobilization",
+          "Pain management techniques",
+          "Gentle joint mobilization",
+          "Postural education",
+          "Home care instructions"
+        ],
+        "expectedOutcomes": "Significant pain reduction and improved sleep quality",
+        "successMarkers": [
+          "Pain level decreased from 8/10 to 3-4/10",
+          "Improved ability to perform daily activities",
+          "Better sleep quality",
+          "Reduced medication dependence"
+        ]
+      },
+      {
+        "phase": "Phase 2",
+        "title": "Mobility & Strength",
+        "duration": "2-4 weeks",
+        "timeframe": "Sessions 7-18", 
+        "goals": [
+          "Improve range of motion by 70-90%",
+          "Build foundational strength",
+          "Address movement dysfunction patterns",
+          "Enhance tissue healing"
+        ],
+        "treatments": [
+          "Progressive strengthening exercises",
+          "Advanced manual therapy techniques",
+          "Movement pattern retraining",
+          "Functional exercise training",
+          "Specialized equipment therapy"
+        ],
+        "expectedOutcomes": "Return to most daily activities and improved function",
+        "successMarkers": [
+          "Near-normal range of motion",
+          "Ability to lift and carry without pain",
+          "Return to work activities",
+          "Improved posture and movement quality"
+        ]
+      },
+      {
+        "phase": "Phase 3",
+        "title": "Function & Performance",
+        "duration": "2-6 weeks",
+        "timeframe": "Sessions 19-36",
+        "goals": [
+          "Return to full activity levels",
+          "Optimize performance and endurance",
+          "Prevent injury recurrence", 
+          "Establish long-term wellness habits"
+        ],
+        "treatments": [
+          "Advanced functional exercises",
+          "Sport-specific rehabilitation",
+          "High-level strengthening",
+          "Injury prevention strategies",
+          "Maintenance program development"
+        ],
+        "expectedOutcomes": "Complete return to activities with injury prevention",
+        "successMarkers": [
+          "Full return to sports/activities",
+          "No pain with demanding activities",
+          "Confidence in movement",
+          "Independent maintenance program"
+        ]
+      }
+    ],
+    "journeyStats": [
+      {
+        "stat": "1M+",
+        "label": "Patients Treated",
+        "description": "Successfully guided through our treatment journey"
+      },
+      {
+        "stat": "90%",
+        "label": "Success Rate",
+        "description": "Patients achieve their recovery goals"
+      },
+      {
+        "stat": "6-8",
+        "label": "Average Weeks",
+        "description": "From first visit to full recovery"
+      },
+      {
+        "stat": "95%",
+        "label": "Avoid Surgery",
+        "description": "Patients avoid invasive procedures"
+      }
+    ]
+  },
+  
+  "conditionsTreated": {
+    "spineConditions": [
+      {
+        "name": "Herniated Discs",
+        "severity": "Common",
+        "treatmentApproach": "Non-invasive decompression",
+        "appointmentCTA": "Schedule Disc Treatment"
+      },
+      {
+        "name": "Sciatica",
+        "severity": "Painful", 
+        "treatmentApproach": "Nerve mobilization",
+        "appointmentCTA": "Book Sciatica Treatment"
+      },
+      {
+        "name": "Spinal Stenosis",
+        "severity": "Progressive",
+        "treatmentApproach": "Joint mobilization",
+        "appointmentCTA": "Schedule Stenosis Care"
+      },
+      {
+        "name": "Chronic Back Pain",
+        "severity": "Persistent",
+        "treatmentApproach": "Comprehensive rehabilitation",
+        "appointmentCTA": "Book Back Pain Treatment"
+      }
+    ],
+    "jointConditions": [
+      {
+        "name": "Hip Arthritis",
+        "severity": "Degenerative",
+        "treatmentApproach": "Movement restoration",
+        "appointmentCTA": "Schedule Hip Treatment"
+      },
+      {
+        "name": "Shoulder Impingement",
+        "severity": "Limiting",
+        "treatmentApproach": "Manual therapy",
+        "appointmentCTA": "Book Shoulder Care"
+      },
+      {
+        "name": "Knee Pain",
+        "severity": "Variable", 
+        "treatmentApproach": "Functional training",
+        "appointmentCTA": "Schedule Knee Treatment"
+      },
+      {
+        "name": "Neck Pain",
+        "severity": "Common",
+        "treatmentApproach": "Cervical mobilization",
+        "appointmentCTA": "Book Neck Treatment"
+      }
+    ]
+  },
+  
+  "networkTrustIndicators": {
+    "locationStats": {
+      "totalLocations": 8,
+      "serviceArea": "San Diego & Orange County",
+      "patientDatabase": "1M+ patient encounters",
+      "successRate": "90% treatment success",
+      "responseTime": "24-hour appointment confirmation",
+      "insuranceAccepted": "All major plans"
+    },
+    "interactiveFeatures": {
+      "mapIntegration": "Google Maps with location details",
+      "appointmentBooking": "Individual clinic scheduling",
+      "realtimeHours": "Current availability display",
+      "patientReviews": "Yelp integration per location"
+    },
+    "locations": [
+      {
+        "name": "La Jolla",
+        "address": "8899 University Center Ln, Suite 130, La Jolla, CA 92122",
+        "phone": "(858) 555-0123",
+        "appointments": "Same-day available",
+        "specialties": ["Spine conditions", "Sports injuries"]
+      },
+      {
+        "name": "Hillcrest",
+        "address": "150 W Washington St, Suite 102, San Diego, CA 92103",
+        "phone": "(619) 555-0124", 
+        "appointments": "Next-day available",
+        "specialties": ["Joint pain", "Post-surgical rehab"]
+      },
+      {
+        "name": "Pacific Beach",
+        "address": "4010 Morena Blvd, Suite 202, San Diego, CA 92117",
+        "phone": "(858) 555-0125",
+        "appointments": "Walk-ins welcome",
+        "specialties": ["Movement disorders", "Athletes"]
+      }
+    ]
+  },
+  
+  "servicesEnhanced": {
+    "conditionAssessment": {
+      "title": "Don't See Your Condition Listed?",
+      "description": "Comprehensive evaluation for any musculoskeletal condition",
+      "features": [
+        "Comprehensive diagnostic evaluation",
+        "Personalized treatment protocols",
+        "Evidence-based approaches", 
+        "Ongoing progress monitoring"
+      ],
+      "cta": "Schedule Comprehensive Assessment",
+      "successRate": "90% success rate even with complex conditions",
+      "specializations": [
+        "Rare spine disorders",
+        "Complex joint pain",
+        "Chronic conditions",
+        "Post-surgical cases",
+        "Failed previous PT",
+        "Unexplained pain",
+        "Movement disorders",
+        "Athletic injuries"
+      ]
+    },
+    "treatmentSelection": {
+      "title": "Not Sure Which Treatment is Right for You?",
+      "description": "Expert team conducts comprehensive evaluation",
+      "process": [
+        "Initial consultation and examination",
+        "Movement and function assessment",
+        "Treatment plan development", 
+        "Progress tracking and adjustments"
+      ],
+      "cta": "Book Assessment Appointment",
+      "determinesFactors": [
+        "Which program will work best for you",
+        "Expected timeline for recovery",
+        "Specific techniques that will help",
+        "Home care and prevention strategies",
+        "Realistic expectations and goals"
+      ]
+    }
+  },
+  
+  "mobileOptimization": {
+    "scanningElements": {
+      "bulletPoints": "Used throughout for easy mobile scanning",
+      "shortParagraphs": "Max 2-3 sentences for mobile reading",
+      "clearHeadings": "Hierarchical structure H1-H4",
+      "touchTargets": "Minimum 44px touch targets for CTAs",
+      "conciseCTAs": "Short, action-oriented button text"
+    },
+    "touchOptimization": {
+      "buttonSpacing": "8px minimum between touch targets",
+      "buttonHeight": "48px minimum height",
+      "tapHighlight": "WebkitTapHighlightColor: transparent",
+      "touchAction": "manipulation for fast tap response"
+    }
+  },
+  
+  "seoKeywords": {
+    "primary": [
+      "San Diego physical therapy 2025",
+      "joint pain treatment San Diego",
+      "physical therapy appointments San Diego", 
+      "San Diego PT scheduling"
+    ],
+    "conditionSpecific": [
+      "back pain treatment San Diego",
+      "neck pain therapy San Diego",
+      "hip pain treatment San Diego",
+      "shoulder pain therapy San Diego", 
+      "knee pain treatment San Diego"
+    ],
+    "localSEO": [
+      "La Jolla physical therapy appointments",
+      "Hillcrest spine treatment appointments",
+      "Pacific Beach PT scheduling",
+      "Mission Valley therapy appointments",
+      "Downtown San Diego PT booking"
+    ],
+    "appointmentFocused": [
+      "book physical therapy appointment San Diego",
+      "schedule PT appointment San Diego",
+      "same day physical therapy appointments",
+      "urgent PT appointments San Diego"
+    ]
+  },
+  
+  "contentMigrationMapping": {
+    "homepage": {
+      "keep": [
+        "HeroSection with updated CTA language",
+        "TrustIndicators", 
+        "ConditionsTreated table with appointment CTAs",
+        "TreatmentOptions overview cards only",
+        "LocalSEO compact version",
+        "FAQSection",
+        "FinalCTA with appointment language"
+      ],
+      "remove": [
+        "Treatment journey detailed phases",
+        "Don't See Your Condition section",
+        "Not Sure Which Treatment section"
+      ]
+    },
+    "treatmentJourney": {
+      "migrated": "Complete treatment journey with phases, timelines, and milestones",
+      "new": "Recovery timeline visualization and FAQ section"
+    },
+    "services": {
+      "enhanced": [
+        "Don't See Your Condition Listed section",
+        "Treatment Selection Guide section" 
+      ],
+      "updated": "All CTAs changed to appointment language"
+    },
+    "locations": {
+      "toAdd": [
+        "Network trust indicators",
+        "Enhanced location details",
+        "Individual appointment booking per location"
+      ]
+    }
+  }
+}

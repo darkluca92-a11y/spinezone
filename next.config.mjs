@@ -29,22 +29,87 @@ const nextConfig = {
   generateEtags: false, // Handled by Netlify CDN
   reactStrictMode: true,
   
-  // Experimental performance features
+  // Enhanced experimental performance features
   experimental: {
     optimizePackageImports: [
       'lucide-react',
       'recharts',
       '@googlemaps/react-wrapper',
+      '@supabase/supabase-js',
+      '@supabase/auth-helpers-nextjs'
     ],
-    webVitalsAttribution: ['CLS', 'LCP', 'FID', 'FCP', 'TTFB'],
+    webVitalsAttribution: ['CLS', 'LCP', 'FID', 'FCP', 'TTFB', 'INP'],
     scrollRestoration: true,
+    optimizeCss: true,
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+    },
   },
   
-  // Compiler optimizations
+  // Enhanced compiler optimizations
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'],
+    } : false,
     styledComponents: false,
+    emotion: false,
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
+  
+  // Bundle analyzer configuration
+  ...(process.env.ANALYZE === 'true' ? {
+    webpack: (config, { isServer }) => {
+      if (!isServer) {
+        config.resolve.fallback = {
+          ...config.resolve.fallback,
+          fs: false,
+          net: false,
+          tls: false,
+        };
+      }
+      
+      // Optimize bundle splitting
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          ...config.optimization.splitChunks,
+          cacheGroups: {
+            ...config.optimization.splitChunks.cacheGroups,
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+              maxSize: 244000, // 244KB chunks
+            },
+            common: {
+              name: 'common',
+              minChunks: 2,
+              chunks: 'all',
+              enforce: true,
+              maxSize: 244000,
+            },
+          },
+        },
+      };
+      
+      // Add bundle analyzer
+      if (process.env.ANALYZE === 'true') {
+        const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+        config.plugins.push(new BundleAnalyzerPlugin({
+          analyzerMode: 'static',
+          openAnalyzer: false,
+          reportFilename: isServer ? '../analyze/server.html' : '../analyze/client.html',
+        }));
+      }
+      
+      return config;
+    },
+  } : {}),
   
   // Note: redirects, rewrites, and headers are handled by Netlify for static exports
 }

@@ -1,9 +1,10 @@
 'use client';
 
-import { MapPin, Clock, Phone, Mail, Search, Star, ExternalLink } from 'lucide-react';
+import { MapPin, Clock, Phone, Mail, Search, Star, ExternalLink, Calendar } from 'lucide-react';
 import { useState } from 'react';
 import Head from 'next/head';
 import InteractiveMap, { LocationDetailsCard } from '@/components/InteractiveMap';
+import LocationAppointmentForm from '@/components/LocationAppointmentForm';
 
 const clinicLocations = [
   {
@@ -530,6 +531,86 @@ export default function LocationsPage() {
                 </button>
               </div>
             )}
+          </div>
+        </section>
+
+        {/* Location-Specific Booking Forms */}
+        <section className="bg-white section-padding">
+          <div className="container-max">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                Book at Your Preferred Location
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Select a location below to book your appointment with location-specific scheduling, directions, and parking information.
+              </p>
+            </div>
+
+            <div className="space-y-12">
+              {clinicLocations.slice(0, 5).map((location) => (
+                <div key={location.id} id={`booking-location-${location.id}`} className="scroll-mt-24">
+                  <LocationAppointmentForm
+                    locationId={location.name.toLowerCase().replace('spinezone ', '').replace(/\s+/g, '-')}
+                    locationName={location.name}
+                    locationAddress={location.address}
+                    locationPhone={location.phone}
+                    onSuccess={(data) => {
+                      console.log(`Appointment booked at ${location.name}:`, data);
+                    }}
+                    onError={(error) => {
+                      console.error(`Booking error for ${location.name}:`, error);
+                    }}
+                    className="max-w-4xl mx-auto"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Additional Locations Info */}
+            <div className="mt-16 bg-blue-50 rounded-2xl p-8">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">More Locations Available</h3>
+                <p className="text-gray-600">
+                  We have additional locations throughout San Diego County. Contact us to find the most convenient location for you.
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <MapPin className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 mb-2">10+ Locations</h4>
+                  <p className="text-sm text-gray-600">Convenient locations across San Diego and Orange County</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Calendar className="w-8 h-8 text-green-600" />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Flexible Scheduling</h4>
+                  <p className="text-sm text-gray-600">Extended hours and weekend appointments available</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Phone className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Personal Service</h4>
+                  <p className="text-sm text-gray-600">Dedicated location coordinators to assist with your needs</p>
+                </div>
+              </div>
+              
+              <div className="text-center mt-6">
+                <a
+                  href="tel:+1-858-555-0123"
+                  className="bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center"
+                >
+                  <Phone className="w-5 h-5 mr-2" />
+                  Call for Location Assistance
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 

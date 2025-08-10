@@ -69,35 +69,161 @@ export default function PerformanceOptimizer({
   const optimizeMobilePerformance = useCallback(() => {
     if (!enableMobileOptimizations) return;
 
-    // Detect mobile device
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    // Detect mobile device with more comprehensive check
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                     (window.innerWidth <= 768 && 'ontouchstart' in window);
+    const isSlowDevice = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
     
     if (isMobile) {
-      // Optimize touch scrolling
+      // Enhanced touch scrolling optimization
       document.documentElement.style.setProperty('-webkit-overflow-scrolling', 'touch');
+      document.documentElement.style.setProperty('scroll-behavior', 'smooth');
       
-      // Prevent zoom on input focus for iOS
+      // Prevent zoom on input focus for iOS with better viewport handling
       const metaViewport = document.querySelector('meta[name="viewport"]') as HTMLMetaElement;
       if (metaViewport) {
-        metaViewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover';
+        metaViewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content';
       }
       
-      // Optimize scroll performance
+      // Advanced scroll performance optimization
       let scrollTimeout: NodeJS.Timeout;
+      let isScrolling = false;
+      
       const optimizeScroll = () => {
-        document.body.style.pointerEvents = 'none';
+        if (!isScrolling) {
+          isScrolling = true;
+          document.body.classList.add('is-scrolling');
+          requestAnimationFrame(() => {
+            // Batch DOM updates during scroll
+            const scrollTop = window.pageYOffset;
+            document.documentElement.style.setProperty('--scroll-y', `${scrollTop}px`);
+          });
+        }
+        
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
-          document.body.style.pointerEvents = 'auto';
+          isScrolling = false;
+          document.body.classList.remove('is-scrolling');
         }, 150);
       };
       
       window.addEventListener('scroll', optimizeScroll, { passive: true });
       
-      // Reduce animation complexity on mobile
+      // Touch interaction optimizations
+      const optimizeTouchInteractions = () => {
+        // Add touch-action optimization for better scroll performance
+        const touchElements = document.querySelectorAll('button, a, [role="button"], .btn, .cta');
+        touchElements.forEach(el => {
+          (el as HTMLElement).style.touchAction = 'manipulation';
+        });
+        
+        // Optimize button hover states for touch
+        const style = document.createElement('style');
+        style.textContent = `
+          @media (hover: none) and (pointer: coarse) {
+            button:hover, .btn:hover, a:hover {
+              transform: none;
+            }
+            .hover\:scale-105:hover {
+              transform: none;
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      };
+      
+      // Reduce animation complexity based on device performance
       const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-      if (!mediaQuery.matches) {
+      if (!mediaQuery.matches && !isSlowDevice) {
         document.documentElement.style.setProperty('--animation-duration', '0.2s');
+        document.documentElement.style.setProperty('--transition-timing', 'cubic-bezier(0.4, 0.0, 0.2, 1)');
+      } else {
+        // Disable complex animations on slow devices
+        document.documentElement.style.setProperty('--animation-duration', '0s');
+        document.documentElement.style.setProperty('--transition-duration', '0.1s');
+      }
+      
+      // Memory and battery optimizations for mobile
+      const optimizeMobileResources = () => {
+        // Limit concurrent network requests on mobile
+        const originalFetch = window.fetch;
+        let activeRequests = 0;
+        const maxConcurrentRequests = isMobile ? 4 : 8;
+        
+        window.fetch = async (...args) => {
+          while (activeRequests >= maxConcurrentRequests) {
+            await new Promise(resolve => setTimeout(resolve, 50));
+          }
+          activeRequests++;
+          try {
+            return await originalFetch(...args);
+          } finally {
+            activeRequests--;
+          }
+        };
+        
+        // Optimize image loading for mobile
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        images.forEach(img => {
+          if (img.hasAttribute('data-mobile-optimized')) return;
+          
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const image = entry.target as HTMLImageElement;
+                // Reduce image quality slightly on mobile for faster loading
+                if (image.src.includes('unsplash.com')) {
+                  const url = new URL(image.src);
+                  url.searchParams.set('q', '75'); // Reduce quality from default 80 to 75
+                  image.src = url.toString();
+                }
+                image.setAttribute('data-mobile-optimized', 'true');
+                observer.unobserve(image);
+              }
+            });
+          }, { rootMargin: '50px' });
+          
+          observer.observe(img);
+        });
+      };
+      
+      // Apply mobile-specific optimizations
+      optimizeTouchInteractions();
+      optimizeMobileResources();
+      
+      // Core Web Vitals specific optimizations for mobile
+      const optimizeCoreWebVitals = () => {
+        // Optimize LCP by prioritizing above-the-fold images
+        const heroImages = document.querySelectorAll('img[data-priority], .hero img, section:first-child img');
+        heroImages.forEach(img => {
+          (img as HTMLImageElement).loading = 'eager';
+          (img as HTMLImageElement).fetchPriority = 'high';
+        });
+        
+        // Optimize CLS by ensuring layout stability
+        const preventLayoutShift = () => {
+          const observer = new ResizeObserver(entries => {
+            // Minimize layout shifts during dynamic content loading
+            entries.forEach(entry => {
+              if (entry.target.classList.contains('lazy-section')) {
+                entry.target.setAttribute('data-stable-size', 'true');
+              }
+            });
+          });
+          
+          document.querySelectorAll('.lazy-section').forEach(el => {
+            observer.observe(el);
+          });
+        };
+        
+        preventLayoutShift();
+      };
+      
+      // Apply Core Web Vitals optimizations after DOM is ready
+      if (document.readyState === 'complete') {
+        optimizeCoreWebVitals();
+      } else {
+        window.addEventListener('load', optimizeCoreWebVitals);
       }
     }
   }, [enableMobileOptimizations]);
@@ -297,7 +423,7 @@ export default function PerformanceOptimizer({
         100% { background-position: -200% 0; }
       }
       
-      /* Mobile optimizations */
+      /* Enhanced mobile optimizations */
       @media (max-width: 768px) {
         .hero-section {
           min-height: 80vh;
@@ -306,6 +432,60 @@ export default function PerformanceOptimizer({
         
         .container-max {
           padding: 0 0.75rem;
+        }
+        
+        /* Optimize scroll performance */
+        .is-scrolling {
+          pointer-events: none;
+        }
+        
+        .is-scrolling * {
+          animation-play-state: paused;
+        }
+        
+        /* Touch-optimized button sizing */
+        button, .btn, a[role="button"] {
+          min-height: 44px;
+          min-width: 44px;
+          touch-action: manipulation;
+        }
+        
+        /* Reduce animation complexity on mobile */
+        @media (prefers-reduced-motion: no-preference) {
+          * {
+            animation-duration: var(--animation-duration, 0.2s) !important;
+            transition-duration: var(--transition-duration, 0.2s) !important;
+          }
+        }
+        
+        /* Optimize for mobile viewport */
+        .viewport-section {
+          will-change: transform;
+        }
+        
+        /* Prevent horizontal scroll issues */
+        body {
+          overflow-x: hidden;
+        }
+        
+        /* Optimize form inputs for mobile */
+        input, textarea, select {
+          font-size: 16px; /* Prevent zoom on iOS */
+          border-radius: 8px;
+          padding: 12px;
+        }
+        
+        /* Mobile-specific loading states */
+        .loading-skeleton {
+          animation-duration: 1s;
+        }
+      }
+      
+      /* High DPI mobile displays */
+      @media (max-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+        .hero-section {
+          background-size: cover;
+          background-attachment: scroll; /* Better performance than fixed */
         }
       }
     </style>
@@ -321,39 +501,131 @@ export default function PerformanceOptimizer({
       <script
         dangerouslySetInnerHTML={{
           __html: `
-            // Core Web Vitals monitoring
-            if ('web-vital' in window) {
-              import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-                getCLS(console.log);
-                getFID(console.log);
-                getFCP(console.log);
-                getLCP(console.log);
-                getTTFB(console.log);
+            // Enhanced Core Web Vitals monitoring with mobile focus
+            if (typeof window !== 'undefined') {
+              const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+              
+              import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB, onINP }) => {
+                const logMetric = (metric) => {
+                  // Log with mobile context for better debugging
+                  console.log(`${metric.name}: ${metric.value} (${isMobile ? 'Mobile' : 'Desktop'})`);
+                  
+                  // Send to analytics in production
+                  if (typeof gtag !== 'undefined') {
+                    gtag('event', metric.name, {
+                      value: metric.value,
+                      metric_id: metric.id,
+                      custom_parameter_device: isMobile ? 'mobile' : 'desktop'
+                    });
+                  }
+                };
+                
+                getCLS(logMetric);
+                getFID(logMetric);
+                getFCP(logMetric);
+                getLCP(logMetric);
+                getTTFB(logMetric);
+                
+                // Monitor Interaction to Next Paint for mobile responsiveness
+                if (onINP) {
+                  onINP(logMetric);
+                }
               });
             }
             
-            // Optimize scroll performance
+            // Enhanced scroll performance optimization
             let ticking = false;
+            let scrollTimeout;
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
             function updateScrollPosition() {
-              // Batch scroll-based animations
               if (!ticking) {
                 requestAnimationFrame(() => {
-                  // Handle scroll-based effects here
+                  // Update scroll-based effects with mobile optimizations
+                  const scrollY = window.pageYOffset;
+                  
+                  // Only update CSS custom properties if needed
+                  if (scrollY % 10 === 0 || !isMobile) {
+                    document.documentElement.style.setProperty('--scroll-y', scrollY + 'px');
+                  }
+                  
+                  // Handle viewport sections visibility for mobile
+                  const viewportSections = document.querySelectorAll('.viewport-section');
+                  viewportSections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    const threshold = parseFloat(section.dataset.viewportThreshold || '0.1');
+                    const isVisible = rect.top < window.innerHeight * (1 - threshold) && 
+                                    rect.bottom > window.innerHeight * threshold;
+                    
+                    if (isVisible && !section.classList.contains('in-viewport')) {
+                      section.classList.add('in-viewport');
+                    }
+                  });
+                  
                   ticking = false;
                 });
                 ticking = true;
               }
             }
             
-            window.addEventListener('scroll', updateScrollPosition, { passive: true });
+            // Throttle scroll events more aggressively on mobile
+            const scrollThrottle = isMobile ? 16 : 8; // 60fps vs 120fps
+            let lastScrollTime = 0;
             
-            // Service Worker registration for caching
-            if ('serviceWorker' in navigator) {
+            function throttledScrollHandler() {
+              const now = Date.now();
+              if (now - lastScrollTime >= scrollThrottle) {
+                updateScrollPosition();
+                lastScrollTime = now;
+              }
+            }
+            
+            window.addEventListener('scroll', throttledScrollHandler, { passive: true });
+            
+            // Enhanced Service Worker registration with mobile optimizations
+            if ('serviceWorker' in navigator && 'caches' in window) {
               window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
-                  .then(registration => console.log('SW registered'))
+                  .then(registration => {
+                    console.log('SW registered');
+                    
+                    // Pre-cache critical resources for mobile
+                    if ('connection' in navigator) {
+                      const connection = navigator.connection;
+                      if (connection && connection.effectiveType && 
+                          ['4g', 'wifi'].includes(connection.effectiveType)) {
+                        // Pre-cache on good connections
+                        caches.open('spinezone-mobile-v1').then(cache => {
+                          cache.addAll([
+                            '/',
+                            '/services',
+                            '/assessment',
+                            '/contact',
+                            '/treatment-journey'
+                          ]);
+                        });
+                      }
+                    }
+                  })
                   .catch(error => console.log('SW registration failed'));
               });
+            }
+            
+            // Mobile-specific resource hints
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+              // Prefetch likely next pages on mobile with good connection
+              if ('connection' in navigator && navigator.connection) {
+                const connection = navigator.connection;
+                if (connection.effectiveType === '4g' || connection.type === 'wifi') {
+                  const prefetchPages = ['/services', '/assessment', '/contact'];
+                  prefetchPages.forEach(page => {
+                    const link = document.createElement('link');
+                    link.rel = 'prefetch';
+                    link.href = page;
+                    document.head.appendChild(link);
+                  });
+                }
+              }
             }
           `
         }}

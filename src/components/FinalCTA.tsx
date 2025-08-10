@@ -71,9 +71,9 @@ export default function FinalCTA({ onScheduleClick, onPhoneClick }: FinalCTAProp
             <div className="bg-white rounded-2xl p-8 text-gray-900 shadow-2xl hover:shadow-3xl transition-shadow duration-300">
               <div className="text-center">
                 <Calendar className="w-12 h-12 text-blue-600 mx-auto mb-4" aria-hidden="true" />
-                <h3 className="text-2xl font-bold mb-3">Schedule Free Consultation</h3>
+                <h3 className="text-2xl font-bold mb-3">Schedule Your Appointment</h3>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  Get a comprehensive evaluation and personalized treatment plan at no cost
+                  Get a comprehensive evaluation and personalized treatment plan
                 </p>
                 <ul className="text-left space-y-2 mb-8">
                   <li className="flex items-center">
@@ -98,7 +98,7 @@ export default function FinalCTA({ onScheduleClick, onPhoneClick }: FinalCTAProp
                   className="w-full bg-gradient-to-r from-blue-600 to-green-600 text-white hover:from-blue-700 hover:to-green-700 font-bold py-4 px-8 rounded-xl text-lg transition-all duration-200 flex items-center justify-center min-h-[56px] shadow-lg hover:shadow-xl"
                 >
                   <Calendar className="w-5 h-5 mr-3" aria-hidden="true" />
-                  Book Your Free Consultation
+                  Book Your Appointment
                   <ArrowRight className="w-5 h-5 ml-3" aria-hidden="true" />
                 </button>
                 <p className="text-xs text-gray-500 mt-3">Available same-day appointments</p>
@@ -116,7 +116,7 @@ export default function FinalCTA({ onScheduleClick, onPhoneClick }: FinalCTAProp
                 <ul className="text-left space-y-2 mb-8">
                   <li className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" aria-hidden="true" />
-                    <span className="text-gray-700">Immediate phone consultation</span>
+                    <span className="text-gray-700">Immediate phone appointment scheduling</span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" aria-hidden="true" />
@@ -151,7 +151,7 @@ export default function FinalCTA({ onScheduleClick, onPhoneClick }: FinalCTAProp
               using advanced non-invasive methods for spine, hip, knee, shoulder, and neck pain.
             </p>
             <p className="text-white/80 text-sm">
-              ✅ Most insurance plans accepted • ✅ No referral needed • ✅ Same-day appointments • ✅ FREE consultation
+              ✅ Most insurance plans accepted • ✅ No referral needed • ✅ Same-day appointments • ✅ Easy appointment booking
             </p>
           </div>
         </div>

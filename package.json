@@ -4,12 +4,22 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:turbo": "next dev --turbo",
     "build": "next build",
-    "postbuild": "next-sitemap",
+    "build:analyze": "ANALYZE=true npm run build",
+    "build:profile": "next build --profile",
+    "postbuild": "next-sitemap && npm run bundle-report",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "analyze": "ANALYZE=true npm run build",
-    "preview": "npx serve out"
+    "preview": "npx serve out",
+    "bundle-report": "npx @next/bundle-analyzer",
+    "perf:lighthouse": "lighthouse http://localhost:3000 --output=json --output=html --output-path=./performance-reports/lighthouse",
+    "perf:webpagetest": "echo 'Run WebPageTest manually at https://www.webpagetest.org/'",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf .next out",
+    "clean:deps": "rm -rf node_modules package-lock.json && npm install"
   },
   "dependencies": {
     "@googlemaps/react-wrapper": "^1.2.0",
@@ -42,7 +52,9 @@
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
-    "webpack-bundle-analyzer": "^4.10.2"
+    "webpack-bundle-analyzer": "^4.10.2",
+    "lighthouse": "^11.4.0",
+    "cross-env": "^7.0.3"
   },
   "engines": {
     "node": ">=18.17.0"

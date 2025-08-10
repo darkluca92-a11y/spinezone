@@ -52,11 +52,16 @@ const config = {
       '/blog/sports-injury-rehabilitation-get-back-in-the-game/'
     ];
 
-    // Service-related pages that might be dynamically generated
-    const servicePaths = [
+    // High-priority appointment-focused pages
+    const appointmentPages = [
+      '/treatment-journey/',
       '/services/',
       '/assessment/',
-      '/contact/',
+      '/contact/'
+    ];
+
+    // Service-related pages that might be dynamically generated
+    const servicePaths = [
       '/insurance/',
       '/team/',
       '/testimonials/',
@@ -67,11 +72,40 @@ const config = {
       '/science/'
     ];
 
-    [...blogPosts, ...servicePaths].forEach(path => {
+    // Add appointment-focused pages with highest priority
+    appointmentPages.forEach(path => {
       result.push({
         loc: path,
-        changefreq: path.startsWith('/blog/') ? 'monthly' : 'weekly',
-        priority: path.startsWith('/blog/') ? 0.8 : 0.9,
+        changefreq: 'daily',
+        priority: 0.95,
+        lastmod: new Date().toISOString(),
+        // Add appointment-specific annotations
+        alternateRefs: [
+          {
+            href: `https://spinezone-sandiego.com${path}`,
+            hreflang: 'en-US',
+            title: 'Physical Therapy Appointments San Diego'
+          },
+        ],
+      });
+    });
+
+    // Add blog posts with medium-high priority
+    blogPosts.forEach(path => {
+      result.push({
+        loc: path,
+        changefreq: 'monthly',
+        priority: 0.8,
+        lastmod: new Date().toISOString(),
+      });
+    });
+
+    // Add other service pages with standard priority
+    servicePaths.forEach(path => {
+      result.push({
+        loc: path,
+        changefreq: 'weekly',
+        priority: 0.7,
         lastmod: new Date().toISOString(),
       });
     });
@@ -85,13 +119,18 @@ const config = {
     let priority = 0.7;
     let changefreq = 'monthly';
 
-    // Homepage gets highest priority
+    // Homepage gets highest priority for appointment scheduling
     if (path === '/') {
       priority = 1.0;
-      changefreq = 'weekly';
+      changefreq = 'daily';
     }
-    // Key service pages
-    else if (['/services', '/assessment', '/contact', '/insurance'].includes(path)) {
+    // Appointment-focused pages get top priority
+    else if (['/treatment-journey', '/services', '/assessment', '/contact'].includes(path)) {
+      priority = 0.95;
+      changefreq = 'daily';
+    }
+    // Insurance page (important for bookings)
+    else if (path === '/insurance') {
       priority = 0.9;
       changefreq = 'weekly';
     }

@@ -22,9 +22,9 @@ function HeroSection() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleConsultationClick = () => {
+  const handleAppointmentClick = () => {
     // In a real implementation, this would open a booking modal or redirect to a booking page
-    alert('Booking system would be integrated here. Call (858) 555-0123 to schedule your free consultation!');
+    alert('Booking system would be integrated here. Call (858) 555-0123 to schedule your appointment!');
   };
 
   return (
@@ -104,12 +104,12 @@ function HeroSection() {
               />
               <div className="flex items-center justify-center sm:justify-start text-green-600">
                 <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" aria-hidden="true" />
-                <span className="text-xs sm:text-sm">FREE consultation • Most insurance accepted • Same-day appointments</span>
+                <span className="text-xs sm:text-sm">Same-day appointments • Most insurance accepted • Easy scheduling</span>
               </div>
             </div>
             
-            <p id="consultation-description" className="sr-only">
-              Click to schedule your free consultation with our physical therapy experts
+            <p id="appointment-description" className="sr-only">
+              Click to schedule your appointment with our physical therapy experts
             </p>
           </div>
 

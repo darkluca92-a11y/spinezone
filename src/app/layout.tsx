@@ -4,19 +4,27 @@ import './globals.css'
 import Header from '@/components/Header'
 import ChatBot from '@/components/ChatBot'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
-import { generateSEOMetadata, generateLocalBusinessSchema } from '@/lib/seo-utils'
+import { generateSEOMetadata, generateLocalBusinessSchema, generateAppointmentBookingSchema } from '@/lib/seo-utils'
+import { CTAIntegrationProvider } from '@/components/CTAIntegrationSystem'
+import { BookingErrorBoundary } from '@/components/BookingErrorHandler'
+import MobileCTASystem from '@/components/MobileCTAOptimization'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: 'SpineZone - San Diego Physical Therapy 2025 | Leading Joint Pain Treatment',
-  description: 'Premier San Diego physical therapy 2025 - Specialized joint pain treatment for hips, shoulders, knees, back, neck. 90% success rate, 1M+ patient encounters, 100,000+ visits. No surgery required.',
+  title: 'Physical Therapy Appointments San Diego 2025 | SpineZone',
+  description: 'Schedule your physical therapy appointment in San Diego. Expert joint pain treatment, spine therapy, sports injury recovery. Book online or call (858) 555-0123. Same-day appointments available.',
   keywords: [
+    'San Diego physical therapy appointments 2025',
+    'schedule physical therapy appointment San Diego',
+    'book PT appointment San Diego',
+    'San Diego joint pain appointments',
+    'physical therapy booking San Diego',
+    'spine therapy appointments',
+    'sports injury appointments San Diego',
+    'make PT appointment online',
     'physical therapy consultation San Diego',
     'free pain assessment',
-    'joint pain treatment San Diego 2025',
-    'spine therapy San Diego 2025',
-    'sports injury rehabilitation',
     'La Jolla physical therapy',
     'Hillcrest spine treatment',
     'Pacific Beach PT',
@@ -42,6 +50,14 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(generateLocalBusinessSchema())
+          }}
+        />
+
+        {/* Appointment Booking Schema for Enhanced Search Visibility */}
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateAppointmentBookingSchema())
           }}
         />
         
@@ -102,6 +118,18 @@ export default function RootLayout({
         <meta name="theme-color" content="#0369a1" />
         <meta name="color-scheme" content="light" />
         
+        {/* Safe area insets for devices with notches */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            :root {
+              --sat: env(safe-area-inset-top);
+              --sar: env(safe-area-inset-right);
+              --sab: env(safe-area-inset-bottom);
+              --sal: env(safe-area-inset-left);
+            }
+          `
+        }} />
+        
         {/* Mobile Web App Capable */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -157,9 +185,15 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ErrorBoundary>
-          <Header />
-          {children}
-          <ChatBot />
+          <CTAIntegrationProvider>
+            <BookingErrorBoundary>
+              <Header />
+              {children}
+              <ChatBot />
+              {/* Mobile CTA system for responsive appointment booking */}
+              <MobileCTASystem priority="medium" variant="standard" />
+            </BookingErrorBoundary>
+          </CTAIntegrationProvider>
         </ErrorBoundary>
       </body>
     </html>

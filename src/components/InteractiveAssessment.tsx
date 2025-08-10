@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback, useMemo, useTransition, memo } from 'react';
 import { CheckCircle, AlertTriangle, Clock, ArrowRight, RefreshCw } from 'lucide-react';
 
 interface Question {
@@ -79,29 +79,38 @@ const assessmentQuestions: Question[] = [
   }
 ];
 
-export default function InteractiveAssessment() {
+// Performance-optimized InteractiveAssessment component
+export default memo(function InteractiveAssessment() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, any>>({});
   const [showResults, setShowResults] = useState(false);
   const [isCompleting, setIsCompleting] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
-  const handleAnswer = (questionId: number, answer: any) => {
-    setAnswers(prev => ({ ...prev, [questionId]: answer }));
-  };
+  // Optimized answer handler with transition
+  const handleAnswer = useCallback((questionId: number, answer: any) => {
+    startTransition(() => {
+      setAnswers(prev => ({ ...prev, [questionId]: answer }));
+    });
+  }, []);
 
-  const handleNext = () => {
-    if (currentQuestion < assessmentQuestions.length - 1) {
-      setCurrentQuestion(prev => prev + 1);
-    } else {
-      completeAssessment();
-    }
-  };
+  const handleNext = useCallback(() => {
+    startTransition(() => {
+      if (currentQuestion < assessmentQuestions.length - 1) {
+        setCurrentQuestion(prev => prev + 1);
+      } else {
+        completeAssessment();
+      }
+    });
+  }, [currentQuestion]);
 
-  const handlePrevious = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(prev => prev - 1);
-    }
-  };
+  const handlePrevious = useCallback(() => {
+    startTransition(() => {
+      if (currentQuestion > 0) {
+        setCurrentQuestion(prev => prev - 1);
+      }
+    });
+  }, [currentQuestion]);
 
   const [processingStep, setProcessingStep] = useState(0);
   const [processingSteps] = useState([
@@ -111,28 +120,37 @@ export default function InteractiveAssessment() {
     'Preparing treatment options...'
   ]);
 
-  const completeAssessment = async () => {
-    setIsCompleting(true);
-    setProcessingStep(0);
+  const completeAssessment = useCallback(async () => {
+    startTransition(() => {
+      setIsCompleting(true);
+      setProcessingStep(0);
+    });
 
-    // Progressive loading simulation with realistic steps
+    // Progressive loading simulation with optimized steps
     for (let i = 0; i < processingSteps.length; i++) {
-      setProcessingStep(i);
-      await new Promise(resolve => setTimeout(resolve, 800)); // Shorter per-step delay
+      startTransition(() => {
+        setProcessingStep(i);
+      });
+      await new Promise(resolve => setTimeout(resolve, 600)); // Faster processing
     }
 
-    setShowResults(true);
-    setIsCompleting(false);
-  };
+    startTransition(() => {
+      setShowResults(true);
+      setIsCompleting(false);
+    });
+  }, [processingSteps]);
 
-  const resetAssessment = () => {
-    setCurrentQuestion(0);
-    setAnswers({});
-    setShowResults(false);
-    setIsCompleting(false);
-  };
+  const resetAssessment = useCallback(() => {
+    startTransition(() => {
+      setCurrentQuestion(0);
+      setAnswers({});
+      setShowResults(false);
+      setIsCompleting(false);
+    });
+  }, []);
 
-  const getRecommendation = () => {
+  // Memoized recommendation calculation
+  const recommendation = useMemo(() => {
     const painLevel = answers[2] || 5;
     const duration = answers[3];
     const hasRadiation = answers[4];
@@ -162,7 +180,7 @@ export default function InteractiveAssessment() {
         timeframe: "Schedule within 2-4 weeks"
       };
     }
-  };
+  }, [answers]);
 
   if (isCompleting) {
     return (
@@ -582,4 +600,101 @@ export default function InteractiveAssessment() {
       </div>
     </section>
   );
-}
+});
+
+// Memoized Question Component for better performance
+const QuestionComponent = memo(function QuestionComponent({ 
+  question, 
+  answer, 
+  onAnswer 
+}: { 
+  question: Question; 
+  answer: any; 
+  onAnswer: (questionId: number, answer: any) => void; 
+}) {
+  const handleOptionSelect = useCallback((value: any) => {
+    onAnswer(question.id, value);
+  }, [question.id, onAnswer]);
+
+  if (question.type === 'multiple') {
+    return (
+      <div>
+        <h3 className="text-xl font-semibold text-gray-900 mb-6">{question.question}</h3>
+        <div className="space-y-3">
+          {question.options?.map((option, index) => (
+            <label key={index} className="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-all transform hover:scale-[1.02]">
+              <input
+                type="radio"
+                name={`question-${question.id}`}
+                value={option}
+                checked={answer === option}
+                onChange={() => handleOptionSelect(option)}
+                className="mr-3 text-blue-600 focus:ring-blue-500"
+              />
+              <span className="text-gray-700">{option}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (question.type === 'scale') {
+    return (
+      <div>
+        <h3 className="text-xl font-semibold text-gray-900 mb-6">{question.question}</h3>
+        <div className="mb-6">
+          <div className="flex justify-between text-sm text-gray-600 mb-2">
+            <span>{question.scaleLabels?.min}</span>
+            <span>{question.scaleLabels?.max}</span>
+          </div>
+          <input
+            type="range"
+            min="1"
+            max="10"
+            value={answer || 5}
+            onChange={(e) => handleOptionSelect(parseInt(e.target.value))}
+            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+          />
+          <div className="flex justify-center mt-4">
+            <div className="text-3xl font-bold text-blue-600">{answer || 5}</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (question.type === 'boolean') {
+    return (
+      <div>
+        <h3 className="text-xl font-semibold text-gray-900 mb-6">{question.question}</h3>
+        <div className="flex gap-4">
+          <label className="flex-1 flex items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-all transform hover:scale-[1.02]">
+            <input
+              type="radio"
+              name={`question-${question.id}`}
+              value="yes"
+              checked={answer === "yes"}
+              onChange={() => handleOptionSelect("yes")}
+              className="mr-3 text-blue-600 focus:ring-blue-500"
+            />
+            <span className="text-gray-700 font-medium">Yes</span>
+          </label>
+          <label className="flex-1 flex items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-all transform hover:scale-[1.02]">
+            <input
+              type="radio"
+              name={`question-${question.id}`}
+              value="no"
+              checked={answer === "no"}
+              onChange={() => handleOptionSelect("no")}
+              className="mr-3 text-blue-600 focus:ring-blue-500"
+            />
+            <span className="text-gray-700 font-medium">No</span>
+          </label>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+});

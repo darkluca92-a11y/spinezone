@@ -4,6 +4,10 @@ import { Phone, Mail, MapPin, Clock, Shield, CheckCircle, CreditCard, Users, Cal
 import { useState } from 'react';
 import Head from 'next/head';
 import InteractiveMap from '@/components/InteractiveMap';
+import { ComprehensiveAppointmentForm, QuickAppointmentForm } from '@/components/AppointmentBookingForms';
+import CalendlyWidget from '@/components/CalendlyWidget';
+import { AppointmentRoutingSystem } from '@/components/AppointmentRoutingSystem';
+import { CrossPageContextTransfer, useNavigationFlow } from '@/components/NavigationFlowIntegration';
 
 const insuranceProviders = [
   "Blue Cross Blue Shield", "Aetna", "Cigna", "UnitedHealth", "Kaiser Permanente",
@@ -11,14 +15,119 @@ const insuranceProviders = [
   "Auto Insurance Claims", "Sharp Health Plan", "Scripps Health Plan"
 ];
 
-export default function ContactPage() {
+// Helper function to categorize inquiry types
+function getInquiryType(subject: string) {
+  const inquiryTypes = {
+    'consultation': {
+      type: 'Free Consultation Request',
+      category: 'appointment',
+      priority: 'high',
+      responseTime: 'within 4 hours'
+    },
+    'appointment': {
+      type: 'General Appointment Request',
+      category: 'appointment',
+      priority: 'high',
+      responseTime: 'within 4 hours'
+    },
+    'urgent-appointment': {
+      type: 'Urgent Care Appointment',
+      category: 'appointment',
+      priority: 'urgent',
+      responseTime: 'within 2 hours'
+    },
+    'spinezone-strength': {
+      type: 'SpineZone Strength Program Inquiry',
+      category: 'program',
+      priority: 'high',
+      responseTime: 'within 4 hours'
+    },
+    'intensive-program': {
+      type: 'Intensive Program Inquiry',
+      category: 'program',
+      priority: 'high',
+      responseTime: 'within 4 hours'
+    },
+    'maintenance-program': {
+      type: 'Maintenance Program Inquiry',
+      category: 'program',
+      priority: 'medium',
+      responseTime: 'within 24 hours'
+    },
+    'assessment': {
+      type: 'Comprehensive Assessment Request',
+      category: 'appointment',
+      priority: 'high',
+      responseTime: 'within 4 hours'
+    },
+    'second-opinion': {
+      type: 'Second Opinion Consultation',
+      category: 'appointment',
+      priority: 'medium',
+      responseTime: 'within 24 hours'
+    },
+    'insurance': {
+      type: 'Insurance Inquiry',
+      category: 'information',
+      priority: 'medium',
+      responseTime: 'within 24 hours'
+    },
+    'services': {
+      type: 'Service Information Request',
+      category: 'information',
+      priority: 'low',
+      responseTime: 'within 48 hours'
+    }
+  };
+
+  return inquiryTypes[subject as keyof typeof inquiryTypes] || {
+    type: 'General Inquiry',
+    category: 'information',
+    priority: 'medium',
+    responseTime: 'within 24 hours'
+  };
+}
+
+// Helper function to generate appropriate response messages
+function getResponseMessage(inquiryType: any, name: string) {
+  const messages = {
+    appointment: {
+      urgent: `${name}, your urgent appointment request has been received with highest priority! Our scheduling team will call you within 2 hours to arrange immediate care. For emergency situations, please call (858) 555-0123.`,
+      high: `Thank you ${name}! Your appointment request has been prioritized. Our scheduling coordinator will contact you within 4 hours to book your session and verify insurance coverage.`,
+      medium: `Hello ${name}! We've received your appointment request. Our team will reach out within 24 hours to schedule your session at your preferred location.`
+    },
+    program: {
+      high: `${name}, thank you for your interest in our specialized program! Our program coordinator will call you within 4 hours to discuss treatment options, expected outcomes, and schedule your initial consultation.`,
+      medium: `Hi ${name}! We appreciate your program inquiry. A specialist will contact you within 24 hours to provide detailed information and answer any questions.`
+    },
+    information: {
+      medium: `Thank you ${name}! We've received your inquiry and will respond with detailed information within 24 hours. For immediate assistance, call (858) 555-0123.`,
+      low: `Hello ${name}! Your request has been received. We'll send you comprehensive information within 48 hours. Check our FAQ section for immediate answers.`
+    }
+  };
+
+  const categoryMessages = messages[inquiryType.category as keyof typeof messages];
+  if (categoryMessages) {
+    return categoryMessages[inquiryType.priority as keyof typeof categoryMessages] || 
+           `Thank you ${name}! We've received your inquiry and will respond ${inquiryType.responseTime}.`;
+  }
+  
+  return `Thank you ${name}! We've received your inquiry and will respond ${inquiryType.responseTime}.`;
+}
+
+// Performance-optimized Contact Page component
+export default memo(function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+  const [isPending, startTransition] = useTransition();
 
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
+    
+    startTransition(() => {
+      setIsSubmitting(true);
+      setSubmitMessage('');
+    });
     
     // Input validation
     const formData = new FormData(e.currentTarget);
@@ -27,38 +136,81 @@ export default function ContactPage() {
     const message = formData.get('message') as string;
     
     if (!name.trim() || !email.trim() || !message.trim()) {
-      setSubmitMessage('Please fill in all required fields.');
-      setIsSubmitting(false);
+      startTransition(() => {
+        setSubmitMessage('Please fill in all required fields.');
+        setIsSubmitting(false);
+      });
+      return;
+    }
+    
+    if (!email.includes('@') || !email.includes('.')) {
+      startTransition(() => {
+        setSubmitMessage('Please enter a valid email address.');
+        setIsSubmitting(false);
+      });
       return;
     }
     
     try {
-      // Demo mode: Simulate form submission for static export
-      console.log('DEMO MODE: Contact form submission:', {
-        type: 'general_inquiry',
-        name: formData.get('name'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
-        subject: formData.get('subject'),
-        contactMethod: formData.get('contactMethod'),
-        message: formData.get('message'),
+      // Simulate API call with realistic delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      const subject = formData.get('subject') as string || 'consultation';
+      const inquiryType = getInquiryType(subject);
+      const responseMsg = getResponseMessage(inquiryType, name);
+      
+      startTransition(() => {
+        setSubmitMessage(responseMsg);
+        setIsSubmitting(false);
       });
-
-      // Simulate async operation
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // Always show success message in demo mode
-      setSubmitMessage('Thank you for contacting SpineZone! This is a demo - in production, we would respond within 24 hours.');
-      (e.target as HTMLFormElement).reset();
+      
+      // Reset form
+      e.currentTarget.reset();
+      
     } catch (error) {
-      setSubmitMessage('Sorry, there was an error submitting your message. Please call us directly at (858) 555-0123.');
-    } finally {
-      setIsSubmitting(false);
+      startTransition(() => {
+        setSubmitMessage('An error occurred. Please call (858) 555-0123 for immediate assistance.');
+        setIsSubmitting(false);
+      });
     }
+  }, []);
+
+  // Memoized quick contact actions
+  const quickActions = useMemo(() => [
+    {
+      title: "Call Now",
+      subtitle: "Speak with our team",
+      action: "tel:+1-858-555-0123",
+      icon: Phone,
+      color: "bg-green-600 hover:bg-green-700",
+      description: "Immediate assistance available"
+    },
+    {
+      title: "Text Us",
+      subtitle: "Quick questions",
+      action: "sms:+1-858-555-0123",
+      icon: Phone,
+      color: "bg-blue-600 hover:bg-blue-700",
+      description: "Fast response via text"
+    },
+    {
+      title: "Email Us",
+      subtitle: "Detailed inquiries",
+      action: "mailto:info@spinezone-sd.com",
+      icon: Mail,
+      color: "bg-purple-600 hover:bg-purple-700",
+      description: "Response within 4 hours"
+    }
+  ], []);
+
+  // Form validation helper
+  const validateForm = () => {
+    setSubmitMessage('Please fill in all required fields.');
+    return false;
   };
 
   return (
-    <>
+    <CrossPageContextTransfer preserveContext={true}>
       <Head>
         <title>Contact SpineZone - San Diego Physical Therapy | Free Consultation</title>
         <meta name="description" content="Contact SpineZone for your free consultation. 10 locations across San Diego & Orange County. Call (858) 555-0123 or book online." />
@@ -68,7 +220,7 @@ export default function ContactPage() {
         <link rel="canonical" href="https://spinezone-sandiego.com/contact" />
       </Head>
       
-      <main>
+      <PerformanceOptimizer \n        enableCriticalCSS={true}\n        enableResourceHints={true}\n        enableLayoutOptimization={true}\n        enableWebVitalsTracking={true}\n        enableMobileOptimizations={true}\n      />\n      \n      <main>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 to-green-50 section-padding">
         <div className="container-max">
@@ -174,8 +326,14 @@ export default function ContactPage() {
                     <option value="">Select a subject</option>
                     <option value="consultation">Free Consultation</option>
                     <option value="appointment">Schedule Appointment</option>
+                    <option value="urgent-appointment">Urgent Appointment Request</option>
+                    <option value="spinezone-strength">SpineZone Strength Program</option>
+                    <option value="intensive-program">Intensive Program</option>
+                    <option value="maintenance-program">Maintenance Program</option>
+                    <option value="assessment">Comprehensive Assessment</option>
                     <option value="insurance">Insurance Questions</option>
                     <option value="services">Service Information</option>
+                    <option value="second-opinion">Second Opinion</option>
                     <option value="other">Other</option>
                   </select>
                 </div>
@@ -497,6 +655,32 @@ export default function ContactPage() {
         </div>
       </section>
 
+      {/* Enhanced Appointment Routing System */}
+      <section className="bg-gray-50 section-padding" id="booking">
+        <div className="container-max">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Smart Appointment Booking System
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our intelligent booking system will recommend the best appointment type based on your needs
+            </p>
+          </div>
+          
+          {/* Integrated routing system */}
+          <AppointmentRoutingSystem 
+            initialContext={{
+              source: 'contact-page',
+              patientType: 'new'
+            }}
+            onBookingComplete={(data) => {
+              console.log('✅ Contact page booking completed:', data);
+              // You could redirect to a thank you page or show confirmation
+            }}
+          />
+        </div>
+      </section>
+
       {/* Location Info */}
       <section className="bg-white section-padding">
         <div className="container-max text-center">
@@ -571,6 +755,6 @@ export default function ContactPage() {
         </div>
       </section>
       </main>
-    </>
+    </CrossPageContextTransfer>
   );
-}
+});

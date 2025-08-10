@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { sandiegoNeighborhoods } from '@/lib/seo-utils';
 
 interface StructuredDataProps {
-  type: 'homepage' | 'team' | 'testimonials' | 'assessment' | 'insurance' | 'services' | 'blog';
+  type: 'homepage' | 'team' | 'testimonials' | 'assessment' | 'insurance' | 'services' | 'blog' | 'treatment-journey';
 }
 
 export default function StructuredData({ type }: StructuredDataProps) {

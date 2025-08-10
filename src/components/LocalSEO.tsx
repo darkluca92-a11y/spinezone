@@ -16,7 +16,7 @@ const neighborhoodData = [
   {
     name: 'La Jolla',
     slug: 'la-jolla',
-    description: 'Premier physical therapy clinic serving La Jolla residents with advanced spine and joint pain treatment.',
+    description: 'Schedule your La Jolla PT appointment online. Best physical therapy appointments La Jolla - same-day scheduling available.',
     specialties: ['Sports Medicine', 'Spine Treatment', 'Luxury Care'],
     distance: '5 miles from downtown',
     zipCodes: ['92037', '92093'],
@@ -25,7 +25,7 @@ const neighborhoodData = [
   {
     name: 'Hillcrest',
     slug: 'hillcrest',
-    description: 'Central San Diego location providing comprehensive physical therapy and rehabilitation services.',
+    description: 'Book Hillcrest PT appointments easily. Central San Diego physical therapy with online appointment scheduling.',
     specialties: ['Joint Pain', 'Rehabilitation', 'Manual Therapy'],
     distance: '2 miles from downtown',
     zipCodes: ['92103', '92104'],
@@ -34,7 +34,7 @@ const neighborhoodData = [
   {
     name: 'Pacific Beach',
     slug: 'pacific-beach',
-    description: 'Beachside physical therapy clinic specializing in active lifestyle and sports injury recovery.',
+    description: 'Pacific Beach PT appointments available. Sports injury therapy appointments with same-day scheduling.',
     specialties: ['Sports Injuries', 'Active Recovery', 'Beach Lifestyle'],
     distance: '8 miles from downtown',
     zipCodes: ['92109'],
@@ -43,7 +43,7 @@ const neighborhoodData = [
   {
     name: 'Mission Valley',
     slug: 'mission-valley',
-    description: 'Convenient Mission Valley location with easy access and comprehensive pain management services.',
+    description: 'Mission Valley physical therapy appointments. Convenient PT booking with flexible appointment times.',
     specialties: ['Pain Management', 'Convenient Access', 'Modern Facility'],
     distance: '3 miles from downtown',
     zipCodes: ['92108', '92120'],
@@ -52,7 +52,7 @@ const neighborhoodData = [
   {
     name: 'Downtown',
     slug: 'downtown',
-    description: 'Downtown San Diego physical therapy clinic serving professionals and urban residents.',
+    description: 'Downtown San Diego PT appointments for busy professionals. Online booking with early and late appointment slots.'
     specialties: ['Executive Care', 'Urban Wellness', 'Flexible Scheduling'],
     distance: 'City center',
     zipCodes: ['92101', '92102'],
@@ -61,7 +61,7 @@ const neighborhoodData = [
   {
     name: 'Point Loma',
     slug: 'point-loma',
-    description: 'Point Loma physical therapy services for coastal community residents and military personnel.',
+    description: 'Point Loma PT appointment scheduling for military and coastal residents. Flexible appointment booking available.'
     specialties: ['Military Care', 'Coastal Community', 'Family Therapy'],
     distance: '6 miles from downtown',
     zipCodes: ['92106', '92107'],
@@ -69,14 +69,20 @@ const neighborhoodData = [
   }
 ];
 
-// "Near me" search terms for local SEO
+// "Near me" search terms for local SEO (appointment-focused)
 const nearMeTerms = [
   'physical therapy near me',
-  'spine treatment near me',
+  'spine treatment near me', 
   'back pain doctor near me',
   'joint pain treatment near me',
   'sports injury therapy near me',
-  'PT clinic near me San Diego'
+  'PT clinic near me San Diego',
+  'PT appointments near me',
+  'book physical therapy near me',
+  'schedule PT appointment near me',
+  'same day PT appointments near me',
+  'physical therapy booking San Diego',
+  'urgent PT appointments near me'
 ];
 
 export default function LocalSEO({ 

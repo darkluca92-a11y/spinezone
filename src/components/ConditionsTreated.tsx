@@ -186,7 +186,7 @@ export default function ConditionsTreated() {
               </div>
               
               <button className="btn-primary w-full sm:w-auto flex items-center justify-center group min-h-[48px]">
-                <span className="text-sm sm:text-base">Schedule Free Assessment</span>
+                <span className="text-sm sm:text-base">Schedule Assessment Appointment</span>
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
               </button>
             </div>

@@ -22,6 +22,20 @@ interface FAQSectionProps {
 // Comprehensive FAQ data optimized for featured snippets
 const defaultFAQs: FAQ[] = [
   {
+    question: "How do I schedule a physical therapy appointment in San Diego?",
+    answer: "To schedule a physical therapy appointment in San Diego, you can book online through our website, call (858) 555-0123, or visit our office at 1234 Healing Way, Suite 200. We offer same-day appointments when available and typically have openings within 24-48 hours. No referral required.",
+    category: "Appointments",
+    featured: true,
+    keywords: ["schedule appointment", "book PT", "San Diego appointments", "same-day scheduling"]
+  },
+  {
+    question: "Can I book same-day PT appointments?",
+    answer: "Yes, SpineZone offers same-day physical therapy appointments when possible. We prioritize urgent cases and acute injuries. Call (858) 555-0123 in the morning for best availability, or use our online booking system to check real-time appointment slots throughout San Diego.",
+    category: "Appointments", 
+    featured: true,
+    keywords: ["same-day appointments", "urgent PT", "immediate scheduling", "San Diego PT booking"]
+  },
+  {
     question: "What conditions does SpineZone Physical Therapy treat in San Diego?",
     answer: "SpineZone specializes in treating all types of joint pain including back pain, neck pain, hip pain, knee pain, shoulder pain, and sports injuries. We use non-invasive methods with a 90% success rate, serving patients throughout San Diego including La Jolla, Hillcrest, Pacific Beach, and Mission Valley.",
     category: "Services",
@@ -65,8 +79,30 @@ const defaultFAQs: FAQ[] = [
   {
     question: "How soon can I schedule an appointment?",
     answer: "We offer same-day scheduling when possible and typically have appointments available within 24-48 hours. Emergency appointments are available for acute injuries. Call (858) 555-0123 or use our online booking system for fastest scheduling.",
-    category: "Scheduling",
+    category: "Appointments", 
+    featured: true,
     keywords: ["appointment scheduling", "same-day PT", "quick booking"]
+  },
+  {
+    question: "What should I expect during my PT treatment journey?",
+    answer: "Your physical therapy treatment journey at SpineZone follows a 3-phase process: Phase 1 focuses on pain relief (1-2 weeks), Phase 2 builds mobility & strength (2-4 weeks), and Phase 3 optimizes function & performance (2-6 weeks). Each phase includes specific appointment milestones and progress tracking.",
+    category: "Treatment Journey",
+    featured: true,
+    keywords: ["treatment journey", "PT phases", "what to expect", "treatment timeline"]
+  },
+  {
+    question: "How long does physical therapy treatment take?",
+    answer: "Physical therapy treatment duration varies by condition and program. Most patients complete treatment in 6-8 weeks with 2-3 appointments per week. Our SpineZone Strength Program is 10 weeks (20 sessions), while our Intensive Program is 7 weeks (14 sessions). 90% of patients see significant improvement within 4 weeks.",
+    category: "Treatment Journey",
+    featured: true,
+    keywords: ["treatment duration", "how long PT takes", "appointment frequency", "recovery timeline"]
+  },
+  {
+    question: "Can I book PT appointments online?",
+    answer: "Yes, you can easily book physical therapy appointments online through our website 24/7. Our online booking system shows real-time availability for all San Diego locations, allows you to select your preferred therapist, and sends confirmation emails with appointment details. You can also reschedule or cancel online.",
+    category: "Appointments",
+    featured: true,
+    keywords: ["online booking", "book appointments online", "PT scheduling", "appointment system"]
   },
   {
     question: "Do I need a doctor's referral for physical therapy?",

@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * Performance Analysis Report Generator
- * Analyzes the built Next.js application for performance optimizations
+ * SpineZone Performance Analysis Report Generator
+ * Comprehensive performance analysis for the SpineZone Physical Therapy website
+ * Analyzes bundle sizes, Core Web Vitals, mobile performance, and appointment booking system
  */
 
 const fs = require('fs');

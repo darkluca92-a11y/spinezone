@@ -1,6 +1,6 @@
 'use client';
 
-import { Heart, Shield, Activity, Zap, CheckCircle, ArrowRight, Clock } from 'lucide-react';
+import { Heart, Shield, Activity, Zap, CheckCircle, ArrowRight, Calendar } from 'lucide-react';
 import Image from 'next/image';
 
 const treatmentCategories = [
@@ -66,29 +66,6 @@ const treatmentCategories = [
   }
 ];
 
-const treatmentPhases = [
-  {
-    phase: "Phase 1",
-    title: "Pain Relief & Protection",
-    duration: "1-2 weeks",
-    goals: ["Reduce acute pain", "Protect injured tissues", "Restore basic function"],
-    treatments: ["Manual therapy", "Pain management", "Gentle mobilization"]
-  },
-  {
-    phase: "Phase 2", 
-    title: "Mobility & Strength",
-    duration: "2-4 weeks",
-    goals: ["Improve range of motion", "Build foundational strength", "Address movement patterns"],
-    treatments: ["Progressive exercises", "Manual therapy", "Movement training"]
-  },
-  {
-    phase: "Phase 3",
-    title: "Function & Performance",
-    duration: "2-6 weeks",
-    goals: ["Return to activities", "Optimize performance", "Prevent recurrence"],
-    treatments: ["Advanced exercises", "Functional training", "Sport-specific prep"]
-  }
-];
 
 const getColorClasses = (color: string) => {
   const colors = {
@@ -155,10 +132,17 @@ export default function TreatmentOptions() {
                       ))}
                     </ul>
                     
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Clock className="w-4 h-4 mr-2" aria-hidden="true" />
+                    <div className="flex items-center text-sm text-gray-600 mb-4">
+                      <Calendar className="w-4 h-4 mr-2" aria-hidden="true" />
                       <span>{treatment.duration}</span>
                     </div>
+                    
+                    <button className={`w-full ${colors.icon.includes('blue') ? 'bg-blue-600 hover:bg-blue-700' : 
+                      colors.icon.includes('green') ? 'bg-green-600 hover:bg-green-700' : 
+                      colors.icon.includes('purple') ? 'bg-purple-600 hover:bg-purple-700' : 
+                      'bg-orange-600 hover:bg-orange-700'} text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-sm`}>
+                      Schedule {treatment.title} Appointment
+                    </button>
                   </div>
                 </div>
               </div>
@@ -166,126 +150,23 @@ export default function TreatmentOptions() {
           })}
         </div>
 
-        {/* Treatment Phases */}
-        <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-6 sm:p-8 lg:p-12 mb-12 sm:mb-16">
-          <div className="text-center mb-8 sm:mb-12">
-            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
-              Your Treatment Journey
-            </h3>
-            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-              Our systematic, phase-based approach ensures optimal recovery at every stage of your healing process
-            </p>
-          </div>
-
-          {/* Mobile horizontal scroll, desktop grid */}
-          <div className="lg:grid lg:grid-cols-3 lg:gap-8">
-            <div className="flex space-x-4 overflow-x-auto pb-4 lg:hidden">
-              {treatmentPhases.map((phase, index) => (
-                <div key={index} className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow flex-shrink-0 w-72">
-                  <div className="flex items-center mb-4">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold mr-3 text-sm">
-                      {index + 1}
-                    </div>
-                    <div>
-                      <h4 className="text-base font-bold text-gray-900">{phase.phase}</h4>
-                      <p className="text-blue-600 font-semibold text-sm">{phase.title}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="mb-4">
-                    <div className="flex items-center text-xs text-gray-600 mb-3">
-                      <Clock className="w-3 h-3 mr-2" aria-hidden="true" />
-                      <span>Duration: {phase.duration}</span>
-                    </div>
-                    
-                    <h5 className="font-semibold text-gray-900 mb-2 text-sm">Primary Goals:</h5>
-                    <ul className="space-y-1 mb-4">
-                      {phase.goals.map((goal, goalIndex) => (
-                        <li key={goalIndex} className="flex items-start text-xs">
-                          <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2 mt-1.5 flex-shrink-0"></div>
-                          <span className="text-gray-700">{goal}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    <h5 className="font-semibold text-gray-900 mb-2 text-sm">Key Treatments:</h5>
-                    <div className="flex flex-wrap gap-1">
-                      {phase.treatments.map((treatment, treatmentIndex) => (
-                        <span key={treatmentIndex} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-                          {treatment}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Desktop grid layout */}
-            <div className="hidden lg:contents">
-              {treatmentPhases.map((phase, index) => (
-                <div key={index} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-                  <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold mr-3">
-                      {index + 1}
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-bold text-gray-900">{phase.phase}</h4>
-                      <p className="text-blue-600 font-semibold">{phase.title}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="mb-4">
-                    <div className="flex items-center text-sm text-gray-600 mb-3">
-                      <Clock className="w-4 h-4 mr-2" aria-hidden="true" />
-                      <span>Duration: {phase.duration}</span>
-                    </div>
-                    
-                    <h5 className="font-semibold text-gray-900 mb-2">Primary Goals:</h5>
-                    <ul className="space-y-1 mb-4">
-                      {phase.goals.map((goal, goalIndex) => (
-                        <li key={goalIndex} className="flex items-start text-sm">
-                          <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2 mt-2"></div>
-                          <span className="text-gray-700">{goal}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    <h5 className="font-semibold text-gray-900 mb-2">Key Treatments:</h5>
-                    <div className="flex flex-wrap gap-2">
-                      {phase.treatments.map((treatment, treatmentIndex) => (
-                        <span key={treatmentIndex} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-                          {treatment}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile scroll indicator */}
-          <div className="lg:hidden mt-4 text-center">
-            <p className="text-xs text-gray-500">← Scroll to see all phases →</p>
-          </div>
-        </div>
-
-        {/* Treatment Selection CTA */}
-        <div className="bg-gradient-to-r from-blue-600 to-green-600 rounded-2xl p-8 lg:p-12 text-white text-center">
-          <h3 className="text-2xl sm:text-3xl font-bold mb-4">
-            Not Sure Which Treatment is Right for You?
+        {/* Treatment Journey CTA - Link to new dedicated page */}
+        <div className="bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl p-8 text-center">
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+            Explore Our Complete Treatment Process
           </h3>
-          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Our expert team will conduct a comprehensive evaluation to determine the optimal treatment plan for your specific condition and goals
+          <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
+            Understand your complete recovery journey with our systematic 3-phase approach. 
+            See exactly what to expect from your first visit to full recovery.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg text-lg transition-colors duration-200 flex items-center justify-center">
-              Schedule Free Evaluation
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-lg text-lg transition-colors duration-200 flex items-center justify-center">
+              View Treatment Journey
               <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" />
             </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold py-4 px-8 rounded-lg text-lg transition-colors duration-200">
-              Learn More About Treatments
+            <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-8 rounded-lg text-lg transition-colors duration-200 flex items-center justify-center">
+              <Calendar className="w-4 h-4 mr-2" aria-hidden="true" />
+              Make an Appointment
             </button>
           </div>
         </div>

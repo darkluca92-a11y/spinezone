@@ -8,15 +8,16 @@ interface InternalLinksProps {
   showLocalSEO?: boolean;
 }
 
-// SEO-optimized internal linking structure
+// SEO-optimized internal linking structure (appointment-focused)
 const internalLinkGroups = {
   services: [
     {
-      title: 'Our Treatment Programs',
+      title: 'Schedule Your Appointment',
       links: [
-        { href: '/services', text: 'All Physical Therapy Services', priority: 'high' },
-        { href: '/assessment', text: 'Free Pain Assessment', priority: 'high' },
-        { href: '/team', text: 'Meet Our Expert Team', priority: 'medium' }
+        { href: '/assessment', text: 'Schedule Free Assessment', priority: 'high' },
+        { href: '/services', text: 'Book Treatment Services', priority: 'high' },
+        { href: '/treatment-journey', text: 'Plan Your Treatment Journey', priority: 'high' },
+        { href: '/contact', text: 'Schedule Consultation Call', priority: 'medium' }
       ]
     }
   ],
@@ -43,38 +44,38 @@ const internalLinkGroups = {
   ],
   localSEO: [
     {
-      title: 'San Diego Area Locations',
+      title: 'Book Appointments by Location',
       links: [
-        { href: '/locations', text: 'La Jolla Physical Therapy', priority: 'high', isLocal: true },
-        { href: '/locations', text: 'Hillcrest Spine Treatment', priority: 'high', isLocal: true },
-        { href: '/locations', text: 'Pacific Beach PT Clinic', priority: 'high', isLocal: true },
-        { href: '/locations', text: 'Mission Valley Therapy', priority: 'medium', isLocal: true },
-        { href: '/locations', text: 'Downtown San Diego PT', priority: 'medium', isLocal: true }
+        { href: '/locations', text: 'Schedule La Jolla PT Appointment', priority: 'high', isLocal: true },
+        { href: '/locations', text: 'Book Hillcrest Spine Treatment', priority: 'high', isLocal: true },
+        { href: '/locations', text: 'Pacific Beach PT Appointment', priority: 'high', isLocal: true },
+        { href: '/locations', text: 'Mission Valley Therapy Booking', priority: 'medium', isLocal: true },
+        { href: '/locations', text: 'Downtown San Diego PT Scheduling', priority: 'medium', isLocal: true }
       ]
     }
   ]
 };
 
-// Priority keywords for anchor text optimization
+// Priority keywords for anchor text optimization (appointment-focused)
 const keywordPhrases = {
   high: [
-    'San Diego physical therapy 2025',
-    'joint pain treatment San Diego',
-    'free pain assessment',
-    'spine therapy San Diego',
-    'comprehensive physical therapy services'
+    'San Diego physical therapy appointments 2025',
+    'schedule PT appointment San Diego',
+    'book physical therapy San Diego',
+    'free pain assessment appointment',
+    'physical therapy appointment booking'
   ],
   medium: [
     'physical therapy insurance coverage',
     'patient testimonials San Diego',
     'expert physical therapists',
-    'sports injury rehabilitation'
+    'sports injury rehabilitation appointments'
   ],
   local: [
-    'La Jolla physical therapy clinic',
-    'Hillcrest spine treatment center',
-    'Pacific Beach PT services',
-    'Mission Valley therapy clinic'
+    'La Jolla PT appointment booking',
+    'Hillcrest spine treatment appointments',
+    'Pacific Beach PT appointment scheduling',
+    'Mission Valley therapy appointments'
   ]
 };
 
@@ -102,7 +103,7 @@ export default function InternalLinks({ currentPage = '', showLocalSEO = true }:
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                 <Star className="w-6 h-6 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900">Treatment Programs</h3>
+              <h3 className="text-xl font-bold text-gray-900">Schedule Appointments</h3>
             </div>
             <div className="space-y-3">
               {filterCurrentPage(internalLinkGroups.services[0].links).map((link, index) => (
@@ -151,7 +152,7 @@ export default function InternalLinks({ currentPage = '', showLocalSEO = true }:
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                   <MapPin className="w-6 h-6 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">San Diego Locations</h3>
+              <h3 className="text-xl font-bold text-gray-900">Appointment Locations</h3>
               </div>
               <div className="space-y-3">
                 {internalLinkGroups.localSEO[0].links.map((link, index) => (

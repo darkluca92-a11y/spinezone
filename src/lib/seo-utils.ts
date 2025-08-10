@@ -53,7 +53,7 @@ export const serviceKeywords = {
   ]
 };
 
-// High-intent conversion keywords
+// High-intent conversion keywords (appointment-focused)
 export const conversionKeywords = [
   'physical therapy consultation San Diego',
   'free pain assessment',
@@ -61,7 +61,13 @@ export const conversionKeywords = [
   'spine treatment consultation',
   'joint pain diagnosis',
   'therapy appointment San Diego',
-  'pain relief consultation 2025'
+  'pain relief consultation 2025',
+  'schedule PT appointment San Diego',
+  'book physical therapy appointment',
+  'San Diego PT appointment booking',
+  'same day physical therapy appointments',
+  'urgent PT appointments San Diego',
+  'online physical therapy scheduling'
 ];
 
 interface SEOConfig {
@@ -273,5 +279,115 @@ export function generateLocalBusinessSchema(pageName?: string) {
       "bestRating": "5",
       "worstRating": "1"
     }
+  };
+}
+
+// Generate appointment booking schema for enhanced search visibility
+export function generateAppointmentBookingSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "@id": "https://spinezone-sandiego.com/#appointmentbooking",
+    "name": "SpineZone Physical Therapy",
+    "url": "https://spinezone-sandiego.com",
+    "telephone": "+1-858-555-0123",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog", 
+      "name": "Physical Therapy Appointment Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "@id": "https://spinezone-sandiego.com/#appointment-consultation",
+          "name": "Physical Therapy Consultation Appointment",
+          "description": "Schedule your initial physical therapy consultation appointment in San Diego",
+          "url": "https://spinezone-sandiego.com/assessment",
+          "availability": "InStock",
+          "priceRange": "$100-200",
+          "validFrom": "2025-01-01",
+          "validThrough": "2025-12-31",
+          "areaServed": {
+            "@type": "City",
+            "name": "San Diego",
+            "addressRegion": "CA",
+            "addressCountry": "US"
+          },
+          "availableAtOrFrom": {
+            "@type": "Place",
+            "name": "SpineZone Physical Therapy",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "1234 Healing Way, Suite 200",
+              "addressLocality": "San Diego", 
+              "addressRegion": "CA",
+              "postalCode": "92101"
+            }
+          }
+        },
+        {
+          "@type": "Offer",
+          "@id": "https://spinezone-sandiego.com/#appointment-treatment",
+          "name": "Physical Therapy Treatment Appointment",
+          "description": "Book ongoing physical therapy treatment sessions in San Diego",
+          "url": "https://spinezone-sandiego.com/services",
+          "availability": "InStock",
+          "priceRange": "$150-300", 
+          "validFrom": "2025-01-01",
+          "validThrough": "2025-12-31",
+          "areaServed": {
+            "@type": "City",
+            "name": "San Diego",
+            "addressRegion": "CA",
+            "addressCountry": "US"
+          }
+        },
+        {
+          "@type": "Offer",
+          "@id": "https://spinezone-sandiego.com/#appointment-journey",
+          "name": "Treatment Journey Program Appointment",
+          "description": "Schedule appointments for our 3-phase treatment journey program",
+          "url": "https://spinezone-sandiego.com/treatment-journey",
+          "availability": "InStock",
+          "priceRange": "$1500-3000",
+          "validFrom": "2025-01-01", 
+          "validThrough": "2025-12-31",
+          "areaServed": {
+            "@type": "City",
+            "name": "San Diego",
+            "addressRegion": "CA", 
+            "addressCountry": "US"
+          }
+        }
+      ]
+    },
+    "potentialAction": [
+      {
+        "@type": "ReserveAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://spinezone-sandiego.com/assessment",
+          "inLanguage": "en-US",
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform"
+          ]
+        },
+        "result": {
+          "@type": "Reservation",
+          "name": "Physical Therapy Appointment Reservation"
+        }
+      },
+      {
+        "@type": "ScheduleAction", 
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://spinezone-sandiego.com/services",
+          "inLanguage": "en-US"
+        },
+        "object": {
+          "@type": "Event",
+          "name": "Physical Therapy Treatment Session"
+        }
+      }
+    ]
   };
 }
