@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Temporarily disable static export to avoid event handler serialization issues
+  // output: 'export',
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   distDir: 'out',
@@ -40,7 +41,8 @@ const nextConfig = {
     ],
     webVitalsAttribution: ['CLS', 'LCP', 'FID', 'FCP', 'TTFB', 'INP'],
     scrollRestoration: true,
-    optimizeCss: true,
+    // Disabled optimizeCss due to 'critters' module dependency issues in Netlify build environment
+    // optimizeCss: true,
     turbo: {
       rules: {
         '*.svg': {
@@ -50,6 +52,9 @@ const nextConfig = {
       },
     },
   },
+  
+  // Static page generation timeout for heavy pages - increased for complex components
+  staticPageGenerationTimeout: 180, // 3 minutes for complex SSG pages with multiple forms
   
   // Enhanced compiler optimizations
   compiler: {
@@ -61,19 +66,21 @@ const nextConfig = {
     reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
   
-  // Bundle analyzer configuration
-  ...(process.env.ANALYZE === 'true' ? {
-    webpack: (config, { isServer }) => {
-      if (!isServer) {
-        config.resolve.fallback = {
-          ...config.resolve.fallback,
-          fs: false,
-          net: false,
-          tls: false,
-        };
-      }
-      
-      // Optimize bundle splitting
+  // Enhanced webpack configuration for performance
+  webpack: (config, { isServer, dev }) => {
+    // Client-side optimizations
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      };
+    }
+    
+    // Production optimizations
+    if (!dev) {
+      // Optimize bundle splitting for better caching
       config.optimization = {
         ...config.optimization,
         splitChunks: {
@@ -84,32 +91,46 @@ const nextConfig = {
               test: /[\\/]node_modules[\\/]/,
               name: 'vendors',
               chunks: 'all',
-              maxSize: 244000, // 244KB chunks
+              maxSize: 200000, // 200KB chunks for better loading
+              priority: 10,
             },
             common: {
               name: 'common',
               minChunks: 2,
               chunks: 'all',
               enforce: true,
-              maxSize: 244000,
+              maxSize: 200000,
+              priority: 5,
+            },
+            // Separate chunk for heavy components
+            appointments: {
+              test: /[\\/]components[\\/](.*AppointmentForm|.*Appointment.*)\\.tsx?$/,
+              name: 'appointments',
+              chunks: 'all',
+              priority: 15,
             },
           },
         },
       };
-      
-      // Add bundle analyzer
-      if (process.env.ANALYZE === 'true') {
-        const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-        config.plugins.push(new BundleAnalyzerPlugin({
-          analyzerMode: 'static',
-          openAnalyzer: false,
-          reportFilename: isServer ? '../analyze/server.html' : '../analyze/client.html',
-        }));
-      }
-      
-      return config;
-    },
-  } : {}),
+    }
+    
+    // Add bundle analyzer only when needed
+    if (process.env.ANALYZE === 'true') {
+      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+      config.plugins.push(new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        openAnalyzer: false,
+        reportFilename: isServer ? '../analyze/server.html' : '../analyze/client.html',
+      }));
+    }
+    
+    return config;
+  },
+  
+  // Enhanced output configuration for Netlify
+  env: {
+    NEXT_TELEMETRY_DISABLED: '1',
+  },
   
   // Note: redirects, rewrites, and headers are handled by Netlify for static exports
 }

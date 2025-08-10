@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useState, useEffect, Suspense } from 'react';
+import { useRouter } from 'next/navigation';
 import { 
   Calendar, 
   Clock, 
@@ -595,7 +595,7 @@ export function AppointmentRoutingSystem({
   onBookingComplete,
   className = '' 
 }: AppointmentRoutingSystemProps) {
-  const searchParams = useSearchParams();
+  // Client-side only search params access
   const { trackCTAClick } = useCTAIntegration();
   const [currentRoute, setCurrentRoute] = useState<AppointmentRoute | null>(null);
   const [context, setContext] = useState<RoutingContext>({
@@ -603,9 +603,12 @@ export function AppointmentRoutingSystem({
     ...initialContext
   });
 
-  // Parse URL parameters for routing context
+  // Parse URL parameters for routing context - client-side only
   useEffect(() => {
-    if (!searchParams) return;
+    // Only run on client side
+    if (typeof window === 'undefined') return;
+    
+    const searchParams = new URLSearchParams(window.location.search);
     
     const urlContext: Partial<RoutingContext> = {
       condition: searchParams.get('condition') || undefined,
@@ -624,7 +627,7 @@ export function AppointmentRoutingSystem({
     if (urlContext.urgencyLevel === 'urgent') {
       setCurrentRoute('urgent-care');
     }
-  }, [searchParams]);
+  }, []); // Empty dependency array since we're using window.location directly
 
   const handleRouteSelection = (route: AppointmentRoute) => {
     console.log(`🎯 Route selected: ${route}`);
@@ -688,4 +691,22 @@ export function AppointmentRoutingSystem({
   );
 }
 
-export default AppointmentRoutingSystem;
+// Export wrapped with Suspense for SSR safety
+function AppointmentRoutingSystemWithSuspense(props: AppointmentRoutingSystemProps) {
+  return (
+    <Suspense fallback={
+      <div className="bg-white rounded-xl shadow-lg p-6">
+        <div className="animate-pulse space-y-4">
+          <div className="h-6 bg-gray-200 rounded w-1/2"></div>
+          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+          <div className="h-10 bg-gray-100 rounded"></div>
+          <div className="h-12 bg-blue-100 rounded"></div>
+        </div>
+      </div>
+    }>
+      <AppointmentRoutingSystem {...props} />
+    </Suspense>
+  );
+}
+
+export default AppointmentRoutingSystemWithSuspense;

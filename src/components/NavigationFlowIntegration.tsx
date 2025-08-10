@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { ArrowRight, MapPin, Calendar, Users, Target, CheckCircle } from 'lucide-react';
 import { useCTAIntegration } from './CTAIntegrationSystem';
 
@@ -31,14 +31,15 @@ interface FlowStep {
 // Hook for managing navigation flows
 export function useNavigationFlow() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { updateBookingPreferences, openBookingModal, trackCTAClick } = useCTAIntegration();
   
-  // Parse URL parameters for deep linking
+  // Parse URL parameters for deep linking - client-side only
   const parseDeepLinkParams = (): DeepLinkParams => {
     const params: DeepLinkParams = {};
     
-    if (searchParams) {
+    // Only access URL parameters on client side
+    if (typeof window !== 'undefined') {
+      const searchParams = new URLSearchParams(window.location.search);
       params.appointmentType = searchParams.get('appointment') || undefined;
       params.service = searchParams.get('service') || undefined;
       params.condition = searchParams.get('condition') || undefined;
