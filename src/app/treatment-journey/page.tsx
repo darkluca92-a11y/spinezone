@@ -7,6 +7,12 @@ import { generateSEOMetadata } from '@/lib/seo-utils';
 import StructuredData from '@/components/StructuredData';
 import PerformanceOptimizer from '@/components/PerformanceOptimizer';
 
+// Client component for download button
+const DownloadButton = dynamic(() => import('@/components/DownloadButton'), {
+  ssr: false,
+  loading: () => <div className="h-12 bg-gray-200 rounded-lg animate-pulse"></div>
+});
+
 // Lazy load appointment forms for better initial page load
 const PhaseAppointmentForm = dynamic(() => 
   import('@/components/AppointmentBookingForms').then(mod => ({ default: mod.PhaseAppointmentForm })), {
@@ -212,9 +218,7 @@ export default function TreatmentJourneyPage() {
               <OptimizedCTAButton 
                 className="w-full sm:w-auto min-h-[48px]"
               />
-              <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-4 px-8 rounded-lg text-lg transition-colors duration-200">
-                Download Recovery Timeline
-              </button>
+              <DownloadButton />
             </div>
           </div>
         </div>

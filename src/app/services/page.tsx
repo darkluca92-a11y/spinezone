@@ -8,6 +8,7 @@ import StructuredData from '@/components/StructuredData';
 import Breadcrumb from '@/components/Breadcrumb';
 import { breadcrumbConfigs } from '@/lib/breadcrumb-config';
 import PerformanceOptimizer from '@/components/PerformanceOptimizer';
+import ClientButton from '@/components/ClientButton';
 
 // Lazy load heavy components for better performance
 const InternalLinks = dynamic(() => import('@/components/InternalLinks'), {
@@ -384,9 +385,9 @@ export default function ServicesPage() {
             <p className="text-gray-600 mb-6">
               Data compiled from internal outcomes research and industry benchmarks (2020-2024)
             </p>
-            <button className="btn-secondary text-lg">
+            <ClientButton className="btn-secondary text-lg">
               View Detailed Outcome Studies
-            </button>
+            </ClientButton>
           </div>
         </div>
       </section>
@@ -467,12 +468,12 @@ export default function ServicesPage() {
             Choose the proven approach with higher success rates, faster recovery, and lasting results.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg text-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
+            <ClientButton className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg text-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
               Schedule Your Appointment
-            </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold py-4 px-8 rounded-lg text-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
+            </ClientButton>
+            <ClientButton className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold py-4 px-8 rounded-lg text-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
               Compare Our Services
-            </button>
+            </ClientButton>
           </div>
         </div>
       </section>
@@ -574,10 +575,10 @@ export default function ServicesPage() {
                     </p>
                   </div>
                   
-                  <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                  <ClientButton className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center">
                     Schedule Comprehensive Assessment
                     <ArrowRight className="w-4 h-4 ml-2" />
-                  </button>
+                  </ClientButton>
                 </div>
               </div>
             </div>
