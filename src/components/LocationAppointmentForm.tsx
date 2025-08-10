@@ -9,8 +9,7 @@ import {
   CheckCircle, 
   AlertCircle, 
   Loader2,
-  Navigation,
-  Parking
+  Navigation
 } from 'lucide-react';
 import { handleLocationAppointment } from '@/lib/appointment-handlers';
 
@@ -293,7 +292,7 @@ export default function LocationAppointmentForm({
                   onChange={(e) => setFormData({ ...formData, parkingNeeds: e.target.checked })}
                   className="mr-2"
                 />
-                <Parking className="w-4 h-4 mr-2 text-blue-600" />
+                <Car className="w-4 h-4 mr-2 text-blue-600" />
                 I need parking assistance or have special parking requirements
               </label>
             </div>

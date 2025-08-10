@@ -1,13 +1,13 @@
 'use client';
 
 import { Phone, Mail, MapPin, Clock, Shield, CheckCircle, CreditCard, Users, Calendar } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useTransition, useCallback, useMemo, memo } from 'react';
 import Head from 'next/head';
+import PerformanceOptimizer from '@/components/PerformanceOptimizer';
 import InteractiveMap from '@/components/InteractiveMap';
 import { ComprehensiveAppointmentForm, QuickAppointmentForm } from '@/components/AppointmentBookingForms';
 import CalendlyWidget from '@/components/CalendlyWidget';
 import { AppointmentRoutingSystem } from '@/components/AppointmentRoutingSystem';
-import { CrossPageContextTransfer, useNavigationFlow } from '@/components/NavigationFlowIntegration';
 
 const insuranceProviders = [
   "Blue Cross Blue Shield", "Aetna", "Cigna", "UnitedHealth", "Kaiser Permanente",
@@ -116,7 +116,7 @@ function getResponseMessage(inquiryType: any, name: string) {
 }
 
 // Performance-optimized Contact Page component
-export default memo(function ContactPage() {
+export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
   const [isPending, startTransition] = useTransition();
@@ -210,7 +210,7 @@ export default memo(function ContactPage() {
   };
 
   return (
-    <CrossPageContextTransfer preserveContext={true}>
+    <div>
       <Head>
         <title>Contact SpineZone - San Diego Physical Therapy | Free Consultation</title>
         <meta name="description" content="Contact SpineZone for your free consultation. 10 locations across San Diego & Orange County. Call (858) 555-0123 or book online." />
@@ -220,7 +220,15 @@ export default memo(function ContactPage() {
         <link rel="canonical" href="https://spinezone-sandiego.com/contact" />
       </Head>
       
-      <PerformanceOptimizer \n        enableCriticalCSS={true}\n        enableResourceHints={true}\n        enableLayoutOptimization={true}\n        enableWebVitalsTracking={true}\n        enableMobileOptimizations={true}\n      />\n      \n      <main>
+      <PerformanceOptimizer 
+        enableCriticalCSS={true}
+        enableResourceHints={true}
+        enableLayoutOptimization={true}
+        enableWebVitalsTracking={true}
+        enableMobileOptimizations={true}
+      />
+      
+      <main>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 to-green-50 section-padding">
         <div className="container-max">
@@ -755,6 +763,6 @@ export default memo(function ContactPage() {
         </div>
       </section>
       </main>
-    </CrossPageContextTransfer>
+    </div>
   );
-});
+}

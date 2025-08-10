@@ -8,7 +8,7 @@ import {
   Mail, 
   CheckCircle, 
   XCircle,
-  WiFiOff,
+  WifiOff,
   Server,
   Clock,
   Shield,
@@ -215,7 +215,7 @@ export function BookingErrorDisplay({
   const getErrorIcon = () => {
     switch (error?.type) {
       case 'network_error':
-        return <WiFiOff className="w-6 h-6 text-orange-600" />;
+        return <WifiOff className="w-6 h-6 text-orange-600" />;
       case 'server_error':
         return <Server className="w-6 h-6 text-red-600" />;
       case 'timeout_error':

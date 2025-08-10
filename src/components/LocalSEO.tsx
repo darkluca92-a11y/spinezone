@@ -52,7 +52,7 @@ const neighborhoodData = [
   {
     name: 'Downtown',
     slug: 'downtown',
-    description: 'Downtown San Diego PT appointments for busy professionals. Online booking with early and late appointment slots.'
+    description: 'Downtown San Diego PT appointments for busy professionals. Online booking with early and late appointment slots.',
     specialties: ['Executive Care', 'Urban Wellness', 'Flexible Scheduling'],
     distance: 'City center',
     zipCodes: ['92101', '92102'],
@@ -61,7 +61,7 @@ const neighborhoodData = [
   {
     name: 'Point Loma',
     slug: 'point-loma',
-    description: 'Point Loma PT appointment scheduling for military and coastal residents. Flexible appointment booking available.'
+    description: 'Point Loma PT appointment scheduling for military and coastal residents. Flexible appointment booking available.',
     specialties: ['Military Care', 'Coastal Community', 'Family Therapy'],
     distance: '6 miles from downtown',
     zipCodes: ['92106', '92107'],

@@ -904,7 +904,7 @@ export const PhaseAppointmentForm = memo(function PhaseAppointmentForm({
             </label>
             <select
               value={formData.preferredLocation}
-              onChange={(e) => updateFormData({ preferredLocation: e.target.value }))
+              onChange={(e) => updateFormData({ preferredLocation: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="downtown-san-diego">Downtown San Diego</option>

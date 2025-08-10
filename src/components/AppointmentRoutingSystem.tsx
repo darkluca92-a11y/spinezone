@@ -198,6 +198,30 @@ export class AppointmentRouter {
         description: 'Appointment at your preferred location with local team',
         estimatedTime: '3 minutes',
         priority: 6
+      },
+      'second-opinion': {
+        title: 'Second Opinion Consultation',
+        description: 'Expert medical review and alternative treatment recommendations',
+        estimatedTime: '5 minutes',
+        priority: 7
+      },
+      'phase-continuation': {
+        title: 'Treatment Phase Continuation',
+        description: 'Continue your current treatment plan with next appointment',
+        estimatedTime: '3 minutes',
+        priority: 6
+      },
+      'follow-up': {
+        title: 'Follow-up Appointment',
+        description: 'Check-in appointment to monitor progress and adjust treatment',
+        estimatedTime: '2 minutes',
+        priority: 5
+      },
+      'emergency-triage': {
+        title: 'Emergency Triage Assessment',
+        description: 'Urgent care evaluation for immediate medical attention',
+        estimatedTime: '4 minutes',
+        priority: 10
       }
     };
 

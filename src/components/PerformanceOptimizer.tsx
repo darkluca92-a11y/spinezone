@@ -364,7 +364,6 @@ export default function PerformanceOptimizer({
 
   // Critical CSS injection for above-the-fold content
   const criticalCSS = enableCriticalCSS ? `
-    <style id="critical-css">
       /* Above-the-fold critical styles */
       .hero-section {
         background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 100%);
@@ -488,148 +487,14 @@ export default function PerformanceOptimizer({
           background-attachment: scroll; /* Better performance than fixed */
         }
       }
-    </style>
   ` : '';
 
   return (
     <>
       {enableCriticalCSS && (
-        <div dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
       )}
       
-      {/* Performance monitoring script */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            // Enhanced Core Web Vitals monitoring with mobile focus
-            if (typeof window !== 'undefined') {
-              const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-              
-              import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB, onINP }) => {
-                const logMetric = (metric) => {
-                  // Log with mobile context for better debugging
-                  console.log(`${metric.name}: ${metric.value} (${isMobile ? 'Mobile' : 'Desktop'})`);
-                  
-                  // Send to analytics in production
-                  if (typeof gtag !== 'undefined') {
-                    gtag('event', metric.name, {
-                      value: metric.value,
-                      metric_id: metric.id,
-                      custom_parameter_device: isMobile ? 'mobile' : 'desktop'
-                    });
-                  }
-                };
-                
-                getCLS(logMetric);
-                getFID(logMetric);
-                getFCP(logMetric);
-                getLCP(logMetric);
-                getTTFB(logMetric);
-                
-                // Monitor Interaction to Next Paint for mobile responsiveness
-                if (onINP) {
-                  onINP(logMetric);
-                }
-              });
-            }
-            
-            // Enhanced scroll performance optimization
-            let ticking = false;
-            let scrollTimeout;
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            
-            function updateScrollPosition() {
-              if (!ticking) {
-                requestAnimationFrame(() => {
-                  // Update scroll-based effects with mobile optimizations
-                  const scrollY = window.pageYOffset;
-                  
-                  // Only update CSS custom properties if needed
-                  if (scrollY % 10 === 0 || !isMobile) {
-                    document.documentElement.style.setProperty('--scroll-y', scrollY + 'px');
-                  }
-                  
-                  // Handle viewport sections visibility for mobile
-                  const viewportSections = document.querySelectorAll('.viewport-section');
-                  viewportSections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    const threshold = parseFloat(section.dataset.viewportThreshold || '0.1');
-                    const isVisible = rect.top < window.innerHeight * (1 - threshold) && 
-                                    rect.bottom > window.innerHeight * threshold;
-                    
-                    if (isVisible && !section.classList.contains('in-viewport')) {
-                      section.classList.add('in-viewport');
-                    }
-                  });
-                  
-                  ticking = false;
-                });
-                ticking = true;
-              }
-            }
-            
-            // Throttle scroll events more aggressively on mobile
-            const scrollThrottle = isMobile ? 16 : 8; // 60fps vs 120fps
-            let lastScrollTime = 0;
-            
-            function throttledScrollHandler() {
-              const now = Date.now();
-              if (now - lastScrollTime >= scrollThrottle) {
-                updateScrollPosition();
-                lastScrollTime = now;
-              }
-            }
-            
-            window.addEventListener('scroll', throttledScrollHandler, { passive: true });
-            
-            // Enhanced Service Worker registration with mobile optimizations
-            if ('serviceWorker' in navigator && 'caches' in window) {
-              window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                  .then(registration => {
-                    console.log('SW registered');
-                    
-                    // Pre-cache critical resources for mobile
-                    if ('connection' in navigator) {
-                      const connection = navigator.connection;
-                      if (connection && connection.effectiveType && 
-                          ['4g', 'wifi'].includes(connection.effectiveType)) {
-                        // Pre-cache on good connections
-                        caches.open('spinezone-mobile-v1').then(cache => {
-                          cache.addAll([
-                            '/',
-                            '/services',
-                            '/assessment',
-                            '/contact',
-                            '/treatment-journey'
-                          ]);
-                        });
-                      }
-                    }
-                  })
-                  .catch(error => console.log('SW registration failed'));
-              });
-            }
-            
-            // Mobile-specific resource hints
-            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-              // Prefetch likely next pages on mobile with good connection
-              if ('connection' in navigator && navigator.connection) {
-                const connection = navigator.connection;
-                if (connection.effectiveType === '4g' || connection.type === 'wifi') {
-                  const prefetchPages = ['/services', '/assessment', '/contact'];
-                  prefetchPages.forEach(page => {
-                    const link = document.createElement('link');
-                    link.rel = 'prefetch';
-                    link.href = page;
-                    document.head.appendChild(link);
-                  });
-                }
-              }
-            }
-          `
-        }}
-      />
     </>
   );
 }

@@ -244,7 +244,8 @@ export function CrossPageContextTransfer({
   preserveContext = true,
   transferKeys = ['condition', 'service', 'location', 'phase', 'urgentCare', 'source']
 }: ContextTransferProps) {
-  const { parseDeepLinkParams, updateBookingPreferences } = useNavigationFlow();
+  const { parseDeepLinkParams } = useNavigationFlow();
+  const { updateBookingPreferences } = useCTAIntegration();
   const [contextLoaded, setContextLoaded] = useState(false);
 
   // Load context from URL parameters on mount
@@ -312,7 +313,8 @@ interface SmartNavigationProps {
 }
 
 export function SmartNavigation({ currentContext, className = '' }: SmartNavigationProps) {
-  const { navigateWithContext, openBookingModal, trackCTAClick } = useCTAIntegration();
+  const { navigateWithContext } = useNavigationFlow();
+  const { openBookingModal, trackCTAClick } = useCTAIntegration();
 
   const getNavigationSuggestions = () => {
     const suggestions = [];

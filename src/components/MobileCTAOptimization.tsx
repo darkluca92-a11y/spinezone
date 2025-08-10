@@ -337,10 +337,6 @@ export function MobileFloatingActionButton({
         bookingType="quick"
         sourceContext={{ page: 'mobile-fab', section: 'floating' }}
         className="rounded-full w-16 h-16 shadow-2xl hover:shadow-3xl"
-        onClick={() => {
-          trackCTAClick({ action: 'fab_clicked', isPulsing });
-          setIsPulsing(false);
-        }}
       >
         <Calendar className="w-6 h-6" />
       </IntegratedAppointmentCTA>

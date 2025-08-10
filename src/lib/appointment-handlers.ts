@@ -68,7 +68,8 @@ const LOCATION_NAMES = {
   'chula-vista': 'SpineZone Chula Vista',
   'carlsbad': 'SpineZone Carlsbad',
   'encinitas': 'SpineZone Encinitas',
-  'del-mar': 'SpineZone Del Mar'
+  'del-mar': 'SpineZone Del Mar',
+  'any-location': 'Any Available Location'
 };
 
 // Appointment types for user-friendly display
@@ -107,7 +108,7 @@ export async function checkAvailability(location: string, date: string): Promise
 /**
  * Simulates provider lookup for location
  */
-export async function getProvidersForLocation(location: string): Promise<typeof DEMO_PROVIDERS.downtown> {
+export async function getProvidersForLocation(location: string): Promise<typeof DEMO_PROVIDERS['downtown-san-diego']> {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, 300));
   
@@ -141,7 +142,7 @@ export async function handleAppointmentBooking(formData: FormData): Promise<APIR
     const validation = appointmentSchema.safeParse(processedData);
     
     if (!validation.success) {
-      console.log('❌ Appointment validation failed:', validation.error.errors);
+      console.log('❌ Appointment validation failed:', validation.error.issues);
       return {
         success: false,
         error: {

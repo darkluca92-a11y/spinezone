@@ -227,7 +227,7 @@ export default memo(function InteractiveAssessment() {
   }
 
   if (showResults) {
-    const recommendation = getRecommendation();
+    // Use the memoized recommendation calculation
     const urgencyColors = {
       high: { bg: "bg-red-50", border: "border-red-200", text: "text-red-800", icon: "text-red-600" },
       moderate: { bg: "bg-orange-50", border: "border-orange-200", text: "text-orange-800", icon: "text-orange-600" },
