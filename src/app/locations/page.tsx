@@ -554,12 +554,6 @@ export default function LocationsPage() {
                     locationName={location.name}
                     locationAddress={location.address}
                     locationPhone={location.phone}
-                    onSuccess={(data) => {
-                      console.log(`Appointment booked at ${location.name}:`, data);
-                    }}
-                    onError={(error) => {
-                      console.error(`Booking error for ${location.name}:`, error);
-                    }}
                     className="max-w-4xl mx-auto"
                   />
                 </div>

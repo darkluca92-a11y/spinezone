@@ -379,12 +379,6 @@ export default function TreatmentJourneyPage() {
               }>
                 <PhaseAppointmentForm 
                   phase="new-patient"
-                  onSuccess={(data) => {
-                    console.log('New patient appointment booked:', data);
-                  }}
-                  onError={(error) => {
-                    console.error('Booking error:', error);
-                  }}
                 />
               </Suspense>
             </div>
@@ -407,12 +401,6 @@ export default function TreatmentJourneyPage() {
               }>
                 <PhaseAppointmentForm 
                   phase="phase-1"
-                  onSuccess={(data) => {
-                    console.log('Phase 1 appointment booked:', data);
-                  }}
-                  onError={(error) => {
-                    console.error('Booking error:', error);
-                  }}
                 />
               </Suspense>
             </div>
@@ -435,12 +423,6 @@ export default function TreatmentJourneyPage() {
               }>
                 <PhaseAppointmentForm 
                   phase="phase-2"
-                  onSuccess={(data) => {
-                    console.log('Phase 2 appointment booked:', data);
-                  }}
-                  onError={(error) => {
-                    console.error('Booking error:', error);
-                  }}
                 />
               </Suspense>
             </div>
@@ -463,12 +445,6 @@ export default function TreatmentJourneyPage() {
               }>
                 <PhaseAppointmentForm 
                   phase="phase-3"
-                  onSuccess={(data) => {
-                    console.log('Phase 3 appointment booked:', data);
-                  }}
-                  onError={(error) => {
-                    console.error('Booking error:', error);
-                  }}
                 />
               </Suspense>
             </div>
