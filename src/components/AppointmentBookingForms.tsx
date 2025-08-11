@@ -92,19 +92,41 @@ export const ComprehensiveAppointmentForm = memo(function ComprehensiveAppointme
         }
       }
 
-      const result = await handleAppointmentBooking(form);
+      let result: { success: boolean; data?: any; error?: { message?: string; code?: string } };
+      try {
+        // Add timeout protection for static export compatibility
+        const timeoutPromise = new Promise((_, reject) => {
+          setTimeout(() => reject(new Error('Request timeout - Please call (858) 555-0123 to book')), 10000);
+        });
+        const bookingPromise = handleAppointmentBooking(form);
+        result = await Promise.race([bookingPromise, timeoutPromise]) as { success: boolean; data?: any; error?: { message?: string; code?: string } };
+      } catch (bookingError) {
+        // Enhanced fallback for static export mode
+        console.log('Booking handler failed, providing phone/email fallbacks');
+        result = {
+          success: false,
+          error: {
+            message: 'Online booking temporarily unavailable. Please call (858) 555-0123 or email appointments@spinezone.com',
+            code: 'STATIC_EXPORT_FALLBACK'
+          }
+        };
+      }
       
       startTransition(() => {
         if (result.success) {
           setSubmitMessage('Appointment successfully booked! Check your email for confirmation details.');
           if (onSuccess) onSuccess(result.data);
         } else {
-          setSubmitMessage(result.error?.message || 'Unable to book appointment. Please try again.');
+          // Enhanced error message with fallback options
+          const fallbackMessage = result.error?.code === 'STATIC_EXPORT_FALLBACK' 
+            ? 'Online booking is temporarily unavailable. Please call (858) 555-0123 or email appointments@spinezone.com to schedule your appointment.'
+            : result.error?.message || 'Unable to book online. Please call (858) 555-0123 for immediate scheduling.';
+          setSubmitMessage(fallbackMessage);
           if (onError) onError(result.error?.message || 'Booking failed');
         }
       });
     } catch (error) {
-      const errorMsg = 'An error occurred while booking your appointment. Please call (858) 555-0123.';
+      const errorMsg = 'Booking system temporarily unavailable. Please call (858) 555-0123 or email appointments@spinezone.com.';
       startTransition(() => {
         setSubmitMessage(errorMsg);
         if (onError) onError(errorMsg);
@@ -606,6 +628,29 @@ export const ComprehensiveAppointmentForm = memo(function ComprehensiveAppointme
               )}
               <p>{submitMessage}</p>
             </div>
+            
+            {/* Fallback Booking Options - Show when there's an error */}
+            {submitMessage && !submitMessage.includes('successfully') && (
+              <div className="mt-4 pt-4 border-t border-red-200">
+                <p className="text-sm text-red-700 mb-3 font-medium">Alternative Booking Options:</p>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <a
+                    href="tel:8585550123"
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium text-center flex items-center justify-center transition-colors"
+                  >
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call (858) 555-0123
+                  </a>
+                  <a
+                    href="mailto:appointments@spinezone.com?subject=Appointment Request&body=Hello, I would like to schedule an appointment. Please contact me to arrange a suitable time.%0A%0AName: {formData.firstName} {formData.lastName}%0APhone: {formData.phone}%0AEmail: {formData.email}"
+                    className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium text-center flex items-center justify-center transition-colors"
+                  >
+                    <Mail className="w-4 h-4 mr-2" />
+                    Email Request
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </form>
