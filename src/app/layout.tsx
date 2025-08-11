@@ -5,9 +5,7 @@ import Header from '@/components/Header'
 import ChatBot from '@/components/ChatBot'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { generateSEOMetadata, generateLocalBusinessSchema, generateAppointmentBookingSchema } from '@/lib/seo-utils'
-import { CTAIntegrationProvider } from '@/components/CTAIntegrationSystem'
-import { BookingErrorBoundary } from '@/components/BookingErrorHandler'
-import MobileCTASystem from '@/components/MobileCTAOptimization'
+// Removed complex booking integrations - using simple contact system
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -185,15 +183,10 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ErrorBoundary>
-          <CTAIntegrationProvider>
-            <BookingErrorBoundary>
-              <Header />
-              {children}
-              <ChatBot />
-              {/* Mobile CTA system for responsive appointment booking */}
-              <MobileCTASystem priority="medium" variant="standard" />
-            </BookingErrorBoundary>
-          </CTAIntegrationProvider>
+          <Header />
+          {children}
+          <ChatBot />
+          {/* Simple, professional healthcare layout */}
         </ErrorBoundary>
       </body>
     </html>

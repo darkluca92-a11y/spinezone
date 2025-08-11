@@ -12,8 +12,8 @@ export default function FinalCTA({ onScheduleClick, onPhoneClick }: FinalCTAProp
     if (onScheduleClick) {
       onScheduleClick();
     } else {
-      // Default action - could integrate with actual booking system
-      alert('Booking system would be integrated here. Call (858) 555-0123 to schedule!');
+      // Direct to phone call for immediate scheduling
+      window.location.href = 'tel:+1-858-555-0123';
     }
   };
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { Calendar, CheckCircle } from 'lucide-react';
-import OptimizedCTAButton from '@/components/OptimizedCTAButtons';
+import { PrimaryContactCTA } from '@/components/ProfessionalContactCTA';
 import OptimizedImage from '@/components/OptimizedImage';
 import { memo, useEffect, useState } from 'react';
 
@@ -22,10 +22,7 @@ function HeroSection() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleAppointmentClick = () => {
-    // In a real implementation, this would open a booking modal or redirect to a booking page
-    alert('Booking system would be integrated here. Call (858) 555-0123 to schedule your appointment!');
-  };
+  // Removed booking handler - using simple contact CTA instead
 
   return (
     <section 
@@ -94,17 +91,15 @@ function HeroSection() {
                 </div>
               </div>
             </div>
-            {/* CTA Button */}
+            {/* Professional Contact CTA */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <OptimizedCTAButton 
+              <PrimaryContactCTA 
                 className="w-full sm:w-auto min-h-[48px]"
-                onAnalytics={(variantId, action) => {
-                  console.log(`Hero CTA: ${variantId} - ${action}`);
-                }}
+                showContactInfo={true}
               />
               <div className="flex items-center justify-center sm:justify-start text-green-600">
                 <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" aria-hidden="true" />
-                <span className="text-xs sm:text-sm">Same-day appointments • Most insurance accepted • Easy scheduling</span>
+                <span className="text-xs sm:text-sm">Same-day appointments • Most insurance accepted • Call (858) 555-0123</span>
               </div>
             </div>
             

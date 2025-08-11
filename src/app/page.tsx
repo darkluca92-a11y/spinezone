@@ -2,10 +2,9 @@ import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
 import HeroSection from '@/components/HeroSection';
 import TrustIndicators from '@/components/TrustIndicators';
-import ScrollTriggeredCTA from '@/components/ScrollTriggeredCTA';
-import { IntegratedFloatingCTA } from '@/components/CTAIntegrationSystem';
+import { FloatingContactCTA, QuickContactCTA } from '@/components/ProfessionalContactCTA';
 import StructuredData from '@/components/StructuredData';
-import { CrossPageContextTransfer, SmartNavigation } from '@/components/NavigationFlowIntegration';
+// Removed complex navigation integrations - using simple layout
 import { generateSEOMetadata } from '@/lib/seo-utils';
 import PerformanceOptimizer from '@/components/PerformanceOptimizer';
 
@@ -168,19 +167,18 @@ const Footer = dynamic(() => import('@/components/Footer'), {
 export default function Home() {
   return (
     <main>
-      <CrossPageContextTransfer preserveContext={true}>
-        <PerformanceOptimizer 
-          enableCriticalCSS={true}
-          enableResourceHints={true}
-          enableLayoutOptimization={true}
-          enableWebVitalsTracking={true}
-          enableMobileOptimizations={true}
-        />
-        <StructuredData type="homepage" />
-        
-        {/* Above-the-fold critical content */}
-        <HeroSection />
-        <TrustIndicators />
+      <PerformanceOptimizer 
+        enableCriticalCSS={true}
+        enableResourceHints={true}
+        enableLayoutOptimization={true}
+        enableWebVitalsTracking={true}
+        enableMobileOptimizations={true}
+      />
+      <StructuredData type="homepage" />
+      
+      {/* Above-the-fold critical content */}
+      <HeroSection />
+      <TrustIndicators />
       
         {/* Below-the-fold lazy-loaded content */}
         <div id="conditions-section" className="viewport-section" data-viewport-threshold="0.3">
@@ -216,35 +214,20 @@ export default function Home() {
       <FinalCTA />
       <Footer />
       
-      {/* Scroll-triggered CTAs */}
-      <ScrollTriggeredCTA
-        triggerElementId="conditions-section"
-        triggerThreshold={0.5}
-        ctaText="Schedule Appointment for My Condition"
-        ctaSubtext="Book personalized care for your specific condition"
-      />
-      
-      <ScrollTriggeredCTA
-        triggerElementId="treatments-section"
-        triggerThreshold={0.75}
-        ctaText="Make an Appointment"
-        ctaSubtext="Begin your recovery journey today"
-      />
-      
-      {/* Mobile Floating CTA - Only visible on mobile with integration */}
-      <IntegratedFloatingCTA 
-        position="bottom-right" 
-        bookingType="quick"
-        sourceContext={{ page: 'homepage', section: 'floating-cta' }}
-      />
-      
-      {/* Smart navigation suggestions based on user context */}
-      <div className="container-max py-8">
-        <SmartNavigation 
-          currentContext={{ page: 'homepage' }}
+      {/* Simple Contact CTAs for Professional Presentation */}
+      <div className="fixed bottom-20 right-4 z-40 hidden md:block">
+        <QuickContactCTA 
+          className="shadow-2xl animate-pulse"
         />
       </div>
-      </CrossPageContextTransfer>
+      
+      {/* Mobile Floating CTA - Professional Contact */}
+      <FloatingContactCTA 
+        position="bottom-right"
+        className="shadow-2xl"
+      />
+      
+      {/* Professional healthcare presentation complete */}
     </main>
   );
 }

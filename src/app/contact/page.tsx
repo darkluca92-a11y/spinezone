@@ -1,13 +1,11 @@
 'use client';
 
-import { Phone, Mail, MapPin, Clock, Shield, CheckCircle, CreditCard, Users, Calendar } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Shield, CheckCircle, CreditCard, Users, Calendar, Star } from 'lucide-react';
 import { useState, useTransition, useCallback, useMemo, memo } from 'react';
 import Head from 'next/head';
 import PerformanceOptimizer from '@/components/PerformanceOptimizer';
 import InteractiveMap from '@/components/InteractiveMap';
-import { ComprehensiveAppointmentForm, QuickAppointmentForm } from '@/components/AppointmentBookingForms';
-import CalendlyWidget from '@/components/CalendlyWidget';
-import { AppointmentRoutingSystem } from '@/components/AppointmentRoutingSystem';
+// Removed complex booking components - using simple contact forms only
 
 const insuranceProviders = [
   "Blue Cross Blue Shield", "Aetna", "Cigna", "UnitedHealth", "Kaiser Permanente",
@@ -587,54 +585,32 @@ export default function ContactPage() {
                 <p className="text-gray-600">Select your preferred date and time</p>
               </div>
               
-              {/* Enhanced Calendly Widget Placeholder */}
+              {/* Professional Contact Information */}
               <div className="bg-gradient-to-br from-blue-50 to-green-50 h-96 rounded-lg border border-gray-200 p-8">
                 <div className="text-center h-full flex flex-col justify-center">
-                  <Calendar className="w-16 h-16 text-blue-600 mx-auto mb-4" aria-hidden="true" />
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Online Booking System</h4>
-                  <p className="text-gray-600 mb-6">
-                    Our Calendly integration allows you to book appointments instantly across all San Diego locations
-                  </p>
+                  <Phone className="w-16 h-16 text-green-600 mx-auto mb-4" aria-hidden="true" />
+                  <h4 className="text-2xl font-bold text-gray-900 mb-4">Call for Immediate Scheduling</h4>
+                  <a 
+                    href="tel:+1-858-555-0123"
+                    className="text-4xl font-bold text-green-600 hover:text-green-700 mb-6 transition-colors"
+                  >
+                    (858) 555-0123
+                  </a>
                   
-                  {/* Mock Calendar Preview */}
-                  <div className="bg-white rounded-lg p-4 mb-6 mx-auto max-w-md">
-                    <div className="grid grid-cols-7 gap-1 text-center text-xs mb-2">
-                      {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
-                        <div key={day} className="font-semibold text-gray-600 p-1">{day}</div>
-                      ))}
-                    </div>
-                    <div className="grid grid-cols-7 gap-1">
-                      {Array.from({ length: 35 }, (_, i) => {
-                        const isAvailable = [4, 5, 6, 11, 12, 13, 18, 19, 20, 25, 26, 27].includes(i);
-                        const isSelected = i === 12;
-                        return (
-                          <div 
-                            key={i} 
-                            className={`aspect-square text-xs flex items-center justify-center rounded ${
-                              isSelected ? 'bg-blue-600 text-white' : 
-                              isAvailable ? 'bg-green-100 text-green-800 cursor-pointer hover:bg-green-200' : 
-                              'text-gray-400'
-                            }`}
-                          >
-                            {i > 5 && i < 30 ? i - 5 : ''}
-                          </div>
-                        );
-                      })}
+                  <div className="bg-white rounded-lg p-6 mb-6 mx-auto max-w-md">
+                    <h5 className="font-semibold text-gray-900 mb-3">Available Hours:</h5>
+                    <div className="text-sm text-gray-700 space-y-1">
+                      <div>Monday - Friday: 7:00 AM - 7:00 PM</div>
+                      <div>Saturday: 8:00 AM - 4:00 PM</div>
+                      <div>Sunday: Emergency appointments only</div>
                     </div>
                   </div>
                   
-                  <button 
-                    onClick={() => {
-                      alert('Demo Mode: In production, this would open the full Calendly booking widget with:\n\n• Real-time availability across 10 locations\n• Provider selection\n• Service type selection\n• Automatic confirmations\n• Calendar integration\n\nFor now, please call (858) 555-0123 to schedule!');
-                    }}
-                    className="btn-primary mb-3"
-                  >
-                    Launch Booking System
-                  </button>
-                  
-                  <p className="text-xs text-gray-500">
-                    🚀 Demo Mode - Click to see what the full system would include
-                  </p>
+                  <div className="space-y-2">
+                    <p className="text-green-600 font-semibold">✓ Same-day appointments available</p>
+                    <p className="text-blue-600 font-semibold">✓ Free consultation included</p>
+                    <p className="text-gray-600">✓ Most insurance plans accepted</p>
+                  </div>
                 </div>
               </div>
               
@@ -663,29 +639,88 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Enhanced Appointment Routing System */}
-      <section className="bg-gray-50 section-padding" id="booking">
+      {/* Simple Contact and Professional Information */}
+      <section className="bg-blue-50 section-padding" id="booking">
         <div className="container-max">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Smart Appointment Booking System
+              Professional Healthcare Contact Information
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our intelligent booking system will recommend the best appointment type based on your needs
+              Connect with San Diego's leading spine care specialists for immediate assistance
             </p>
           </div>
           
-          {/* Integrated routing system */}
-          <AppointmentRoutingSystem 
-            initialContext={{
-              source: 'contact-page',
-              patientType: 'new'
-            }}
-            onBookingComplete={(data) => {
-              console.log('✅ Contact page booking completed:', data);
-              // You could redirect to a thank you page or show confirmation
-            }}
-          />
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {/* Phone Contact */}
+            <div className="bg-white p-8 rounded-2xl shadow-lg text-center hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Phone className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Call for Immediate Care</h3>
+              <a 
+                href="tel:+1-858-555-0123"
+                className="text-3xl font-bold text-green-600 hover:text-green-700 block mb-4"
+              >
+                (858) 555-0123
+              </a>
+              <p className="text-gray-600 mb-4">Available Mon-Fri 7AM-7PM</p>
+              <p className="text-sm text-gray-500">Same-day appointments available</p>
+            </div>
+
+            {/* Email Contact */}
+            <div className="bg-white p-8 rounded-2xl shadow-lg text-center hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Mail className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Email Consultation</h3>
+              <a 
+                href="mailto:appointments@spinezone.com?subject=Healthcare Consultation"
+                className="text-lg font-semibold text-blue-600 hover:text-blue-700 block mb-4"
+              >
+                appointments@spinezone.com
+              </a>
+              <p className="text-gray-600 mb-4">Response within 24 hours</p>
+              <p className="text-sm text-gray-500">Detailed treatment planning</p>
+            </div>
+
+            {/* Location Info */}
+            <div className="bg-white p-8 rounded-2xl shadow-lg text-center hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <MapPin className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Visit Our Clinic</h3>
+              <p className="text-lg font-semibold text-gray-700 mb-4">10 San Diego Locations</p>
+              <p className="text-gray-600 mb-4">Downtown, La Jolla, Pacific Beach</p>
+              <p className="text-sm text-gray-500">Professional healthcare facility</p>
+            </div>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="mt-12 bg-white p-8 rounded-2xl shadow-lg">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="text-3xl font-bold text-blue-600 mb-2">90%</div>
+                <div className="text-gray-700">Success Rate</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-green-600 mb-2">1M+</div>
+                <div className="text-gray-700">Patient Encounters</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-blue-600 mb-2">10</div>
+                <div className="text-gray-700">SD Locations</div>
+              </div>
+              <div>
+                <div className="flex justify-center mb-2">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <div className="text-gray-700">Patient Rating</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

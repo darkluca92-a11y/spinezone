@@ -458,3 +458,68 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Professional Healthcare Design Enhancements */
+.healthcare-card {
+  @apply bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.healthcare-gradient {
+  background: linear-gradient(135deg, #e0f2fe 0%, #ecfdf5 50%, #f0f9ff 100%);
+}
+
+.healthcare-text-gradient {
+  background: linear-gradient(135deg, #0369a1 0%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.professional-shadow {
+  box-shadow: 0 10px 40px -12px rgba(3, 105, 161, 0.15), 0 4px 12px -4px rgba(5, 150, 105, 0.1);
+}
+
+.healthcare-badge {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+  background: linear-gradient(135deg, #dbeafe 0%, #d1fae5 100%);
+  color: #0369a1;
+  border: 1px solid rgba(3, 105, 161, 0.2);
+}
+
+.trust-indicator {
+  @apply flex items-center justify-center p-4 rounded-xl transition-transform duration-300;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid rgba(3, 105, 161, 0.1);
+}
+
+.trust-indicator:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -8px rgba(3, 105, 161, 0.2);
+}
+
+.professional-cta {
+  @apply font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95;
+  background: linear-gradient(135deg, #0369a1 0%, #059669 100%);
+  box-shadow: 0 4px 15px -4px rgba(3, 105, 161, 0.3);
+}
+
+.professional-cta:hover {
+  box-shadow: 0 8px 25px -8px rgba(3, 105, 161, 0.4);
+}
+
+.medical-icon {
+  filter: drop-shadow(0 2px 8px rgba(3, 105, 161, 0.15));
+}
+
+.healthcare-stat {
+  @apply text-center p-6 rounded-xl;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  border: 1px solid rgba(3, 105, 161, 0.1);
+  box-shadow: 0 4px 12px -4px rgba(5, 150, 105, 0.1);
+}
+
+.professional-testimonial {
+  @apply bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-600;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
