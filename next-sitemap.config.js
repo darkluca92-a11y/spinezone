@@ -4,6 +4,8 @@ const config = {
   generateRobotsTxt: true,
   generateIndexSitemap: false, // For static exports, we don't need index sitemap
   outDir: './out', // Output directory for static exports
+  sourceDir: '.next', // Source directory for build manifest
+  trailingSlash: false,
   
   // Enhanced robots.txt configuration for medical/healthcare site
   robotsTxtOptions: {
@@ -40,130 +42,9 @@ const config = {
     '/out/*'
   ],
 
-  // Additional paths for comprehensive coverage
-  additionalPaths: async (config) => {
-    const result = [];
-    
-    // Blog posts with specific priority and changefreq
-    const blogPosts = [
-      '/blog/comprehensive-back-pain-treatment-san-diego/',
-      '/blog/advanced-neck-pain-relief-cervical-spine-treatment/', 
-      '/blog/joint-mobility-restoration-comprehensive-treatment-guide/',
-      '/blog/sports-injury-rehabilitation-get-back-in-the-game/'
-    ];
-
-    // High-priority appointment-focused pages
-    const appointmentPages = [
-      '/treatment-journey/',
-      '/services/',
-      '/assessment/',
-      '/contact/'
-    ];
-
-    // Service-related pages that might be dynamically generated
-    const servicePaths = [
-      '/insurance/',
-      '/team/',
-      '/testimonials/',
-      '/about/',
-      '/locations/',
-      '/patient-portal/',
-      '/privacy/',
-      '/science/'
-    ];
-
-    // Add appointment-focused pages with highest priority
-    appointmentPages.forEach(path => {
-      result.push({
-        loc: path,
-        changefreq: 'daily',
-        priority: 0.95,
-        lastmod: new Date().toISOString(),
-        // Add appointment-specific annotations
-        alternateRefs: [
-          {
-            href: `https://spinezone-sandiego.com${path}`,
-            hreflang: 'en-US',
-            title: 'Physical Therapy Appointments San Diego'
-          },
-        ],
-      });
-    });
-
-    // Add blog posts with medium-high priority
-    blogPosts.forEach(path => {
-      result.push({
-        loc: path,
-        changefreq: 'monthly',
-        priority: 0.8,
-        lastmod: new Date().toISOString(),
-      });
-    });
-
-    // Add other service pages with standard priority
-    servicePaths.forEach(path => {
-      result.push({
-        loc: path,
-        changefreq: 'weekly',
-        priority: 0.7,
-        lastmod: new Date().toISOString(),
-      });
-    });
-
-    return result;
-  },
-
-  // Transform function to customize each URL
-  transform: async (config, path) => {
-    // Set priorities and change frequencies based on page type
-    let priority = 0.7;
-    let changefreq = 'monthly';
-
-    // Homepage gets highest priority for appointment scheduling
-    if (path === '/') {
-      priority = 1.0;
-      changefreq = 'daily';
-    }
-    // Appointment-focused pages get top priority
-    else if (['/treatment-journey', '/services', '/assessment', '/contact'].includes(path)) {
-      priority = 0.95;
-      changefreq = 'daily';
-    }
-    // Insurance page (important for bookings)
-    else if (path === '/insurance') {
-      priority = 0.9;
-      changefreq = 'weekly';
-    }
-    // Important informational pages
-    else if (['/team', '/testimonials', '/about', '/locations'].includes(path)) {
-      priority = 0.8;
-      changefreq = 'monthly';
-    }
-    // Blog posts
-    else if (path.startsWith('/blog/')) {
-      priority = 0.7;
-      changefreq = 'monthly';
-    }
-    // Other pages
-    else {
-      priority = 0.6;
-      changefreq = 'monthly';
-    }
-
-    return {
-      loc: path,
-      changefreq: changefreq,
-      priority: priority,
-      lastmod: new Date().toISOString(),
-      // Add mobile-specific annotations
-      alternateRefs: [
-        {
-          href: `https://spinezone-sandiego.com${path}`,
-          hreflang: 'en-US',
-        },
-      ],
-    };
-  },
+  // Simplified configuration for reliable builds
+  changefreq: 'monthly',
+  priority: 0.7,
 };
 
 module.exports = config;
