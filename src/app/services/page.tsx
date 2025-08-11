@@ -9,6 +9,8 @@ import Breadcrumb from '@/components/Breadcrumb';
 import { breadcrumbConfigs } from '@/lib/breadcrumb-config';
 import PerformanceOptimizer from '@/components/PerformanceOptimizer';
 import ClientButton from '@/components/ClientButton';
+import ServiceScrollButton from '@/components/ServiceScrollButton';
+import ServiceActionButtons from '@/components/ServiceActionButtons';
 
 // Lazy load heavy components for better performance
 const InternalLinks = dynamic(() => import('@/components/InternalLinks'), {
@@ -305,20 +307,10 @@ export default function ServicesPage() {
                         </div>
                       </div>
                       
-                      <button 
-                        onClick={() => {
-                          const bookingSection = document.getElementById(`booking-${service.id}`);
-                          if (bookingSection) {
-                            bookingSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            // Preload the appointment form if not already loaded
-                            import('@/components/ServiceAppointmentForm');
-                          }
-                        }}
-                        className="btn-primary w-full flex items-center justify-center group hover:scale-105 active:scale-95 transform transition-all"
-                      >
-                        {service.ctaText}
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                      </button>
+                      <ServiceScrollButton 
+                        serviceId={service.id}
+                        ctaText={service.ctaText}
+                      />
                     </div>
                   </div>
                 </div>
@@ -671,14 +663,7 @@ export default function ServicesPage() {
                       </p>
                     </div>
                     
-                    <div className="grid grid-cols-2 gap-3">
-                      <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-sm">
-                        Book Assessment
-                      </button>
-                      <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-sm">
-                        Call (858) 555-0123
-                      </button>
-                    </div>
+                    <ServiceActionButtons />
                   </div>
                 </div>
               </div>
@@ -719,12 +704,6 @@ export default function ServicesPage() {
                     serviceDescription={service.description}
                     duration={service.duration}
                     sessions={service.sessions}
-                    onSuccess={(data) => {
-                      console.log(`${service.title} appointment booked:`, data);
-                    }}
-                    onError={(error) => {
-                      console.error('Service appointment booking error:', error);
-                    }}
                     className="max-w-4xl mx-auto"
                   />
                 </Suspense>
@@ -752,12 +731,6 @@ export default function ServicesPage() {
                   serviceDescription="Not sure which program is right for you? Start with our free consultation to get personalized recommendations and create your treatment plan."
                   duration="30 minutes"
                   sessions="Single session"
-                  onSuccess={(data) => {
-                    console.log('Consultation appointment booked:', data);
-                  }}
-                  onError={(error) => {
-                    console.error('Consultation booking error:', error);
-                  }}
                 />
               </Suspense>
             </div>
@@ -780,12 +753,6 @@ export default function ServicesPage() {
                   serviceDescription="Get a detailed evaluation of your condition with our comprehensive assessment. Includes movement analysis, pain evaluation, and treatment recommendations."
                   duration="60 minutes"
                   sessions="Single session"
-                  onSuccess={(data) => {
-                    console.log('Assessment appointment booked:', data);
-                  }}
-                  onError={(error) => {
-                    console.error('Assessment booking error:', error);
-                  }}
                 />
               </Suspense>
             </div>

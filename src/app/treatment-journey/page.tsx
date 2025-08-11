@@ -3,6 +3,7 @@ import { Clock, CheckCircle, ArrowRight, Calendar, Users, TrendingUp, Shield, Ta
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import OptimizedCTAButton from '@/components/OptimizedCTAButtons';
+import TreatmentPhaseButtons from '@/components/TreatmentPhaseButtons';
 import { generateSEOMetadata } from '@/lib/seo-utils';
 import StructuredData from '@/components/StructuredData';
 import PerformanceOptimizer from '@/components/PerformanceOptimizer';
@@ -339,34 +340,11 @@ export default function TreatmentJourneyPage() {
                         {index === 1 && "Ready to transition to Phase 2? Book your mobility and strength building sessions."}
                         {index === 2 && "Advance to Phase 3 for high-level functional training and performance optimization."}
                       </p>
-                      <div className="flex flex-col sm:flex-row gap-2">
-                        <button 
-                          onClick={() => {
-                            const phaseId = `phase-${index + 1}`;
-                            const formSection = document.getElementById(`appointment-form-${phaseId}`);
-                            if (formSection) {
-                              formSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                              // Preload the form component if not already loaded
-                              import('@/components/AppointmentBookingForms');
-                            }
-                          }}
-                          className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center"
-                        >
-                          <Calendar className="w-4 h-4 mr-2" />
-                          Book {phase.phase} Session
-                        </button>
-                        <button 
-                          onClick={() => {
-                            console.log(`📞 PHASE ${index + 1} CONSULTATION REQUEST:`);
-                            console.log(`Patient requesting consultation for ${phase.title}`);
-                            console.log('🏥 Our team will call within 2 hours for phase-specific guidance');
-                            alert(`Phase ${index + 1} Consultation Request\n\nOur specialist will call you within 2 hours to discuss:\n• ${phase.title} requirements\n• Session frequency and duration\n• Expected outcomes and timeline\n• Insurance coverage details\n\nFor immediate assistance: (858) 555-0123`);
-                          }}
-                          className="flex-1 border border-blue-600 text-blue-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-50 transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center"
-                        >
-                          Get Consultation
-                        </button>
-                      </div>
+                      <TreatmentPhaseButtons 
+                        phaseIndex={index}
+                        phaseTitle={phase.title}
+                        phasePhase={phase.phase}
+                      />
                     </div>
                   </div>
                 </div>

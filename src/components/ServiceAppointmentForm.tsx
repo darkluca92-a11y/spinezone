@@ -20,8 +20,6 @@ interface ServiceAppointmentFormProps {
   serviceDescription: string;
   duration?: string;
   sessions?: string;
-  onSuccess?: (data: any) => void;
-  onError?: (error: string) => void;
   className?: string;
 }
 
@@ -94,8 +92,6 @@ export default function ServiceAppointmentForm({
   serviceDescription,
   duration,
   sessions,
-  onSuccess,
-  onError,
   className = ''
 }: ServiceAppointmentFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -137,15 +133,15 @@ export default function ServiceAppointmentForm({
       
       if (result.success) {
         setSubmitMessage(`${serviceName} appointment successfully booked! Our program coordinator will contact you within 24 hours.`);
-        if (onSuccess) onSuccess(result.data);
+        console.log(`${serviceName} appointment booked successfully:`, result.data);
       } else {
         setSubmitMessage(result.error?.message || 'Unable to book appointment. Please try again.');
-        if (onError) onError(result.error?.message || 'Booking failed');
+        console.error('Service appointment booking error:', result.error?.message || 'Booking failed');
       }
     } catch (error) {
       const errorMsg = 'An error occurred while booking your appointment. Please call (858) 555-0123.';
       setSubmitMessage(errorMsg);
-      if (onError) onError(errorMsg);
+      console.error('Service appointment error:', errorMsg, error);
     } finally {
       setIsSubmitting(false);
     }
