@@ -213,7 +213,7 @@ export default function Home() {
       <Footer />
       
       {/* Simple Contact CTAs for Professional Presentation */}
-      <div className="fixed bottom-20 right-4 z-40 hidden md:block">
+      <div className="fixed bottom-20 left-4 z-40 hidden md:block">
         <QuickContactCTA 
           className="shadow-2xl animate-pulse"
         />
@@ -221,7 +221,7 @@ export default function Home() {
       
       {/* Mobile Floating CTA - Professional Contact */}
       <FloatingContactCTA 
-        position="bottom-right"
+        position="bottom-left"
         className="shadow-2xl"
       />
       

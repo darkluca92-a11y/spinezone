@@ -117,17 +117,12 @@ function HeroSection() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 px-2 sm:px-0"
+              className="flex justify-center mb-12 px-2 sm:px-0"
             >
               <PrimaryContactCTA 
                 className="w-full sm:w-auto min-h-[48px] sm:min-h-[56px] px-6 sm:px-8 text-base sm:text-lg font-bold bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-2xl max-w-xs sm:max-w-none"
-                showContactInfo={false}
+                showContactInfo={true}
               />
-              <div className="flex items-center text-green-600 bg-white/80 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-green-200 shadow-lg max-w-xs sm:max-w-none">
-                <Phone className="w-5 h-5 mr-2" />
-                <span className="font-semibold text-sm sm:text-base">(858) 555-0123</span>
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </div>
             </motion.div>
           </div>
 
