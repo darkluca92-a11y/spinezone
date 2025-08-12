@@ -1,5 +1,6 @@
 import { Phone, MapPin, Clock, Mail, Facebook, Instagram, Linkedin } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -9,7 +10,16 @@ export default function Footer() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info */}
             <div>
-              <h3 className="text-2xl font-bold text-blue-400 mb-4">SpineZone</h3>
+              <div className="flex items-center mb-4">
+                <Image
+                  src="/spinezone-logo.svg"
+                  alt="SpineZone Logo"
+                  width={32}
+                  height={32}
+                  className="w-8 h-8 mr-3"
+                />
+                <h3 className="text-2xl font-bold text-blue-400">SpineZone</h3>
+              </div>
               <p className="text-gray-300 mb-6 leading-relaxed">
                 San Diego's premier physical therapy clinic, dedicated to helping you heal naturally without surgery or opioids.
               </p>

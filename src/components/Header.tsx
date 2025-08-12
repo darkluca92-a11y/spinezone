@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,10 +18,20 @@ export default function Header() {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold text-blue-600 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">
-              SpineZone
+            <Link href="/" className="flex items-center hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">
+              <Image
+                src="/spinezone-logo.svg"
+                alt="SpineZone Logo"
+                width={40}
+                height={40}
+                className="w-8 h-8 sm:w-10 sm:h-10"
+                priority
+              />
+              <span className="ml-3 text-xl sm:text-2xl font-bold text-blue-600">
+                SpineZone
+              </span>
             </Link>
-            <span className="ml-2 text-sm text-gray-600 hidden sm:inline">
+            <span className="ml-2 text-sm text-gray-600 hidden lg:inline">
               San Diego Physical Therapy
             </span>
           </div>
