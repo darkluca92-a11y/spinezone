@@ -4,6 +4,7 @@ import './globals.css'
 import Header from '@/components/Header'
 import ChatBot from '@/components/ChatBot'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { SpineZoneNavigationCompact } from '@/components/SpineZoneNavigation'
 import { generateSEOMetadata, generateLocalBusinessSchema, generateAppointmentBookingSchema } from '@/lib/seo-utils'
 // Removed complex booking integrations - using simple contact system
 
@@ -184,6 +185,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ErrorBoundary>
           <Header />
+          <SpineZoneNavigationCompact />
           {children}
           <ChatBot />
           {/* Simple, professional healthcare layout */}
