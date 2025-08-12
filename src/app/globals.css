@@ -459,6 +459,167 @@
   }
 }
 
+/* Mobile-First Animation Optimizations for Hero Section */
+.hero-gradient-animate {
+  background: linear-gradient(-45deg, #e0f2fe, #f0f9ff, #ecfdf5, #f0fdf4);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+.mobile-wow-entrance {
+  animation: mobileWowEntrance 1.2s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+.mobile-scale-bounce {
+  animation: mobileScaleBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.mobile-slide-up-fast {
+  animation: mobileSlideUpFast 0.8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+.mobile-float {
+  animation: mobileFloat 3s ease-in-out infinite;
+}
+
+.hero-text-reveal {
+  animation: heroTextReveal 1s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+.mobile-glow-pulse {
+  animation: mobileGlowPulse 2s ease-in-out infinite alternate;
+}
+
+.mobile-shake-attention {
+  animation: mobileShakeAttention 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) 3;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes mobileWowEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotateY(-45deg);
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1) rotateY(-10deg);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+    filter: blur(0px);
+  }
+}
+
+@keyframes mobileScaleBounce {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes mobileSlideUpFast {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) rotateX(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+@keyframes mobileFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+}
+
+@keyframes heroTextReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+  }
+}
+
+@keyframes mobileGlowPulse {
+  0% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 40px rgba(16, 185, 129, 0.3);
+  }
+}
+
+@keyframes mobileShakeAttention {
+  10%, 90% {
+    transform: translate3d(-2px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(4px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-8px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(8px, 0, 0);
+  }
+}
+
+/* Mobile-specific performance optimizations */
+@media (max-width: 768px) {
+  .mobile-performance-optimized {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform, opacity;
+  }
+  
+  .mobile-performance-optimized * {
+    will-change: auto;
+  }
+  
+  /* Reduce animation complexity on lower-end mobile devices */
+  @media (max-width: 480px) {
+    .hero-gradient-animate {
+      animation-duration: 20s; /* Slower for battery optimization */
+    }
+    
+    .mobile-float {
+      animation-duration: 4s; /* Slightly slower */
+    }
+  }
+}
+
 /* Professional Healthcare Design Enhancements */
 .healthcare-card {
   @apply bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300;

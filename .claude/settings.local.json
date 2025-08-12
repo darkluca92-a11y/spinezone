@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(where claude)",
+      "Bash(echo $PATH)",
+      "Bash(npm --version)",
+      "Bash(npm uninstall:*)",
+      "Bash(netlify:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(npm run build:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

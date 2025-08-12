@@ -22,6 +22,7 @@
     "clean:deps": "rm -rf node_modules package-lock.json && npm install"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.59.0",
     "@googlemaps/react-wrapper": "^1.2.0",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/auth-ui-react": "^0.4.7",
@@ -31,9 +32,10 @@
     "@types/jsonwebtoken": "^9.0.10",
     "bcryptjs": "^3.0.2",
     "crypto-js": "^4.2.0",
+    "framer-motion": "^12.23.12",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.316.0",
-    "next": "14.1.0",
+    "next": "^14.2.31",
     "next-sitemap": "^4.2.3",
     "rate-limiter-flexible": "^7.2.0",
     "react": "^18.2.0",
@@ -47,14 +49,14 @@
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "autoprefixer": "^10.4.17",
+    "cross-env": "^7.0.3",
     "eslint": "^8.56.0",
     "eslint-config-next": "14.1.0",
+    "lighthouse": "^12.8.1",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
-    "webpack-bundle-analyzer": "^4.10.2",
-    "lighthouse": "^11.4.0",
-    "cross-env": "^7.0.3"
+    "webpack-bundle-analyzer": "^4.10.2"
   },
   "engines": {
     "node": ">=18.17.0"
