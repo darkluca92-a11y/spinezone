@@ -14,12 +14,11 @@ const HERO_IMAGE_URLS = {
 };
 
 function HeroSection() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // Start visible for immediate display
 
   useEffect(() => {
-    // Trigger animation after component mounts for better perceived performance
-    const timer = setTimeout(() => setIsVisible(true), 100);
-    return () => clearTimeout(timer);
+    // Ensure visibility is set
+    setIsVisible(true);
   }, []);
 
   // Removed booking handler - using simple contact CTA instead
