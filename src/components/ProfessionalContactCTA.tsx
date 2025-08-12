@@ -256,7 +256,7 @@ export function FloatingContactCTA({
       <ProfessionalContactCTA 
         variant="secondary" 
         size="large" 
-        className={`shadow-2xl animate-bounce ${className}`}
+        className={`shadow-2xl hover:shadow-3xl transition-shadow duration-300 ${className}`}
       >
         <Phone className="w-6 h-6 mr-2" aria-hidden="true" />
         Call Now

@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
 import HeroSection from '@/components/HeroSection';
-import TrustIndicators from '@/components/TrustIndicators';
 import { FloatingContactCTA, QuickContactCTA } from '@/components/ProfessionalContactCTA';
 import StructuredData from '@/components/StructuredData';
 // Removed complex navigation integrations - using simple layout
@@ -178,7 +177,6 @@ export default function Home() {
       
       {/* Above-the-fold critical content */}
       <HeroSection />
-      <TrustIndicators />
       
         {/* Below-the-fold lazy-loaded content */}
         <div id="conditions-section" className="viewport-section" data-viewport-threshold="0.3">

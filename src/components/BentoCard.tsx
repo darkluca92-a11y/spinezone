@@ -108,31 +108,31 @@ const BentoCard = memo(function BentoCard({
     }
   }[gradient];
 
-  // Size configurations
+  // Size configurations - Mobile optimized
   const sizeConfigs = {
     small: {
-      container: 'p-4 min-h-[120px]',
-      icon: 'w-8 h-8',
-      value: 'text-2xl sm:text-3xl',
-      title: 'text-sm',
+      container: 'p-3 sm:p-4 min-h-[100px] sm:min-h-[120px]',
+      icon: 'w-6 h-6 sm:w-8 sm:h-8',
+      value: 'text-xl sm:text-2xl md:text-3xl',
+      title: 'text-xs sm:text-sm',
       description: 'text-xs',
       badge: 'text-xs px-2 py-1'
     },
     medium: {
-      container: 'p-6 min-h-[160px]',
-      icon: 'w-10 h-10',
-      value: 'text-3xl sm:text-4xl',
-      title: 'text-base',
-      description: 'text-sm',
-      badge: 'text-xs px-3 py-1'
+      container: 'p-4 sm:p-5 md:p-6 min-h-[140px] sm:min-h-[160px]',
+      icon: 'w-8 h-8 sm:w-10 sm:h-10',
+      value: 'text-2xl sm:text-3xl md:text-4xl',
+      title: 'text-sm sm:text-base',
+      description: 'text-xs sm:text-sm',
+      badge: 'text-xs px-2 py-1 sm:px-3'
     },
     large: {
-      container: 'p-8 min-h-[200px]',
-      icon: 'w-12 h-12',
-      value: 'text-4xl sm:text-5xl',
-      title: 'text-lg',
-      description: 'text-base',
-      badge: 'text-sm px-4 py-2'
+      container: 'p-6 sm:p-7 md:p-8 min-h-[180px] sm:min-h-[200px]',
+      icon: 'w-10 h-10 sm:w-12 sm:h-12',
+      value: 'text-3xl sm:text-4xl md:text-5xl',
+      title: 'text-base sm:text-lg',
+      description: 'text-sm sm:text-base',
+      badge: 'text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2'
     }
   }[size];
 

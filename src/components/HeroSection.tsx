@@ -77,7 +77,7 @@ function HeroSection() {
         className="w-full py-8 md:py-16 gpu-accelerated"
         aria-labelledby="hero-heading"
       >
-        <div className="container-max relative z-10">
+        <div className="container-max relative z-10 px-4 sm:px-6 lg:px-8 mobile-container-safe">
           {/* Mobile-First Hero Content */}
           <div className="text-center mb-8 md:mb-12">
             <motion.div
@@ -87,13 +87,13 @@ function HeroSection() {
             >
               <h1 
                 id="hero-heading"
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-rendering-optimized"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight text-rendering-optimized overflow-hidden mobile-text-safe"
               >
                 <span className="block text-gray-900 mb-2">Heal Naturally</span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-teal-600 to-green-600 mb-3">
                   90% Success Rate
                 </span>
-                <span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700">
+                <span className="block text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold text-gray-700">
                   Without Surgery • Injections • Opioids
                 </span>
               </h1>
@@ -103,7 +103,7 @@ function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed"
+              className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed px-2 sm:px-0 mobile-text-safe"
             >
               San Diego's #1 rated physical therapy clinic. Revolutionary non-invasive therapy 
               for <strong>all joint pain</strong> including spine, hips, shoulders, and knees.
@@ -117,15 +117,15 @@ function HeroSection() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 px-2 sm:px-0"
             >
               <PrimaryContactCTA 
-                className="w-full sm:w-auto min-h-[56px] px-8 text-lg font-bold bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-2xl"
+                className="w-full sm:w-auto min-h-[48px] sm:min-h-[56px] px-6 sm:px-8 text-base sm:text-lg font-bold bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-2xl max-w-xs sm:max-w-none"
                 showContactInfo={false}
               />
-              <div className="flex items-center text-green-600 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full border border-green-200 shadow-lg">
+              <div className="flex items-center text-green-600 bg-white/80 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-green-200 shadow-lg max-w-xs sm:max-w-none">
                 <Phone className="w-5 h-5 mr-2" />
-                <span className="font-semibold">(858) 555-0123</span>
+                <span className="font-semibold text-sm sm:text-base">(858) 555-0123</span>
                 <ArrowRight className="w-4 h-4 ml-2" />
               </div>
             </motion.div>
@@ -136,7 +136,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 px-2 sm:px-0"
           >
             {heroStats.map((stat, index) => (
               <BentoCard
@@ -166,7 +166,7 @@ function HeroSection() {
             >
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 rounded-2xl blur-xl opacity-30 animate-pulse" />
-                <div className="relative bg-gradient-to-r from-red-50 via-orange-50 to-yellow-50 border-l-6 border-red-500 rounded-2xl p-6 shadow-2xl backdrop-blur-sm">
+                <div className="relative bg-gradient-to-r from-red-50 via-orange-50 to-yellow-50 border-l-4 sm:border-l-6 border-red-500 rounded-2xl p-4 sm:p-6 shadow-2xl backdrop-blur-sm mx-2 sm:mx-0">
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
                       <motion.div
@@ -181,10 +181,10 @@ function HeroSection() {
                       </motion.div>
                     </div>
                     <div className="ml-4">
-                      <h3 className="text-lg sm:text-xl font-bold text-red-800 mb-2">
+                      <h3 className="text-base sm:text-lg md:text-xl font-bold text-red-800 mb-2">
                         🚨 URGENT: Only 12 New Patient Slots Remaining
                       </h3>
-                      <p className="text-red-700 leading-relaxed text-sm sm:text-base mb-4">
+                      <p className="text-red-700 leading-relaxed text-xs sm:text-sm md:text-base mb-4">
                         Revolutionary expansion to treat <strong>ALL joint pain</strong> - spine, hips, shoulders, knees. 
                         Same 90% success rate, same non-invasive approach. Limited availability this month.
                       </p>
@@ -205,7 +205,7 @@ function HeroSection() {
               transition={{ duration: 1, delay: 1.2 }}
               className="lg:order-2 relative mt-6 lg:mt-0 contain-paint"
             >
-              <div className="relative h-72 sm:h-96 md:h-[500px] lg:h-[500px] xl:h-[600px] rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-500">
+              <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-500 mx-2 sm:mx-0">
                 {/* Gradient overlay for better text contrast */}
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 via-transparent to-green-900/20 z-10" />
               <OptimizedImage
@@ -239,7 +239,7 @@ function HeroSection() {
                   initial={{ opacity: 0, y: 20, x: -20 }}
                   animate={{ opacity: 1, y: 0, x: 0 }}
                   transition={{ duration: 0.8, delay: 1.5 }}
-                  className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 bg-gradient-to-br from-white via-blue-50 to-green-50 p-4 sm:p-6 rounded-2xl shadow-2xl border border-blue-200/50 max-w-xs sm:max-w-sm backdrop-blur-sm"
+                  className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 md:-bottom-8 md:-left-8 bg-gradient-to-br from-white via-blue-50 to-green-50 p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl shadow-2xl border border-blue-200/50 max-w-[280px] sm:max-w-xs md:max-w-sm backdrop-blur-sm"
                 >
                   <div className="flex items-center mb-3">
                     <div className="flex text-yellow-400 text-base mr-2" aria-label="5 star rating">
@@ -247,7 +247,7 @@ function HeroSection() {
                     </div>
                     <span className="text-sm font-semibold text-gray-600">5.0</span>
                   </div>
-                  <p className="text-sm sm:text-base text-gray-800 font-medium mb-2">
+                  <p className="text-xs sm:text-sm md:text-base text-gray-800 font-medium mb-2">
                     "SpineZone got me back to hiking in just 3 weeks after 6 months of chronic pain!"
                   </p>
                   <div className="flex items-center">
@@ -255,7 +255,7 @@ function HeroSection() {
                       S
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-gray-700">Sarah M.</p>
+                      <p className="text-xs sm:text-sm font-semibold text-gray-700">Sarah M.</p>
                       <p className="text-xs text-gray-500">Mission Hills</p>
                     </div>
                   </div>
