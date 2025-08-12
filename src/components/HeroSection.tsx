@@ -151,54 +151,13 @@ function HeroSection() {
           </motion.div>
 
           {/* Hero Visual Section */}
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Urgency Notice - Mobile Optimized */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="lg:order-1"
-            >
-              <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 rounded-2xl blur-xl opacity-30 animate-pulse" />
-                <div className="relative bg-gradient-to-r from-red-50 via-orange-50 to-yellow-50 border-l-4 sm:border-l-6 border-red-500 rounded-2xl p-4 sm:p-6 shadow-2xl backdrop-blur-sm mx-2 sm:mx-0">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0">
-                      <motion.div
-                        animate={{ 
-                          rotate: [0, 10, -10, 0],
-                          scale: [1, 1.1, 1]
-                        }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center"
-                      >
-                        <span className="text-white font-bold text-lg">!</span>
-                      </motion.div>
-                    </div>
-                    <div className="ml-4">
-                      <h3 className="text-base sm:text-lg md:text-xl font-bold text-red-800 mb-2">
-                        🚨 URGENT: Only 12 New Patient Slots Remaining
-                      </h3>
-                      <p className="text-red-700 leading-relaxed text-xs sm:text-sm md:text-base mb-4">
-                        Revolutionary expansion to treat <strong>ALL joint pain</strong> - spine, hips, shoulders, knees. 
-                        Same 90% success rate, same non-invasive approach. Limited availability this month.
-                      </p>
-                      <div className="flex items-center text-red-600 font-semibold">
-                        <CheckCircle className="w-5 h-5 mr-2" />
-                        <span>Same-day appointments available</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
+          <div className="flex justify-center">
             {/* Hero Image - Enhanced with Overlay */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
               animate={isInView ? { opacity: 1, scale: 1, rotateY: 0 } : { opacity: 0, scale: 0.9, rotateY: -15 }}
-              transition={{ duration: 1, delay: 1.2 }}
-              className="lg:order-2 relative mt-6 lg:mt-0 contain-paint"
+              transition={{ duration: 1, delay: 0.8 }}
+              className="relative mt-6 contain-paint max-w-2xl w-full"
             >
               <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-500 mx-2 sm:mx-0">
                 {/* Gradient overlay for better text contrast */}
