@@ -5,6 +5,7 @@ import { PrimaryContactCTA } from '@/components/ProfessionalContactCTA';
 import OptimizedImage from '@/components/OptimizedImage';
 import AnimatedGradient from '@/components/AnimatedGradient';
 import BentoCard from '@/components/BentoCard';
+import { GeometricBackground } from '@/components/ui/shape-landing-hero';
 import { memo, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -66,12 +67,7 @@ function HeroSection() {
   ];
 
   return (
-    <AnimatedGradient
-      variant="hero"
-      intensity="high"
-      speed="medium"
-      className="relative min-h-screen flex items-center overflow-hidden"
-    >
+    <GeometricBackground>
       <section 
         ref={ref}
         className="w-full py-8 md:py-16 gpu-accelerated"
@@ -219,7 +215,7 @@ function HeroSection() {
           </div>
         </div>
       </section>
-    </AnimatedGradient>
+    </GeometricBackground>
   );
 }
 

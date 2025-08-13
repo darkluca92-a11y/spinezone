@@ -13,7 +13,9 @@
       "Bash(copy:*)",
       "Bash(cp:*)",
       "Bash(npm install:*)",
-      "Bash(touch:*)"
+      "Bash(touch:*)",
+      "Bash(node:*)",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []
