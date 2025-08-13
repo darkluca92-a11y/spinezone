@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, Calendar, MessageCircle, FileText } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { SpineZoneFluidMenu, SpineZoneFluidMenuCompact } from '@/components/ui/spinezone-fluid-menu';
+import TopRightDropdown from '@/components/TopRightDropdown';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,33 +38,21 @@ export default function Header() {
             </span>
           </div>
 
-          {/* Desktop Navigation - Fluid Menu */}
-          <div className="hidden lg:flex items-center space-x-6">
+          {/* Desktop Navigation - Top Right Dropdown */}
+          <div className="hidden md:flex items-center space-x-4">
             {/* Phone CTA - Always visible on desktop */}
             <a 
               href="tel:+1-858-555-0123" 
-              className="flex items-center text-green-600 hover:text-green-700 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 rounded px-3 py-2 bg-green-50 hover:bg-green-100 mr-4"
+              className="flex items-center text-green-600 hover:text-green-700 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 rounded px-3 py-2 bg-green-50 hover:bg-green-100"
               aria-label="Call SpineZone at 858-555-0123"
             >
               <Phone className="w-4 h-4 mr-2" aria-hidden="true" />
-              (858) 555-0123
+              <span className="hidden lg:inline">(858) 555-0123</span>
+              <span className="lg:hidden">Call</span>
             </a>
             
-            {/* Fluid Navigation Menu */}
-            <SpineZoneFluidMenu />
-          </div>
-
-          {/* Tablet Navigation - Compact Fluid Menu */}
-          <div className="hidden md:flex lg:hidden items-center space-x-4">
-            <a 
-              href="tel:+1-858-555-0123" 
-              className="flex items-center text-green-600 hover:text-green-700 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 rounded px-2 py-1"
-              aria-label="Call SpineZone at 858-555-0123"
-            >
-              <Phone className="w-4 h-4 mr-1" aria-hidden="true" />
-              (858) 555-0123
-            </a>
-            <SpineZoneFluidMenuCompact />
+            {/* Top Right Dropdown Navigation */}
+            <TopRightDropdown />
           </div>
 
           {/* Mobile menu button */}
@@ -87,19 +76,61 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg z-50" id="mobile-menu">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t max-h-screen overflow-y-auto">
+              {/* Healthcare Actions Section - Mobile Priority */}
+              <div className="mb-4 pb-4 border-b border-gray-200">
+                <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                  Healthcare Actions
+                </div>
+                <Link 
+                  href="/assessment" 
+                  className="flex items-center px-3 py-3 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-semibold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 min-h-[44px]"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Calendar className="w-5 h-5 mr-3" aria-hidden="true" />
+                  Book Assessment
+                </Link>
+                <a 
+                  href="tel:+1-858-555-0123" 
+                  className="flex items-center px-3 py-3 text-green-600 hover:text-green-700 hover:bg-green-50 font-semibold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 min-h-[44px]"
+                  onClick={() => setIsMenuOpen(false)}
+                  aria-label="Call SpineZone at 858-555-0123"
+                >
+                  <Phone className="w-5 h-5 mr-3" aria-hidden="true" />
+                  Call (858) 555-0123
+                </a>
+                <button
+                  onClick={() => {
+                    const chatbot = document.querySelector('[data-chatbot]');
+                    if (chatbot) {
+                      (chatbot as HTMLElement).click();
+                    }
+                    setIsMenuOpen(false);
+                  }}
+                  className="flex items-center px-3 py-3 text-purple-600 hover:text-purple-700 hover:bg-purple-50 font-semibold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 min-h-[44px] w-full text-left"
+                >
+                  <MessageCircle className="w-5 h-5 mr-3" aria-hidden="true" />
+                  Chat Support
+                </button>
+                <Link 
+                  href="/patient-portal" 
+                  className="flex items-center px-3 py-3 text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 min-h-[44px]"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <FileText className="w-5 h-5 mr-3" aria-hidden="true" />
+                  Patient Portal
+                </Link>
+              </div>
+
+              {/* Navigation Section */}
+              <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                Navigation
+              </div>
               <Link 
                 href="/" 
                 className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 min-h-[44px] flex items-center"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
-              </Link>
-              <Link 
-                href="/about" 
-                className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 min-h-[44px] flex items-center"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
               </Link>
               <Link 
                 href="/services" 
@@ -109,18 +140,11 @@ export default function Header() {
                 Services
               </Link>
               <Link 
-                href="/treatment-journey" 
+                href="/about" 
                 className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 min-h-[44px] flex items-center"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Treatment Journey
-              </Link>
-              <Link 
-                href="/team" 
-                className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 min-h-[44px] flex items-center"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Team
+                About & Team
               </Link>
               <Link 
                 href="/testimonials" 
@@ -130,11 +154,11 @@ export default function Header() {
                 Reviews
               </Link>
               <Link 
-                href="/assessment" 
+                href="/treatment-journey" 
                 className="block px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 min-h-[44px] flex items-center"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Assessment Appointment
+                Treatment Journey
               </Link>
               <Link 
                 href="/insurance" 
@@ -150,15 +174,6 @@ export default function Header() {
               >
                 Contact
               </Link>
-              <a 
-                href="tel:+1-858-555-0123" 
-                className="flex items-center px-3 py-3 text-green-600 hover:text-green-700 hover:bg-green-50 font-semibold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 min-h-[44px]"
-                onClick={() => setIsMenuOpen(false)}
-                aria-label="Call SpineZone at 858-555-0123"
-              >
-                <Phone className="w-4 h-4 mr-2" aria-hidden="true" />
-                (858) 555-0123
-              </a>
             </div>
           </div>
         )}

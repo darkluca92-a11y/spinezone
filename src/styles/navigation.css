@@ -1,0 +1,133 @@
+/* Navigation Mobile Optimizations */
+
+/* Safe area insets for devices with notches/dynamic islands */
+@supports (padding: max(0px)) {
+  .dropdown-menu {
+    padding-top: max(8px, env(safe-area-inset-top));
+    padding-right: max(8px, env(safe-area-inset-right));
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    padding-left: max(8px, env(safe-area-inset-left));
+  }
+}
+
+/* Enhanced touch targets for accessibility */
+@media (hover: none) and (pointer: coarse) {
+  /* Mobile touch device optimizations */
+  .touch-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  /* Increase button sizes on small screens */
+  .nav-button {
+    padding: 12px 16px;
+  }
+  
+  /* Better spacing for thumb navigation */
+  .dropdown-item {
+    margin-bottom: 4px;
+    padding: 14px 20px;
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .nav-icon {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Focus states for keyboard navigation */
+.nav-item:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Animation performance optimizations */
+.dropdown-animate {
+  will-change: transform, opacity;
+  transform: translateZ(0); /* Hardware acceleration */
+}
+
+.dropdown-animate:not(.is-animating) {
+  will-change: auto;
+}
+
+/* Prevent text selection on navigation items */
+.nav-item {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .dropdown-menu {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .nav-button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .dropdown-animate {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .nav-item {
+    border: 1px solid;
+  }
+  
+  .nav-item:hover,
+  .nav-item:focus {
+    background-color: HighlightText;
+    color: Highlight;
+  }
+}
+
+/* Dark mode considerations */
+@media (prefers-color-scheme: dark) {
+  .dropdown-menu {
+    background-color: rgba(17, 24, 39, 0.95);
+    border-color: rgba(75, 85, 99, 0.3);
+  }
+  
+  .nav-item {
+    color: rgb(229, 231, 235);
+  }
+  
+  .nav-item:hover {
+    background-color: rgba(55, 65, 81, 0.5);
+  }
+}
+
+/* Landscape orientation optimizations for mobile */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .dropdown-menu {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  
+  .dropdown-item {
+    padding: 10px 16px;
+  }
+}
+
+/* Large screens - prevent dropdown from being too wide */
+@media screen and (min-width: 1200px) {
+  .dropdown-menu {
+    max-width: 320px;
+  }
+}

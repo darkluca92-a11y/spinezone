@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import '../styles/navigation.css'
 import Header from '@/components/Header'
 import ChatBot from '@/components/ChatBot'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
-import { SpineZoneFloatingMenuCompact } from '@/components/SpineZoneFloatingMenu'
 import { generateSEOMetadata, generateLocalBusinessSchema, generateAppointmentBookingSchema } from '@/lib/seo-utils'
 // Removed complex booking integrations - using simple contact system
 
@@ -185,7 +185,6 @@ export default function RootLayout({
       <body className={inter.className}>
         <ErrorBoundary>
           <Header />
-          <SpineZoneFloatingMenuCompact />
           {children}
           <ChatBot />
           {/* Simple, professional healthcare layout */}

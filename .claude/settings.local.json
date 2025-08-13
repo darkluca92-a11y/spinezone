@@ -15,7 +15,8 @@
       "Bash(npm install:*)",
       "Bash(touch:*)",
       "Bash(node:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(npm run dev:*)"
     ],
     "deny": [],
     "ask": []
