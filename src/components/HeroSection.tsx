@@ -168,18 +168,34 @@ function HeroSection() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, ease: [0.4, 0.0, 0.2, 1] }}
             >
+              {/* Primary Brand Headline */}
               <h1 
                 id="hero-heading"
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight text-rendering-optimized overflow-hidden mobile-text-safe"
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black mb-4 leading-none text-rendering-optimized overflow-hidden mobile-text-safe tracking-tight"
               >
-                <span className="block text-gray-900 mb-2">Heal Naturally</span>
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-teal-600 to-green-600 mb-3">
-                  90% Success Rate
-                </span>
-                <span className="block text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold text-gray-700">
-                  Without Surgery • Injections • Opioids
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-teal-600 to-green-600 mb-2 drop-shadow-sm">
+                  SpineZone
                 </span>
               </h1>
+              
+              {/* Secondary Headlines */}
+              <div className="mb-6">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 leading-tight text-gray-900">
+                  Heal Naturally
+                </h2>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-3">
+                  <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-600">
+                    90% Success Rate
+                  </span>
+                  <span className="hidden sm:block text-gray-400 text-2xl">•</span>
+                  <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700">
+                    No Surgery Required
+                  </span>
+                </div>
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-gray-600 max-w-3xl mx-auto">
+                  Without Surgery • Injections • Opioids
+                </p>
+              </div>
             </motion.div>
 
             <motion.p
