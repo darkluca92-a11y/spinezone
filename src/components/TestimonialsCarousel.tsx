@@ -44,6 +44,15 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 4,
+    name: "Sarah M",
+    location: "Mission Hills",
+    rating: 5,
+    text: "SpineZone got me back to hiking in just 3 weeks after 6 months of chronic pain! Their comprehensive approach and professional team made all the difference.",
+    condition: "Chronic Pain Recovery",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
+  },
+  {
+    id: 5,
     name: "Anonymous",
     location: "2025 Yelp Review",
     rating: 5,

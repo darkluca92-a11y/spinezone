@@ -455,34 +455,6 @@ function HeroSection() {
                 </div>
               </div>
               
-              {/* Enhanced floating testimonial */}
-              {isVisible && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20, x: -20 }}
-                  animate={{ opacity: 1, y: 0, x: 0 }}
-                  transition={{ duration: 0.8, delay: 1.5 }}
-                  className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 md:-bottom-8 md:-left-8 bg-gradient-to-br from-white via-blue-50 to-green-50 p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl shadow-2xl border border-blue-200/50 max-w-[280px] sm:max-w-xs md:max-w-sm backdrop-blur-sm"
-                >
-                  <div className="flex items-center mb-3">
-                    <div className="flex text-yellow-400 text-base mr-2" aria-label="5 star rating">
-                      {'★'.repeat(5)}
-                    </div>
-                    <span className="text-sm font-semibold text-gray-600">5.0</span>
-                  </div>
-                  <p className="text-xs sm:text-sm md:text-base text-gray-800 font-medium mb-2">
-                    "SpineZone got me back to hiking in just 3 weeks after 6 months of chronic pain!"
-                  </p>
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm mr-3">
-                      S
-                    </div>
-                    <div>
-                      <p className="text-xs sm:text-sm font-semibold text-gray-700">Sarah M.</p>
-                      <p className="text-xs text-gray-500">Mission Hills</p>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
             </motion.div>
           </div>
         </div>

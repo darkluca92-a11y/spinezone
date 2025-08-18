@@ -54,25 +54,6 @@ const ConditionsTreated = dynamic(() => import('@/components/ConditionsTreated')
   ssr: false
 });
 
-const TreatmentOverviewCards = dynamic(() => import('@/components/TreatmentOverviewCards'), {
-  loading: () => (
-    <div className="section-padding bg-white animate-pulse" style={{ minHeight: '400px' }}>
-      <div className="container-max">
-        <div className="h-8 bg-gray-200 rounded mb-4 w-1/2 mx-auto"></div>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="bg-gray-100 rounded-xl p-6">
-              <div className="h-6 bg-gray-200 rounded mb-3"></div>
-              <div className="h-4 bg-gray-200 rounded mb-2"></div>
-              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  ),
-  ssr: false
-});
 
 const LocalSEO = dynamic(() => import('@/components/LocalSEO'), {
   loading: () => (
@@ -183,9 +164,6 @@ export default function Home() {
           <ConditionsTreated />
         </div>
         
-        <div id="treatments-section" className="viewport-section" data-viewport-threshold="0.3">
-          <TreatmentOverviewCards />
-        </div>
       
       {/* Local SEO Component for San Diego neighborhoods */}
       <LocalSEO 
