@@ -1,11 +1,12 @@
 'use client';
 
-import { CheckCircle, Star, TrendingUp, Users, Award, Phone, ArrowRight } from 'lucide-react';
+import { CheckCircle, Star, TrendingUp, Users, Award, Phone, ArrowRight, Calendar } from 'lucide-react';
 import { PrimaryContactCTA } from '@/components/ProfessionalContactCTA';
 import OptimizedImage from '@/components/OptimizedImage';
 import AnimatedGradient from '@/components/AnimatedGradient';
 import BentoCard from '@/components/BentoCard';
 import { GeometricBackground } from '@/components/ui/shape-landing-hero';
+import { StarBorder } from '@/components/ui/star-border';
 import { memo, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -20,12 +21,98 @@ const HERO_IMAGE_URLS = {
 
 function HeroSection() {
   const [isVisible, setIsVisible] = useState(true);
+  const [showContactDetails, setShowContactDetails] = useState(false);
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  // Custom StarBorder CTA Component that maintains PrimaryContactCTA functionality
+  const StarBorderCTA = () => {
+    const handleClick = () => {
+      setShowContactDetails(!showContactDetails);
+    };
+
+    return (
+      <div className="w-full sm:w-auto max-w-xs sm:max-w-none">
+        <StarBorder
+          as="button"
+          color="hsl(197, 90%, 55%)" // Healthcare blue that matches the gradient
+          speed="8s" // Professional, not too fast
+          className="w-full sm:w-auto transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-3xl"
+          onClick={handleClick}
+          aria-label="Contact SpineZone to schedule your appointment"
+        >
+          <div className="flex items-center justify-center py-2 px-4 sm:py-3 sm:px-6 min-h-[48px] sm:min-h-[56px] text-base sm:text-lg font-bold text-gray-900 bg-gradient-to-r from-blue-50 via-teal-50 to-green-50 rounded-[20px] w-full">
+            <Calendar className="w-5 h-5 mr-2 text-blue-600" aria-hidden="true" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-600">
+              Contact Us to Schedule
+            </span>
+          </div>
+        </StarBorder>
+
+        {/* Enhanced Contact Details Modal */}
+        {showContactDetails && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: [0.4, 0.0, 0.2, 1] }}
+            className="mt-6 p-6 bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl border border-blue-200/50 max-w-md mx-auto"
+          >
+            <div className="text-center mb-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Contact SpineZone</h3>
+              <p className="text-gray-600">Get professional spine and joint care in San Diego</p>
+            </div>
+
+            <div className="grid gap-4">
+              {/* Phone Contact */}
+              <a
+                href="tel:+1-858-555-0123"
+                className="flex items-center p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg hover:from-blue-100 hover:to-blue-200 transition-all duration-200 group"
+              >
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center mr-4 group-hover:scale-105 transition-transform shadow-lg">
+                  <Phone className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Call Now</h4>
+                  <p className="text-blue-600 font-medium">(858) 555-0123</p>
+                  <p className="text-sm text-gray-600">Immediate scheduling & urgent care</p>
+                </div>
+              </a>
+
+              {/* Trust Indicators */}
+              <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-200">
+                <div className="p-3 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg text-center">
+                  <div className="flex items-center justify-center mb-1">
+                    <Star className="w-5 h-5 text-yellow-500 mr-1" />
+                    <span className="font-bold text-gray-900">4.9/5</span>
+                  </div>
+                  <p className="text-sm text-gray-600">Patient Rating</p>
+                </div>
+                <div className="p-3 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg text-center">
+                  <div className="flex items-center justify-center mb-1">
+                    <CheckCircle className="w-5 h-5 text-green-600 mr-1" />
+                    <span className="font-bold text-gray-900">90%</span>
+                  </div>
+                  <p className="text-sm text-gray-600">Success Rate</p>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setShowContactDetails(false)}
+              className="mt-4 w-full text-gray-500 hover:text-gray-700 text-sm font-medium transition-colors py-2"
+            >
+              Close
+            </button>
+          </motion.div>
+        )}
+      </div>
+    );
+  };
 
   // Mobile-first hero stats for immediate impact
   const heroStats = [
@@ -108,17 +195,14 @@ function HeroSection() {
               </span>
             </motion.p>
 
-            {/* Mobile-Optimized CTA */}
+            {/* Mobile-Optimized StarBorder CTA */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               className="flex justify-center mb-12 px-2 sm:px-0"
             >
-              <PrimaryContactCTA 
-                className="w-full sm:w-auto min-h-[48px] sm:min-h-[56px] px-6 sm:px-8 text-base sm:text-lg font-bold bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-2xl max-w-xs sm:max-w-none"
-                showContactInfo={true}
-              />
+              <StarBorderCTA />
             </motion.div>
           </div>
 

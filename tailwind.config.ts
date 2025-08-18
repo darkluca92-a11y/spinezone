@@ -40,6 +40,8 @@ const config: Config = {
       animation: {
         'fade-in': 'fadeIn 0.6s ease-in-out',
         'slide-up': 'slideUp 0.6s ease-out',
+        'star-movement-bottom': 'star-movement-bottom linear infinite alternate',
+        'star-movement-top': 'star-movement-top linear infinite alternate',
       },
       keyframes: {
         fadeIn: {
@@ -49,6 +51,14 @@ const config: Config = {
         slideUp: {
           '0%': { opacity: '0', transform: 'translateY(30px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'star-movement-bottom': {
+          '0%': { transform: 'translate(0%, 0%)', opacity: '1' },
+          '100%': { transform: 'translate(-100%, 0%)', opacity: '0' },
+        },
+        'star-movement-top': {
+          '0%': { transform: 'translate(0%, 0%)', opacity: '1' },
+          '100%': { transform: 'translate(100%, 0%)', opacity: '0' },
         },
       },
     },
