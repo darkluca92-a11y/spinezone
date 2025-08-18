@@ -246,6 +246,116 @@ function HeroSection() {
             ))}
           </motion.div>
 
+          {/* Professional Clinic Showcase */}
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+            transition={{ duration: 1.2, delay: 1.2 }}
+            className="mb-16 px-2 sm:px-0"
+          >
+            <div className="text-center mb-8">
+              <motion.h3
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.8, delay: 1.4 }}
+                className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3"
+              >
+                State-of-the-Art Facilities
+              </motion.h3>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.8, delay: 1.5 }}
+                className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto"
+              >
+                Experience healing in our modern, professionally equipped clinic designed for optimal patient care
+              </motion.p>
+            </div>
+
+            <div className="relative max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 30 }}
+                animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 30 }}
+                transition={{ duration: 1, delay: 1.6 }}
+                className="relative group cursor-pointer"
+              >
+                <div className="relative h-64 sm:h-80 md:h-96 lg:h-[450px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl transform group-hover:scale-[1.02] transition-all duration-700 ease-out">
+                  {/* Gradient overlay for professional aesthetic */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 via-transparent to-blue-600/10 z-10 group-hover:from-blue-900/20 transition-all duration-500" />
+                  
+                  <OptimizedImage
+                    src="/assets/grok_image_xc22l0n.jpg"
+                    alt="Modern physical therapy clinic interior featuring state-of-the-art blue equipment and professional treatment areas"
+                    width={1200}
+                    height={800}
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out"
+                    sizes="(max-width: 480px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 1200px"
+                    quality={90}
+                    aspectRatio="3/2"
+                  />
+                  
+                  {/* Professional badge overlay */}
+                  <div className="absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                    <div className="flex items-center">
+                      <Award className="w-5 h-5 text-blue-600 mr-2" />
+                      <span className="font-bold text-gray-900 text-sm">Licensed & Certified</span>
+                    </div>
+                  </div>
+
+                  {/* Equipment highlight badge */}
+                  <div className="absolute bottom-4 left-4 z-20 bg-gradient-to-r from-blue-600 to-teal-600 rounded-lg px-4 py-2 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                    <div className="flex items-center">
+                      <CheckCircle className="w-5 h-5 text-white mr-2" />
+                      <span className="font-semibold text-white text-sm">Advanced Equipment</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating credential indicators */}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                  transition={{ duration: 0.8, delay: 2.0 }}
+                  className="absolute -bottom-6 -left-4 sm:-bottom-8 sm:-left-6 bg-gradient-to-br from-white via-green-50 to-blue-50 p-4 sm:p-5 rounded-xl sm:rounded-2xl shadow-2xl border border-green-200/50 max-w-[250px] sm:max-w-xs backdrop-blur-sm"
+                >
+                  <div className="flex items-center mb-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mr-3">
+                      <CheckCircle className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-gray-900">FDA Approved</p>
+                      <p className="text-xs text-gray-600">Equipment & Methods</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-700">
+                    All treatment modalities meet the highest safety and efficacy standards
+                  </p>
+                </motion.div>
+
+                {/* Floating technology highlight */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+                  transition={{ duration: 0.8, delay: 2.2 }}
+                  className="absolute -bottom-6 -right-4 sm:-bottom-8 sm:-right-6 bg-gradient-to-br from-white via-blue-50 to-teal-50 p-4 sm:p-5 rounded-xl sm:rounded-2xl shadow-2xl border border-blue-200/50 max-w-[250px] sm:max-w-xs backdrop-blur-sm"
+                >
+                  <div className="flex items-center mb-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center mr-3">
+                      <TrendingUp className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-gray-900">Latest Technology</p>
+                      <p className="text-xs text-gray-600">2024 Equipment</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-700">
+                    Cutting-edge rehabilitation technology for faster recovery
+                  </p>
+                </motion.div>
+              </motion.div>
+            </div>
+          </motion.div>
+
           {/* Hero Visual Section */}
           <div className="flex justify-center">
             {/* Hero Image - Enhanced with Overlay */}
