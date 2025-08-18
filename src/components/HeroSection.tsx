@@ -1,9 +1,8 @@
 'use client';
 
-import { CheckCircle, Star, TrendingUp, Users, Award, Phone, ArrowRight, Calendar, Shield, Zap, Stethoscope } from 'lucide-react';
-import { PrimaryContactCTA } from '@/components/ProfessionalContactCTA';
+import { CheckCircle, TrendingUp, Users, Award, Shield, Zap, Stethoscope, Calendar, Phone, Star } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
-import AnimatedGradient from '@/components/AnimatedGradient';
+import { PrimaryContactCTA } from '@/components/ProfessionalContactCTA';
 import BentoCard from '@/components/BentoCard';
 import { GeometricBackground } from '@/components/ui/shape-landing-hero';
 import { StarBorder } from '@/components/ui/star-border';
@@ -11,13 +10,6 @@ import { memo, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
-// Pre-generate optimized image URLs for better LCP
-const HERO_IMAGE_URLS = {
-  avif: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=85&fm=avif',
-  webp: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=85&fm=webp',
-  fallback: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=85',
-  blur: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
-};
 
 function HeroSection() {
   const [isVisible, setIsVisible] = useState(true);
@@ -418,45 +410,6 @@ function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Hero Visual Section */}
-          <div className="flex justify-center">
-            {/* Hero Image - Enhanced with Overlay */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
-              animate={isInView ? { opacity: 1, scale: 1, rotateY: 0 } : { opacity: 0, scale: 0.9, rotateY: -15 }}
-              transition={{ duration: 1, delay: 0.8 }}
-              className="relative mt-6 contain-paint max-w-2xl w-full"
-            >
-              <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-500 mx-2 sm:mx-0">
-                {/* Gradient overlay for better text contrast */}
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 via-transparent to-green-900/20 z-10" />
-              <OptimizedImage
-                src={HERO_IMAGE_URLS.fallback}
-                avifSrc={HERO_IMAGE_URLS.avif}
-                webpSrc={HERO_IMAGE_URLS.webp}
-                alt="Professional physical therapist helping patient with back rehabilitation exercises in a modern clinic setting"
-                width={1000}
-                height={600}
-                className="object-cover w-full h-full"
-                priority
-                sizes="(max-width: 480px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 70vw, (max-width: 1200px) 50vw, 600px"
-                quality={85}
-                placeholder="blur"
-                blurDataURL={HERO_IMAGE_URLS.blur}
-                aspectRatio="5/3"
-              />
-                
-                {/* Success badge overlay */}
-                <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-                  <div className="flex items-center">
-                    <Star className="w-5 h-5 text-yellow-500 mr-2" />
-                    <span className="font-bold text-gray-900">4.9/5 Rating</span>
-                  </div>
-                </div>
-              </div>
-              
-            </motion.div>
-          </div>
         </div>
       </section>
     </GeometricBackground>

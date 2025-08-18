@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { AlertCircle, Zap, Activity, Users, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
-import Image from 'next/image';
+import { AlertCircle, Zap, Activity, Users, ChevronDown, ChevronUp } from 'lucide-react';
 
 const conditions = [
   {
@@ -155,54 +154,6 @@ export default function ConditionsTreated() {
           })}
         </div>
 
-        {/* Visual Treatment Success */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-12">
-          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 items-center">
-            <div>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
-                Don't See Your Condition Listed?
-              </h3>
-              <p className="text-base sm:text-lg text-gray-700 mb-4 sm:mb-6">
-                We treat many more conditions beyond what's listed here. Our comprehensive evaluation process allows us to create personalized treatment plans for virtually any musculoskeletal condition.
-              </p>
-              
-              <div className="space-y-2 sm:space-y-3 mb-6">
-                <div className="flex items-start">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3 mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-700 text-sm sm:text-base">Comprehensive diagnostic evaluation</span>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3 mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-700 text-sm sm:text-base">Personalized treatment protocols</span>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3 mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-700 text-sm sm:text-base">Evidence-based treatment approaches</span>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3 mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-700 text-sm sm:text-base">Ongoing progress monitoring</span>
-                </div>
-              </div>
-              
-              <button className="btn-primary w-full sm:w-auto flex items-center justify-center group min-h-[48px]">
-                <span className="text-sm sm:text-base">Schedule Assessment Appointment</span>
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-              </button>
-            </div>
-            
-            <div className="relative h-64 sm:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-lg order-first lg:order-last">
-              <Image
-                src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                alt="Physical therapist conducting comprehensive patient assessment and treatment planning"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
