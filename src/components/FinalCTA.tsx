@@ -30,38 +30,15 @@ export default function FinalCTA({ onScheduleClick, onPhoneClick }: FinalCTAProp
       <div className="container-max">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-            Don't Let Pain Control Your Life Another Day
+            Take Action Today - Your Pain-Free Life Awaits
           </h2>
           <p className="text-xl sm:text-2xl mb-4 opacity-90 max-w-3xl mx-auto">
-            Join over 100,000 San Diego residents who chose SpineZone and got their life back. 
-            90% success rate with non-invasive joint pain treatment.
+            Ready to experience San Diego's premier non-invasive joint pain treatment? 
+            Our expert team is here to help you reclaim your active lifestyle.
           </p>
           <p className="text-lg opacity-80 max-w-2xl mx-auto mb-8">
-            ⏰ <strong>LIMITED TIME:</strong> Only 12 new patient slots remaining this month. Book now before they're gone.
+            ⏰ <strong>URGENT:</strong> Only 12 new patient slots remaining this month. Don't wait - schedule your consultation now.
           </p>
-
-          {/* Trust Indicators */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <div className="flex justify-center mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" aria-hidden="true" />
-                ))}
-              </div>
-              <div className="text-2xl font-bold mb-1">500+</div>
-              <div className="text-white/90 text-sm">5-Star Reviews</div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <CheckCircle className="w-8 h-8 mx-auto text-green-400 mb-3" aria-hidden="true" />
-              <div className="text-2xl font-bold mb-1">90%</div>
-              <div className="text-white/90 text-sm">Success Rate</div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <Clock className="w-8 h-8 mx-auto text-blue-300 mb-3" aria-hidden="true" />
-              <div className="text-2xl font-bold mb-1">1M+</div>
-              <div className="text-white/90 text-sm">Patient Encounters</div>
-            </div>
-          </div>
         </div>
 
         {/* Main CTA Buttons */}
@@ -146,9 +123,8 @@ export default function FinalCTA({ onScheduleClick, onPhoneClick }: FinalCTAProp
           {/* Additional Information */}
           <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
             <p className="text-white/90 mb-4 text-lg">
-              <strong>Why Choose SpineZone for Joint Pain Treatment in San Diego 2025?</strong> We're San Diego's #1 rated 
-              physical therapy clinic with 8 convenient locations, 1M+ patient encounters, and a proven 90% success rate 
-              using advanced non-invasive methods for spine, hip, knee, shoulder, and neck pain.
+              <strong>Ready to Start Your Healing Journey?</strong> Experience San Diego's most trusted physical therapy clinic 
+              with 8 convenient locations throughout San Diego County. Advanced non-invasive treatment for spine, hip, knee, shoulder, and neck pain.
             </p>
             <p className="text-white/80 text-sm">
               ✅ Most insurance plans accepted • ✅ No referral needed • ✅ Same-day appointments • ✅ Easy appointment booking
