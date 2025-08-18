@@ -1,6 +1,6 @@
 'use client';
 
-import { CheckCircle, Star, TrendingUp, Users, Award, Phone, ArrowRight, Calendar } from 'lucide-react';
+import { CheckCircle, Star, TrendingUp, Users, Award, Phone, ArrowRight, Calendar, Shield, Zap, Stethoscope } from 'lucide-react';
 import { PrimaryContactCTA } from '@/components/ProfessionalContactCTA';
 import OptimizedImage from '@/components/OptimizedImage';
 import AnimatedGradient from '@/components/AnimatedGradient';
@@ -284,7 +284,7 @@ function HeroSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 via-transparent to-blue-600/10 z-10 group-hover:from-blue-900/20 transition-all duration-500" />
                   
                   <OptimizedImage
-                    src="/assets/grok_image_xc22l0n.jpg"
+                    src="/clinic-interior.jpg"
                     alt="Modern physical therapy clinic interior featuring state-of-the-art blue equipment and professional treatment areas"
                     width={1200}
                     height={800}
@@ -311,49 +311,111 @@ function HeroSection() {
                   </div>
                 </div>
 
-                {/* Floating credential indicators */}
+              </motion.div>
+            </div>
+
+            {/* Clinic Features Cards - Clean Grid Layout */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+              transition={{ duration: 0.8, delay: 2.0 }}
+              className="mt-12 sm:mt-16"
+            >
+              <div className="text-center mb-8">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+                  Why Choose SpineZone
+                </h3>
+                <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+                  Certified excellence in advanced rehabilitation technology
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
+                {/* FDA Approved Equipment */}
                 <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                  transition={{ duration: 0.8, delay: 2.0 }}
-                  className="absolute -bottom-6 -left-4 sm:-bottom-8 sm:-left-6 bg-gradient-to-br from-white via-green-50 to-blue-50 p-4 sm:p-5 rounded-xl sm:rounded-2xl shadow-2xl border border-green-200/50 max-w-[250px] sm:max-w-xs backdrop-blur-sm"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: 2.2 }}
+                  className="bg-gradient-to-br from-blue-50 via-blue-50 to-teal-50 border border-blue-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="flex items-center mb-3">
-                    <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mr-3">
-                      <CheckCircle className="w-6 h-6 text-white" />
+                  <div className="flex items-center mb-4">
+                    <div className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg mr-4 flex-shrink-0">
+                      <Shield className="w-6 h-6 text-white" aria-hidden="true" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-gray-900">FDA Approved</p>
-                      <p className="text-xs text-gray-600">Equipment & Methods</p>
+                      <h4 className="text-lg sm:text-xl font-bold text-gray-900">FDA Approved Equipment</h4>
+                      <p className="text-sm text-blue-600 font-medium">Certified & Compliant</p>
                     </div>
                   </div>
-                  <p className="text-xs text-gray-700">
-                    All treatment modalities meet the highest safety and efficacy standards
+                  <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                    All treatment modalities meet the highest federal safety and efficacy standards for patient care
                   </p>
                 </motion.div>
 
-                {/* Floating technology highlight */}
+                {/* Latest Technology */}
                 <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-                  transition={{ duration: 0.8, delay: 2.2 }}
-                  className="absolute -bottom-6 -right-4 sm:-bottom-8 sm:-right-6 bg-gradient-to-br from-white via-blue-50 to-teal-50 p-4 sm:p-5 rounded-xl sm:rounded-2xl shadow-2xl border border-blue-200/50 max-w-[250px] sm:max-w-xs backdrop-blur-sm"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: 2.4 }}
+                  className="bg-gradient-to-br from-teal-50 via-teal-50 to-green-50 border border-teal-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="flex items-center mb-3">
-                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center mr-3">
-                      <TrendingUp className="w-6 h-6 text-white" />
+                  <div className="flex items-center mb-4">
+                    <div className="p-3 bg-gradient-to-r from-teal-500 to-teal-600 rounded-lg mr-4 flex-shrink-0">
+                      <Zap className="w-6 h-6 text-white" aria-hidden="true" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-gray-900">Latest Technology</p>
-                      <p className="text-xs text-gray-600">2024 Equipment</p>
+                      <h4 className="text-lg sm:text-xl font-bold text-gray-900">Latest Technology</h4>
+                      <p className="text-sm text-teal-600 font-medium">2024 Equipment</p>
                     </div>
                   </div>
-                  <p className="text-xs text-gray-700">
-                    Cutting-edge rehabilitation technology for faster recovery
+                  <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                    Cutting-edge rehabilitation technology for faster, more effective recovery outcomes
                   </p>
                 </motion.div>
-              </motion.div>
-            </div>
+
+                {/* Licensed & Certified */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: 2.6 }}
+                  className="bg-gradient-to-br from-green-50 via-green-50 to-blue-50 border border-green-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="flex items-center mb-4">
+                    <div className="p-3 bg-gradient-to-r from-green-500 to-green-600 rounded-lg mr-4 flex-shrink-0">
+                      <Award className="w-6 h-6 text-white" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg sm:text-xl font-bold text-gray-900">Licensed & Certified</h4>
+                      <p className="text-sm text-green-600 font-medium">Professional Standards</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                    Board-certified therapists with specialized training in advanced treatment methods
+                  </p>
+                </motion.div>
+
+                {/* Advanced Treatment Methods */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: 2.8 }}
+                  className="bg-gradient-to-br from-purple-50 via-purple-50 to-blue-50 border border-purple-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="flex items-center mb-4">
+                    <div className="p-3 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg mr-4 flex-shrink-0">
+                      <Stethoscope className="w-6 h-6 text-white" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg sm:text-xl font-bold text-gray-900">Advanced Treatment Methods</h4>
+                      <p className="text-sm text-purple-600 font-medium">Evidence-Based</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                    Innovative non-invasive therapies proven to deliver superior patient outcomes
+                  </p>
+                </motion.div>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Hero Visual Section */}
