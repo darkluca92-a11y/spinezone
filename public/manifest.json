@@ -28,16 +28,16 @@
   ],
   "icons": [
     {
-      "src": "/spinezone-logo.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/spinezone-logo.png",
+      "src": "/spinezone-logo-correct.png",
       "sizes": "64x64",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "/spinezone-logo-correct.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/icons/icon-72x72.png",

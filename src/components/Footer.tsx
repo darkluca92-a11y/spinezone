@@ -12,8 +12,8 @@ export default function Footer() {
             <div>
               <div className="flex items-center mb-4">
                 <Image
-                  src="/spinezone-logo.svg"
-                  alt="SpineZone Logo"
+                  src="/spinezone-logo-correct.png"
+                  alt="SpineZone Logo - Professional Physical Therapy Clinic"
                   width={32}
                   height={32}
                   className="w-8 h-8 mr-3"

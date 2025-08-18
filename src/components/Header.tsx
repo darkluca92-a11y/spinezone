@@ -22,8 +22,8 @@ export default function Header() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">
               <Image
-                src="/spinezone-logo.svg"
-                alt="SpineZone Logo"
+                src="/spinezone-logo-correct.png"
+                alt="SpineZone Logo - Professional Physical Therapy Clinic"
                 width={40}
                 height={40}
                 className="w-8 h-8 sm:w-10 sm:h-10"

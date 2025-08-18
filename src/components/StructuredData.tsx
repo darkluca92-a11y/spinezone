@@ -14,7 +14,7 @@ export default function StructuredData({ type }: StructuredDataProps) {
     "name": "SpineZone Physical Therapy",
     "alternateName": "SpineZone PT San Diego",
     "url": "https://spinezone-sandiego.com",
-    "logo": "https://spinezone-sandiego.com/logo.png",
+    "logo": "https://spinezone-sandiego.com/spinezone-logo-correct.png",
     "image": [
       "https://spinezone-sandiego.com/images/clinic-exterior.jpg",
       "https://spinezone-sandiego.com/images/treatment-room.jpg",
