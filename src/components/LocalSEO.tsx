@@ -163,20 +163,6 @@ export default function LocalSEO({
                 ))}
               </div>
               
-              {/* Near Me Search Terms */}
-              <div className="mt-8">
-                <h4 className="font-semibold text-lg mb-4">Find Us With:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {nearMeTerms.map((term, index) => (
-                    <span 
-                      key={index}
-                      className="text-sm bg-white/20 px-3 py-1 rounded-full"
-                    >
-                      "{term}"
-                    </span>
-                  ))}
-                </div>
-              </div>
             </div>
           )}
 

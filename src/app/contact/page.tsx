@@ -5,6 +5,7 @@ import { useState, useTransition, useCallback, useMemo, memo } from 'react';
 import Head from 'next/head';
 import PerformanceOptimizer from '@/components/PerformanceOptimizer';
 import InteractiveMap from '@/components/InteractiveMap';
+import { nearMeTerms } from '@/components/LocalSEO';
 // Removed complex booking components - using simple contact forms only
 
 const insuranceProviders = [
@@ -718,6 +719,54 @@ export default function ContactPage() {
                   ))}
                 </div>
                 <div className="text-gray-700">Patient Rating</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Find Us With Section */}
+      <section className="bg-gradient-to-br from-blue-50 to-green-50 section-padding">
+        <div className="container-max">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Find Us With These Search Terms
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Patients often find SpineZone Physical Therapy using these common search terms across San Diego
+            </p>
+          </div>
+          
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Find Us With:</h3>
+            <div className="flex flex-wrap gap-3 justify-center">
+              {nearMeTerms.map((term, index) => (
+                <span 
+                  key={index}
+                  className="text-sm bg-gradient-to-r from-blue-100 to-green-100 text-gray-700 px-4 py-2 rounded-full border border-blue-200 hover:shadow-sm transition-shadow"
+                >
+                  "{term}"
+                </span>
+              ))}
+            </div>
+            
+            <div className="mt-8 text-center">
+              <p className="text-gray-600 mb-4">
+                These search terms help patients throughout San Diego County find our comprehensive physical therapy services.
+              </p>
+              <div className="grid sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <h4 className="font-semibold text-blue-900 mb-2">Local SEO Coverage</h4>
+                  <p className="text-sm text-blue-700">Optimized for San Diego area searches</p>
+                </div>
+                <div className="bg-green-50 p-4 rounded-lg">
+                  <h4 className="font-semibold text-green-900 mb-2">Appointment Focus</h4>
+                  <p className="text-sm text-green-700">Easy booking and scheduling terms</p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h4 className="font-semibold text-gray-900 mb-2">Condition Specific</h4>
+                  <p className="text-sm text-gray-700">Targeted treatment searches</p>
+                </div>
               </div>
             </div>
           </div>
