@@ -23,6 +23,11 @@
   /* Core Web Vitals optimized values */
   --loading-skeleton-speed: 1.5s;
   --intersection-threshold: 0.1;
+  
+  /* Vapi Widget Styling Variables */
+  --vapi-primary-color: #0369a1;
+  --vapi-hover-color: #1e40af;
+  --vapi-shadow: 0 10px 25px -5px rgba(3, 105, 161, 0.3);
 }
 
 @layer base {
@@ -240,6 +245,55 @@
   /* Optimize scrolling performance */
   .scroll-smooth {
     scroll-behavior: smooth;
+  }
+  
+  /* Vapi AI Widget Custom Styling */
+  vapi-widget {
+    /* Ensure proper positioning and z-index */
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 1000 !important;
+    
+    /* Add SpineZone healthcare branding */
+    --vapi-color-primary: var(--vapi-primary-color);
+    --vapi-color-primary-hover: var(--vapi-hover-color);
+    
+    /* Enhanced shadow for healthcare professionalism */
+    filter: drop-shadow(var(--vapi-shadow));
+    
+    /* Smooth transitions */
+    transition: all var(--transition-duration) var(--transition-timing);
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      bottom: 80px !important; /* Account for mobile browser UI */
+      right: 16px !important;
+      transform: scale(0.9); /* Slightly smaller on mobile */
+    }
+    
+    /* Ensure it doesn't interfere with other floating elements */
+    &:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 15px 35px -5px rgba(3, 105, 161, 0.4));
+    }
+  }
+  
+  /* Ensure Vapi widget has proper accessibility */
+  vapi-widget[aria-label] {
+    speak: none;
+  }
+  
+  /* Healthcare-specific styling for voice widget */
+  vapi-widget::part(button) {
+    background: linear-gradient(135deg, var(--vapi-primary-color), var(--primary-green)) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+  }
+  
+  vapi-widget::part(button):hover {
+    background: linear-gradient(135deg, var(--vapi-hover-color), var(--dark-green)) !important;
+    transform: scale(1.1) !important;
   }
   
   .scroll-optimized {
