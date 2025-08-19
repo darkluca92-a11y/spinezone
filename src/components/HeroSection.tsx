@@ -60,20 +60,17 @@ function HeroSection() {
             </div>
 
             <div className="grid gap-4">
-              {/* Phone Contact */}
-              <a
-                href="tel:+1-858-555-0123"
-                className="flex items-center p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg hover:from-blue-100 hover:to-blue-200 transition-all duration-200 group"
-              >
+              {/* Voice Call Contact */}
+              <div className="flex items-center p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg hover:from-blue-100 hover:to-blue-200 transition-all duration-200 group">
                 <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center mr-4 group-hover:scale-105 transition-transform shadow-lg">
                   <Phone className="w-6 h-6 text-white" />
                 </div>
-                <div>
+                <div className="flex-1">
                   <h4 className="font-semibold text-gray-900">Call Now</h4>
                   <p className="text-blue-600 font-medium">(858) 555-0123</p>
                   <p className="text-sm text-gray-600">Immediate scheduling & urgent care</p>
                 </div>
-              </a>
+              </div>
 
               {/* Trust Indicators */}
               <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-200">

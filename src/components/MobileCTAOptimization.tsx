@@ -15,19 +15,7 @@ import {
   Shield
 } from 'lucide-react';
 import { useCTAIntegration, IntegratedAppointmentCTA } from './CTAIntegrationSystem';
-
-// Helper function to trigger Vapi AI call (disguised as regular call)
-function triggerVapiCall() {
-  // Look for Vapi widget and trigger it
-  const vapiWidget = document.querySelector('vapi-widget');
-  if (vapiWidget) {
-    // Trigger the Vapi widget programmatically
-    const button = vapiWidget.shadowRoot?.querySelector('button') || vapiWidget.querySelector('button');
-    if (button) {
-      (button as HTMLElement).click();
-    }
-  }
-}
+import { triggerVapiVoiceCall, MobileVoiceCallButton } from './VapiVoiceIntegration';
 
 // Mobile-optimized floating CTA types
 type FloatingCTAVariant = 'standard' | 'sticky-header' | 'bottom-bar' | 'fab' | 'slide-up' | 'pulse';
@@ -203,17 +191,17 @@ export function MobileStickyHeaderCTA({
                 <span>Book</span>
               </IntegratedAppointmentCTA>
               
-              <button
+              <MobileVoiceCallButton
                 onClick={() => {
                   trackCTAClick({ action: 'mobile_header_vapi_call', source: 'expanded' });
-                  triggerVapiCall();
                 }}
                 className="bg-green-600 hover:bg-green-700 text-white text-xs py-2 px-2 rounded-lg font-medium transition-colors flex flex-col items-center justify-center"
-                title="Call Now - Free Consultation"
+                size="small"
+                variant="default"
               >
                 <Phone className="w-4 h-4 mb-1" />
                 <span>Call</span>
-              </button>
+              </MobileVoiceCallButton>
               
               <IntegratedAppointmentCTA
                 variant="urgent"
@@ -276,17 +264,17 @@ export function MobileBottomBarCTA({
             Book Now
           </IntegratedAppointmentCTA>
           
-          <button
+          <MobileVoiceCallButton
             onClick={() => {
               trackCTAClick({ action: 'mobile_bottom_vapi_call' });
-              triggerVapiCall();
             }}
             className="bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center text-sm"
-            title="Call Now - Free Consultation"
+            size="default"
+            variant="default"
           >
             <Phone className="w-4 h-4 mr-2" />
             Call
-          </button>
+          </MobileVoiceCallButton>
           
           <IntegratedAppointmentCTA
             variant="secondary"
@@ -451,17 +439,17 @@ export function MobileSlideUpPanel({
           </IntegratedAppointmentCTA>
 
           <div className="grid grid-cols-2 gap-3">
-            <button
+            <MobileVoiceCallButton
               onClick={() => {
                 trackCTAClick({ action: 'slide_up_vapi_call' });
-                triggerVapiCall();
               }}
               className="bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center text-sm"
-              title="Call Now - Free Consultation"
+              size="default"
+              variant="default"
             >
               <Phone className="w-4 h-4 mr-2" />
               Call Now
-            </button>
+            </MobileVoiceCallButton>
             
             <IntegratedAppointmentCTA
               variant="outline"
@@ -571,7 +559,7 @@ export function MobileQuickActionsToolbar({
       label: 'Call',
       action: () => {
         trackCTAClick({ action: 'toolbar_vapi_call' });
-        triggerVapiCall();
+        triggerVapiVoiceCall();
       },
       color: 'bg-green-500 hover:bg-green-600'
     },

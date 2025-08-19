@@ -3,8 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import '../styles/navigation.css'
 import Header from '@/components/Header'
-import ChatBot from '@/components/ChatBot'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { DesktopVoiceCallButton } from '@/components/VapiVoiceIntegration'
 import { generateSEOMetadata, generateLocalBusinessSchema, generateAppointmentBookingSchema } from '@/lib/seo-utils'
 // Removed complex booking integrations - using simple contact system
 
@@ -176,9 +176,9 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//unpkg.com" />
         
-        {/* Vapi AI Widget Script */}
+        {/* Vapi Web SDK for Voice Calls */}
         <script
-          src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js"
+          src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/index.umd.js"
           async
           type="text/javascript"
         />
@@ -194,14 +194,11 @@ export default function RootLayout({
         <ErrorBoundary>
           <Header />
           {children}
-          <ChatBot />
           
-          {/* Vapi AI Voice Assistant Widget (Disguised as Regular Call Button) */}
-          <vapi-widget 
-            assistant-id="c60da784-16bf-4c38-b980-07a49ecbc4af" 
-            public-key="265b6773-dcd2-4c2a-9073-a9203a761db2"
-            aria-label="Call SpineZone - Click to speak with our team"
-          />
+          {/* Desktop Voice Call Button - Hidden on mobile */}
+          <div className="hidden md:block">
+            <DesktopVoiceCallButton />
+          </div>
           
           {/* Simple, professional healthcare layout */}
         </ErrorBoundary>

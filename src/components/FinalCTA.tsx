@@ -1,6 +1,7 @@
 'use client';
 
 import { Calendar, Phone, CheckCircle, Star, Clock, ArrowRight } from 'lucide-react';
+import { triggerVapiVoiceCall, MobileVoiceCallButton } from './VapiVoiceIntegration';
 
 interface FinalCTAProps {
   onScheduleClick?: () => void;
@@ -17,11 +18,15 @@ export default function FinalCTA({ onScheduleClick, onPhoneClick }: FinalCTAProp
     }
   };
 
-  const handlePhoneClick = () => {
+  const handlePhoneClick = async () => {
     if (onPhoneClick) {
       onPhoneClick();
     } else {
-      window.location.href = 'tel:+1-858-555-0123';
+      // Try voice call first, fallback to phone
+      const voiceCallStarted = await triggerVapiVoiceCall();
+      if (!voiceCallStarted) {
+        window.location.href = 'tel:+1-858-555-0123';
+      }
     }
   };
 
@@ -108,13 +113,15 @@ export default function FinalCTA({ onScheduleClick, onPhoneClick }: FinalCTAProp
                     <span className="text-gray-700">Immediate symptom assessment</span>
                   </li>
                 </ul>
-                <button
+                <MobileVoiceCallButton
                   onClick={handlePhoneClick}
                   className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 font-bold py-4 px-8 rounded-xl text-lg transition-all duration-200 flex items-center justify-center min-h-[56px] shadow-lg hover:shadow-xl"
+                  fullWidth
+                  size="large"
                 >
                   <Phone className="w-5 h-5 mr-3" aria-hidden="true" />
                   (858) 555-0123
-                </button>
+                </MobileVoiceCallButton>
                 <p className="text-xs text-gray-500 mt-3">Mon-Fri: 8AM-6PM | Weekends: Emergency Only</p>
               </div>
             </div>
