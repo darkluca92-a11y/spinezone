@@ -252,7 +252,7 @@
     /* Ensure proper positioning and z-index */
     position: fixed !important;
     bottom: 20px !important;
-    right: 20px !important;
+    left: 20px !important;
     z-index: 1000 !important;
     
     /* Add SpineZone healthcare branding */
@@ -267,8 +267,8 @@
     
     /* Mobile responsiveness */
     @media (max-width: 768px) {
-      bottom: 80px !important; /* Account for mobile browser UI */
-      right: 16px !important;
+      bottom: 100px !important; /* Account for mobile browser UI and other floating elements */
+      left: 16px !important;
       transform: scale(0.9); /* Slightly smaller on mobile */
     }
     
