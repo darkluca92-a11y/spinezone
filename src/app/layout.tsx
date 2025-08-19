@@ -196,11 +196,11 @@ export default function RootLayout({
           {children}
           <ChatBot />
           
-          {/* Vapi AI Voice Assistant Widget */}
+          {/* Vapi AI Voice Assistant Widget (Disguised as Regular Call Button) */}
           <vapi-widget 
             assistant-id="c60da784-16bf-4c38-b980-07a49ecbc4af" 
             public-key="265b6773-dcd2-4c2a-9073-a9203a761db2"
-            aria-label="SpineZone AI Voice Assistant - Click to start voice consultation"
+            aria-label="Call SpineZone - Click to speak with our team"
           />
           
           {/* Simple, professional healthcare layout */}

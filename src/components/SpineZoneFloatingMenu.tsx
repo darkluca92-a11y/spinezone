@@ -4,6 +4,19 @@ import FloatingActionMenu from "@/components/ui/floating-action-menu";
 import { Calendar, Phone, MessageCircle, FileText, HeartHandshake } from "lucide-react";
 import { useRouter } from "next/navigation";
 
+// Helper function to trigger Vapi AI call (disguised as regular call)
+function triggerVapiCall() {
+  // Look for Vapi widget and trigger it
+  const vapiWidget = document.querySelector('vapi-widget');
+  if (vapiWidget) {
+    // Trigger the Vapi widget programmatically
+    const button = vapiWidget.shadowRoot?.querySelector('button') || vapiWidget.querySelector('button');
+    if (button) {
+      (button as HTMLElement).click();
+    }
+  }
+}
+
 export function SpineZoneFloatingMenu() {
   const router = useRouter();
 
@@ -16,7 +29,7 @@ export function SpineZoneFloatingMenu() {
     {
       label: "Call Now",
       Icon: <Phone className="w-4 h-4" />,
-      onClick: () => window.open("tel:+1-858-555-0123"),
+      onClick: () => triggerVapiCall(),
     },
     {
       label: "Patient Portal", 
@@ -62,7 +75,7 @@ export function SpineZoneFloatingMenuCompact() {
     {
       label: "Call Now",
       Icon: <Phone className="w-4 h-4" />,
-      onClick: () => window.open("tel:+1-858-555-0123"),
+      onClick: () => triggerVapiCall(),
     },
     {
       label: "Patient Portal", 

@@ -3,6 +3,19 @@
 import { Phone, Mail, MapPin, Clock, Calendar, Star, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
 
+// Helper function to trigger Vapi AI call (disguised as regular call)
+function triggerVapiCall() {
+  // Look for Vapi widget and trigger it
+  const vapiWidget = document.querySelector('vapi-widget');
+  if (vapiWidget) {
+    // Trigger the Vapi widget programmatically
+    const button = vapiWidget.shadowRoot?.querySelector('button') || vapiWidget.querySelector('button');
+    if (button) {
+      (button as HTMLElement).click();
+    }
+  }
+}
+
 interface ProfessionalContactCTAProps {
   variant?: 'primary' | 'secondary' | 'phone' | 'urgent' | 'outline' | 'small';
   size?: 'small' | 'medium' | 'large';
@@ -89,12 +102,12 @@ export function ProfessionalContactCTA({
 
   const handleClick = () => {
     if (variant === 'phone' || variant === 'urgent') {
-      window.location.href = 'tel:+1-858-555-0123';
+      triggerVapiCall();
     } else if (showContactInfo) {
       setShowDetails(!showDetails);
     } else {
-      // Default to phone call
-      window.location.href = 'tel:+1-858-555-0123';
+      // Default to Vapi call
+      triggerVapiCall();
     }
   };
 
@@ -130,19 +143,19 @@ export function ProfessionalContactCTA({
 
           <div className="grid gap-4">
             {/* Phone Contact */}
-            <a
-              href="tel:+1-858-555-0123"
-              className="flex items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors group"
+            <button
+              onClick={triggerVapiCall}
+              className="w-full flex items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors group"
             >
               <div className="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-105 transition-transform">
                 <Phone className="w-6 h-6 text-white" />
               </div>
-              <div>
+              <div className="text-left">
                 <h4 className="font-semibold text-gray-900">Call Now</h4>
                 <p className="text-blue-600 font-medium">(858) 555-0123</p>
                 <p className="text-sm text-gray-600">Immediate scheduling & urgent care</p>
               </div>
-            </a>
+            </button>
 
             {/* Email Contact */}
             <a

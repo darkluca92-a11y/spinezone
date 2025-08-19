@@ -249,15 +249,15 @@
   
   /* Vapi AI Widget Custom Styling */
   vapi-widget {
-    /* Ensure proper positioning and z-index */
+    /* Ensure proper positioning and z-index - moved to bottom-right to avoid conflicts */
     position: fixed !important;
     bottom: 20px !important;
-    left: 20px !important;
+    right: 20px !important;
     z-index: 1000 !important;
     
     /* Add SpineZone healthcare branding */
-    --vapi-color-primary: var(--vapi-primary-color);
-    --vapi-color-primary-hover: var(--vapi-hover-color);
+    --vapi-color-primary: var(--primary-green);
+    --vapi-color-primary-hover: var(--dark-green);
     
     /* Enhanced shadow for healthcare professionalism */
     filter: drop-shadow(var(--vapi-shadow));
@@ -265,17 +265,15 @@
     /* Smooth transitions */
     transition: all var(--transition-duration) var(--transition-timing);
     
-    /* Mobile responsiveness */
+    /* Mobile responsiveness - hidden on mobile as we'll integrate with existing mobile CTAs */
     @media (max-width: 768px) {
-      bottom: 100px !important; /* Account for mobile browser UI and other floating elements */
-      left: 16px !important;
-      transform: scale(0.9); /* Slightly smaller on mobile */
+      display: none !important; /* Hidden on mobile - using integrated mobile CTAs instead */
     }
     
     /* Ensure it doesn't interfere with other floating elements */
     &:hover {
       transform: scale(1.05);
-      filter: drop-shadow(0 15px 35px -5px rgba(3, 105, 161, 0.4));
+      filter: drop-shadow(0 15px 35px -5px rgba(5, 150, 105, 0.4));
     }
   }
   
@@ -284,16 +282,88 @@
     speak: none;
   }
   
-  /* Healthcare-specific styling for voice widget */
+  /* Healthcare-specific styling for voice widget - hide AI branding, look like regular call button */
   vapi-widget::part(button) {
-    background: linear-gradient(135deg, var(--vapi-primary-color), var(--primary-green)) !important;
+    background: linear-gradient(135deg, var(--primary-green), var(--dark-green)) !important;
     border: 2px solid rgba(255, 255, 255, 0.2) !important;
     color: white !important;
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
   }
   
   vapi-widget::part(button):hover {
-    background: linear-gradient(135deg, var(--vapi-hover-color), var(--dark-green)) !important;
-    transform: scale(1.1) !important;
+    background: linear-gradient(135deg, var(--dark-green), #065f46) !important;
+    transform: scale(1.05) !important;
+  }
+  
+  /* Hide AI branding text/icons and make it look like a phone button */
+  vapi-widget::part(button)::before {
+    content: "📞" !important;
+    font-size: 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Hide any AI-related text or icons */
+  vapi-widget::part(button) svg,
+  vapi-widget::part(button) span,
+  vapi-widget::part(button) .vapi-logo,
+  vapi-widget::part(button) .ai-indicator {
+    display: none !important;
+  }
+  
+  /* Custom tooltip for the call button */
+  vapi-widget:hover::after {
+    content: "Call Now - Free Consultation" !important;
+    position: absolute !important;
+    bottom: 70px !important;
+    right: 0 !important;
+    background: #1f2937 !important;
+    color: white !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+    opacity: 1 !important;
+    transition: opacity 0.3s ease !important;
+  }
+  
+  /* Mobile Vapi Integration Enhancements */
+  @media (max-width: 768px) {
+    /* When Vapi is triggered on mobile, ensure it's prominent */
+    vapi-widget[data-mobile-active] {
+      display: block !important;
+      position: fixed !important;
+      bottom: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, 50%) !important;
+      z-index: 9999 !important;
+      background: rgba(0, 0, 0, 0.8) !important;
+      width: 100vw !important;
+      height: 100vh !important;
+    }
+    
+    /* Style the mobile call buttons to match healthcare green theme */
+    .mobile-vapi-button {
+      background: linear-gradient(135deg, var(--primary-green), var(--dark-green)) !important;
+      border: none !important;
+      color: white !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.025em !important;
+      box-shadow: 0 4px 15px -4px rgba(5, 150, 105, 0.3) !important;
+    }
+    
+    .mobile-vapi-button:hover {
+      background: linear-gradient(135deg, var(--dark-green), #065f46) !important;
+      box-shadow: 0 8px 25px -8px rgba(5, 150, 105, 0.4) !important;
+      transform: translateY(-1px) !important;
+    }
+    
+    .mobile-vapi-button:active {
+      transform: translateY(0) scale(0.98) !important;
+    }
   }
   
   .scroll-optimized {
