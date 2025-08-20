@@ -33,6 +33,7 @@ type FormState = 'idle' | 'loading' | 'success' | 'error';
 
 const LOCATIONS = [
   { value: '', label: 'Select Preferred Location' },
+  { value: 'carlsbad', label: 'Carlsbad' },
   { value: 'del-mar', label: 'Del Mar' },
   { value: 'grossmont', label: 'Grossmont' },
   { value: 'mission-valley', label: 'Mission Valley' },
