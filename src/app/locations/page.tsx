@@ -9,25 +9,6 @@ import LocationAppointmentForm from '@/components/LocationAppointmentForm';
 const clinicLocations = [
   {
     id: 1,
-    name: "SpineZone Carlsbad",
-    address: "6005 Hidden Valley Rd Suite 100, Carlsbad, CA 92011",
-    phone: "(760) 517-7165",
-    zipCode: "92011",
-    city: "Carlsbad",
-    hours: {
-      monday: "9:00 AM - 6:00 PM",
-      tuesday: "7:00 AM - 4:00 PM", 
-      wednesday: "9:00 AM - 6:00 PM",
-      thursday: "7:00 AM - 4:00 PM",
-      friday: "7:00 AM - 4:00 PM",
-      saturday: "Closed",
-      sunday: "Closed"
-    },
-    yelp: "https://www.yelp.com/biz/spinezone-oceanside",
-    coordinates: { lat: 33.1280, lng: -117.3197 }
-  },
-  {
-    id: 2,
     name: "SpineZone Del Mar",
     address: "12865 Pointe Del Mar Way Suite 190, Del Mar, CA 92014",
     phone: "(858) 704-2713",
@@ -46,7 +27,7 @@ const clinicLocations = [
     coordinates: { lat: 32.9595, lng: -117.2661 }
   },
   {
-    id: 3,
+    id: 2,
     name: "SpineZone Grossmont",
     address: "8866 Navajo Rd, San Diego, CA 92119",
     phone: "(619) 771-1030",
@@ -65,7 +46,7 @@ const clinicLocations = [
     coordinates: { lat: 32.7738, lng: -117.0431 }
   },
   {
-    id: 4,
+    id: 3,
     name: "SpineZone Lake Forest",
     address: "23161 Lake Center Dr Suite 120, Lake Forest, CA 92630",
     phone: "(949) 676-9226",
@@ -84,7 +65,7 @@ const clinicLocations = [
     coordinates: { lat: 33.6472, lng: -117.6931 }
   },
   {
-    id: 5,
+    id: 4,
     name: "SpineZone Mission Valley",
     address: "7525 Metropolitan Dr Suite 306, San Diego, CA 92108",
     phone: "(619) 693-3973",
@@ -103,7 +84,7 @@ const clinicLocations = [
     coordinates: { lat: 32.7683, lng: -117.1566 }
   },
   {
-    id: 6,
+    id: 5,
     name: "SpineZone Rancho Bernardo", 
     address: "11838 Bernardo Plaza Ct Suite 101, San Diego, CA 92128",
     phone: "(858) 381-3858",
@@ -122,7 +103,7 @@ const clinicLocations = [
     coordinates: { lat: 33.0208, lng: -117.1106 }
   },
   {
-    id: 7,
+    id: 6,
     name: "SpineZone San Marcos",
     address: "405 N Twin Oaks Valley Rd Suite 111, San Marcos, CA 92069",
     phone: "(760) 653-2683",
@@ -141,7 +122,7 @@ const clinicLocations = [
     coordinates: { lat: 33.1434, lng: -117.1661 }
   },
   {
-    id: 8,
+    id: 7,
     name: "SpineZone Santa Ana",
     address: "400 N Tustin Ave Suite 140, Santa Ana, CA 92705",
     phone: "(657) 284-1399",
@@ -228,11 +209,11 @@ export default function LocationsPage() {
   return (
     <>
       <Head>
-        <title>SpineZone Locations - 8 Physical Therapy Clinics Across San Diego & Orange County</title>
-        <meta name="description" content="Find a SpineZone physical therapy clinic near you. 8 convenient locations across San Diego and Orange County with expert spine specialists." />
+        <title>SpineZone Locations - 7 Physical Therapy Clinics Across San Diego & Orange County</title>
+        <meta name="description" content="Find a SpineZone physical therapy clinic near you. 7 convenient locations across San Diego and Orange County with expert spine specialists." />
         <meta name="keywords" content="SpineZone locations, San Diego physical therapy clinics, Orange County PT, spine treatment locations" />
         <meta property="og:title" content="SpineZone Locations - Physical Therapy Clinics" />
-        <meta property="og:description" content="8 convenient SpineZone locations across San Diego and Orange County." />
+        <meta property="og:description" content="7 convenient SpineZone locations across San Diego and Orange County." />
         <link rel="canonical" href="https://spinezone-sandiego.com/locations" />
       </Head>
       
@@ -245,7 +226,7 @@ export default function LocationsPage() {
               <span className="text-blue-600 block">SpineZone Location</span>
             </h1>
             <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
-              8 convenient clinic locations across San Diego and Orange County, each staffed with expert spine specialists ready to help you heal naturally.
+              7 convenient clinic locations across San Diego and Orange County, each staffed with expert spine specialists ready to help you heal naturally.
             </p>
             
             {/* Zip Code Search */}
@@ -267,7 +248,7 @@ export default function LocationsPage() {
             
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
               <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                <div className="text-2xl font-bold text-blue-600 mb-1">8</div>
+                <div className="text-2xl font-bold text-blue-600 mb-1">7</div>
                 <div className="text-sm text-gray-600">Clinic Locations</div>
               </div>
               <div className="text-center p-4 bg-white rounded-lg shadow-sm">

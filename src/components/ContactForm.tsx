@@ -33,14 +33,13 @@ type FormState = 'idle' | 'loading' | 'success' | 'error';
 
 const LOCATIONS = [
   { value: '', label: 'Select Preferred Location' },
-  { value: 'la-jolla', label: 'La Jolla' },
-  { value: 'hillcrest', label: 'Hillcrest' },
-  { value: 'pacific-beach', label: 'Pacific Beach' },
-  { value: 'mission-valley', label: 'Mission Valley' },
-  { value: 'downtown-san-diego', label: 'Downtown San Diego' },
-  { value: 'chula-vista', label: 'Chula Vista' },
   { value: 'del-mar', label: 'Del Mar' },
-  { value: 'carlsbad', label: 'Carlsbad' },
+  { value: 'grossmont', label: 'Grossmont' },
+  { value: 'mission-valley', label: 'Mission Valley' },
+  { value: 'rancho-bernardo', label: 'Rancho Bernardo' },
+  { value: 'san-marcos', label: 'San Marcos' },
+  { value: 'lake-forest', label: 'Lake Forest (OC)' },
+  { value: 'santa-ana', label: 'Santa Ana (OC)' },
   { value: 'any-location', label: 'Any Location' }
 ];
 

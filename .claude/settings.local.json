@@ -17,7 +17,9 @@
       "Bash(node:*)",
       "Bash(rm:*)",
       "Bash(npm run dev:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "WebSearch",
+      "WebFetch(domain:www.spinezone.com)"
     ],
     "deny": [],
     "ask": []
