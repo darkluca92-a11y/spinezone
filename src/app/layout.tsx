@@ -4,6 +4,7 @@ import './globals.css'
 import '../styles/navigation.css'
 import Header from '@/components/Header'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
+import ChatBot from '@/components/ChatBot'
 import { generateSEOMetadata, generateLocalBusinessSchema, generateAppointmentBookingSchema } from '@/lib/seo-utils'
 // Removed complex booking integrations - using simple contact system
 
@@ -188,6 +189,8 @@ export default function RootLayout({
           <Header />
           {children}
           
+          {/* ChatBot positioned at bottom-right */}
+          <ChatBot />
           
           {/* Simple, professional healthcare layout */}
         </ErrorBoundary>
