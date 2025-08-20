@@ -2,7 +2,6 @@
 
 import { Phone, Mail, MapPin, Clock, Calendar, Star, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
-import { triggerVapiVoiceCall, MobileVoiceCallButton } from './VapiVoiceIntegration';
 
 interface ProfessionalContactCTAProps {
   variant?: 'primary' | 'secondary' | 'phone' | 'urgent' | 'outline' | 'small';
@@ -90,12 +89,11 @@ export function ProfessionalContactCTA({
 
   const handleClick = () => {
     if (variant === 'phone' || variant === 'urgent') {
-      triggerVapiVoiceCall();
+      window.location.href = 'tel:+1-858-555-0123';
     } else if (showContactInfo) {
       setShowDetails(!showDetails);
     } else {
-      // Default to Vapi voice call
-      triggerVapiVoiceCall();
+      window.location.href = 'tel:+1-858-555-0123';
     }
   };
 
@@ -131,10 +129,9 @@ export function ProfessionalContactCTA({
 
           <div className="grid gap-4">
             {/* Phone Contact */}
-            <MobileVoiceCallButton
+            <a
+              href="tel:+1-858-555-0123"
               className="w-full flex items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors group"
-              variant="text"
-              fullWidth
             >
               <div className="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-105 transition-transform">
                 <Phone className="w-6 h-6 text-white" />
@@ -144,7 +141,7 @@ export function ProfessionalContactCTA({
                 <p className="text-blue-600 font-medium">(858) 555-0123</p>
                 <p className="text-sm text-gray-600">Immediate scheduling & urgent care</p>
               </div>
-            </MobileVoiceCallButton>
+            </a>
 
             {/* Email Contact */}
             <a

@@ -2,7 +2,6 @@
 
 import { Phone, Mail, MapPin, Clock, Calendar, Star, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
-import { triggerVapiVoiceCall } from './VapiVoiceIntegration';
 
 interface SimpleContactCTAProps {
   variant?: 'primary' | 'secondary' | 'phone' | 'urgent' | 'outline' | 'small';
@@ -90,21 +89,13 @@ export function SimpleContactCTA({
     }
   };
 
-  const handleClick = async () => {
+  const handleClick = () => {
     if (variant === 'phone' || variant === 'urgent') {
-      // Try voice call first, fallback to phone
-      const voiceCallStarted = await triggerVapiVoiceCall();
-      if (!voiceCallStarted) {
-        window.location.href = 'tel:+1-858-555-0123';
-      }
+      window.location.href = 'tel:+1-858-555-0123';
     } else if (showContactInfo) {
       setShowDetails(!showDetails);
     } else {
-      // Default to voice call, fallback to phone
-      const voiceCallStarted = await triggerVapiVoiceCall();
-      if (!voiceCallStarted) {
-        window.location.href = 'tel:+1-858-555-0123';
-      }
+      window.location.href = 'tel:+1-858-555-0123';
     }
   };
 

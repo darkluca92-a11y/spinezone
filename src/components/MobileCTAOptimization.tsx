@@ -15,7 +15,6 @@ import {
   Shield
 } from 'lucide-react';
 import { useCTAIntegration, IntegratedAppointmentCTA } from './CTAIntegrationSystem';
-import { triggerVapiVoiceCall, MobileVoiceCallButton } from './VapiVoiceIntegration';
 
 // Mobile-optimized floating CTA types
 type FloatingCTAVariant = 'standard' | 'sticky-header' | 'bottom-bar' | 'fab' | 'slide-up' | 'pulse';
@@ -191,17 +190,16 @@ export function MobileStickyHeaderCTA({
                 <span>Book</span>
               </IntegratedAppointmentCTA>
               
-              <MobileVoiceCallButton
+              <a
+                href="tel:+1-858-555-0123"
                 onClick={() => {
                   trackCTAClick({ action: 'mobile_header_vapi_call', source: 'expanded' });
                 }}
                 className="bg-green-600 hover:bg-green-700 text-white text-xs py-2 px-2 rounded-lg font-medium transition-colors flex flex-col items-center justify-center"
-                size="small"
-                variant="default"
               >
                 <Phone className="w-4 h-4 mb-1" />
                 <span>Call</span>
-              </MobileVoiceCallButton>
+              </a>
               
               <IntegratedAppointmentCTA
                 variant="urgent"
@@ -264,17 +262,16 @@ export function MobileBottomBarCTA({
             Book Now
           </IntegratedAppointmentCTA>
           
-          <MobileVoiceCallButton
+          <a
+            href="tel:+1-858-555-0123"
             onClick={() => {
               trackCTAClick({ action: 'mobile_bottom_vapi_call' });
             }}
             className="bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center text-sm"
-            size="default"
-            variant="default"
           >
             <Phone className="w-4 h-4 mr-2" />
             Call
-          </MobileVoiceCallButton>
+          </a>
           
           <IntegratedAppointmentCTA
             variant="secondary"
@@ -439,17 +436,16 @@ export function MobileSlideUpPanel({
           </IntegratedAppointmentCTA>
 
           <div className="grid grid-cols-2 gap-3">
-            <MobileVoiceCallButton
+            <a
+              href="tel:+1-858-555-0123"
               onClick={() => {
                 trackCTAClick({ action: 'slide_up_vapi_call' });
               }}
               className="bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center text-sm"
-              size="default"
-              variant="default"
             >
               <Phone className="w-4 h-4 mr-2" />
               Call Now
-            </MobileVoiceCallButton>
+            </a>
             
             <IntegratedAppointmentCTA
               variant="outline"
@@ -559,7 +555,7 @@ export function MobileQuickActionsToolbar({
       label: 'Call',
       action: () => {
         trackCTAClick({ action: 'toolbar_vapi_call' });
-        triggerVapiVoiceCall();
+        window.location.href = 'tel:+1-858-555-0123';
       },
       color: 'bg-green-500 hover:bg-green-600'
     },

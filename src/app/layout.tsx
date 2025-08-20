@@ -4,7 +4,6 @@ import './globals.css'
 import '../styles/navigation.css'
 import Header from '@/components/Header'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
-import { DesktopVoiceCallButton } from '@/components/VapiVoiceIntegration'
 import { generateSEOMetadata, generateLocalBusinessSchema, generateAppointmentBookingSchema } from '@/lib/seo-utils'
 // Removed complex booking integrations - using simple contact system
 
@@ -176,9 +175,9 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//unpkg.com" />
         
-        {/* Vapi Web SDK for Voice Calls */}
+        {/* Vapi AI Widget Script */}
         <script
-          src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/index.umd.js"
+          src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js"
           async
           type="text/javascript"
         />
@@ -195,10 +194,12 @@ export default function RootLayout({
           <Header />
           {children}
           
-          {/* Desktop Voice Call Button - Hidden on mobile */}
-          <div className="hidden md:block">
-            <DesktopVoiceCallButton />
-          </div>
+          {/* Vapi AI Voice Assistant Widget */}
+          <vapi-widget 
+            assistant-id="c60da784-16bf-4c38-b980-07a49ecbc4af" 
+            public-key="265b6773-dcd2-4c2a-9073-a9203a761db2"
+            aria-label="SpineZone Voice Assistant - Click to speak with Riley"
+          />
           
           {/* Simple, professional healthcare layout */}
         </ErrorBoundary>
