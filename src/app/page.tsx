@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
 import HeroSection from '@/components/HeroSection';
 import { FloatingContactCTA, QuickContactCTA } from '@/components/ProfessionalContactCTA';
+import ContactForm from '@/components/ContactForm';
 import StructuredData from '@/components/StructuredData';
 // Removed complex navigation integrations - using simple layout
 import { generateSEOMetadata } from '@/lib/seo-utils';
@@ -138,6 +139,23 @@ export default function Home() {
         showContact={true}
       />
       
+      {/* Contact Form Section */}
+      <section className="section-padding bg-gradient-to-br from-blue-50 via-white to-green-50">
+        <div className="container-max">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Schedule Your <span className="healthcare-text-gradient">Free Consultation</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Take the first step towards pain-free living. Fill out the form below and our team 
+              will contact you within 24 hours to schedule your personalized evaluation.
+            </p>
+          </div>
+          <div className="max-w-2xl mx-auto">
+            <ContactForm />
+          </div>
+        </div>
+      </section>
       
       <FinalCTA />
       <Footer />

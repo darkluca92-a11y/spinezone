@@ -37,7 +37,7 @@ export default function TopRightDropdown({ className }: DropdownProps) {
   const healthcareActions = [
     {
       id: "book-assessment",
-      label: "Book Assessment",
+      label: "Book Evaluation",
       icon: <Calendar className="w-5 h-5" />,
       onClick: () => router.push("/assessment"),
       primary: true,

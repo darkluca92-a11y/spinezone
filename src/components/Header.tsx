@@ -87,7 +87,7 @@ export default function Header() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <Calendar className="w-5 h-5 mr-3" aria-hidden="true" />
-                  Book Assessment
+                  Book Evaluation
                 </Link>
                 <a 
                   href="tel:+1-858-555-0123" 
