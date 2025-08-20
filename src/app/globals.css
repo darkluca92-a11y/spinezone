@@ -296,32 +296,6 @@
     overflow-y: auto;
   }
   
-  /* Vapi AI Widget Styling */
-  vapi-widget {
-    position: fixed !important;
-    bottom: 20px !important;
-    right: 20px !important;
-    z-index: 1000 !important;
-    
-    /* Healthcare green styling */
-    --vapi-color-primary: #059669;
-    --vapi-color-primary-hover: #047857;
-    
-    filter: drop-shadow(0 10px 25px -5px rgba(5, 150, 105, 0.3));
-    transition: all 0.3s ease;
-    
-    /* Mobile positioning */
-    @media (max-width: 768px) {
-      bottom: 20px !important;
-      right: 20px !important;
-      transform: scale(0.9);
-    }
-    
-    &:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0 15px 35px -5px rgba(5, 150, 105, 0.4));
-    }
-  }
   
   /* Optimize font rendering */
   .text-rendering-optimized {

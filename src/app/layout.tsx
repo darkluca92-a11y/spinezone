@@ -175,12 +175,6 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//unpkg.com" />
         
-        {/* Vapi AI Widget Script */}
-        <script
-          src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js"
-          async
-          type="text/javascript"
-        />
         
         {/* Favicon and icons */}
         <link rel="icon" href="/favicon.ico" />
@@ -194,12 +188,6 @@ export default function RootLayout({
           <Header />
           {children}
           
-          {/* Vapi AI Voice Assistant Widget */}
-          <vapi-widget 
-            assistant-id="c60da784-16bf-4c38-b980-07a49ecbc4af" 
-            public-key="265b6773-dcd2-4c2a-9073-a9203a761db2"
-            aria-label="SpineZone Voice Assistant - Click to speak with Riley"
-          />
           
           {/* Simple, professional healthcare layout */}
         </ErrorBoundary>
