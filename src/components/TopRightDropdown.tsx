@@ -16,7 +16,8 @@ import {
   ClipboardList,
   CreditCard,
   ChevronRight,
-  Menu
+  Menu,
+  Bot
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -65,6 +66,15 @@ export default function TopRightDropdown({ className }: DropdownProps) {
       primary: true,
       color: "text-purple-600 hover:text-purple-700",
       bgColor: "hover:bg-purple-50",
+    },
+    {
+      id: "ai-assistant",
+      label: "AI Phone Assistant",
+      icon: <Bot className="w-5 h-5" />,
+      onClick: () => router.push("/ai-assistant"),
+      primary: true,
+      color: "text-orange-600 hover:text-orange-700",
+      bgColor: "hover:bg-orange-50",
     },
     {
       id: "patient-portal",

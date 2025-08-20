@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Menu, X, Phone, Calendar, MessageCircle, FileText } from 'lucide-react';
+import { Menu, X, Phone, Calendar, MessageCircle, FileText, Bot } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { SpineZoneFluidMenu, SpineZoneFluidMenuCompact } from '@/components/ui/spinezone-fluid-menu';
@@ -111,6 +111,14 @@ export default function Header() {
                   <MessageCircle className="w-5 h-5 mr-3" aria-hidden="true" />
                   Chat Support
                 </button>
+                <Link 
+                  href="/ai-assistant" 
+                  className="flex items-center px-3 py-3 text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 min-h-[44px]"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Bot className="w-5 h-5 mr-3" aria-hidden="true" />
+                  AI Phone Assistant
+                </Link>
                 <Link 
                   href="/patient-portal" 
                   className="flex items-center px-3 py-3 text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 min-h-[44px]"
