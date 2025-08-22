@@ -19,7 +19,14 @@
       "Bash(npm run dev:*)",
       "Bash(git commit:*)",
       "WebSearch",
-      "WebFetch(domain:www.spinezone.com)"
+      "WebFetch(domain:www.spinezone.com)",
+      "Bash(set ANALYZE=true)",
+      "Bash(npx webpack-bundle-analyzer:*)",
+      "Bash(find:*)",
+      "Bash(timeout 30 npm run build)",
+      "Bash(timeout 60 npm run build)",
+      "Bash(timeout 45 npm run build)",
+      "Bash(npm run analyze:*)"
     ],
     "deny": [],
     "ask": []

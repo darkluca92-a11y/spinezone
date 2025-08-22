@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, memo, useCallback, useMemo } from 'react';
 import { 
   User, 
   Mail, 
@@ -44,7 +44,7 @@ const LOCATIONS = [
   { value: 'any-location', label: 'Any Location' }
 ];
 
-export default function ContactForm() {
+function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
@@ -57,18 +57,18 @@ export default function ContactForm() {
   const [formState, setFormState] = useState<FormState>('idle');
   const formRef = useRef<HTMLFormElement>(null);
 
-  // Phone number formatting
-  const formatPhoneNumber = (value: string): string => {
+  // Memoized phone number formatting
+  const formatPhoneNumber = useCallback((value: string): string => {
     const cleaned = value.replace(/\D/g, '');
     const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
     if (match) {
       return `(${match[1]}) ${match[2]}-${match[3]}`;
     }
     return value;
-  };
+  }, []);
 
-  // Form validation
-  const validateForm = (): boolean => {
+  // Memoized form validation
+  const validateForm = useCallback((): boolean => {
     const newErrors: FormErrors = {};
 
     // Full name validation
@@ -109,10 +109,10 @@ export default function ContactForm() {
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
+  }, [formData]);
 
-  // Handle input changes
-  const handleInputChange = (field: keyof FormData, value: string) => {
+  // Memoized input change handler
+  const handleInputChange = useCallback((field: keyof FormData, value: string) => {
     let processedValue = value;
     
     if (field === 'phone') {
@@ -131,10 +131,10 @@ export default function ContactForm() {
         [field]: undefined
       }));
     }
-  };
+  }, [formatPhoneNumber, errors]);
 
-  // Handle form submission
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Memoized form submission handler
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -177,7 +177,10 @@ export default function ContactForm() {
         setFormState('idle');
       }, 5000);
     }
-  };
+  }, [validateForm]);
+
+  // Memoized location options to prevent recreation
+  const memoizedLocationOptions = useMemo(() => LOCATIONS, []);
 
   return (
     <div className="healthcare-card max-w-2xl mx-auto p-6 sm:p-8">
@@ -333,7 +336,7 @@ export default function ContactForm() {
               aria-describedby={errors.location ? 'location-error' : undefined}
               disabled={formState === 'loading'}
             >
-              {LOCATIONS.map((loc) => (
+              {memoizedLocationOptions.map((loc) => (
                 <option key={loc.value} value={loc.value}>
                   {loc.label}
                 </option>
@@ -482,3 +485,6 @@ export default function ContactForm() {
     </div>
   );
 }
+
+// Memoized export to prevent unnecessary re-renders
+export default memo(ContactForm);

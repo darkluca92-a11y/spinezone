@@ -37,10 +37,13 @@ const nextConfig = {
       'recharts',
       '@googlemaps/react-wrapper',
       '@supabase/supabase-js',
-      '@supabase/auth-helpers-nextjs'
+      '@supabase/auth-helpers-nextjs',
+      'framer-motion'
     ],
     webVitalsAttribution: ['CLS', 'LCP', 'FID', 'FCP', 'TTFB', 'INP'],
     scrollRestoration: true,
+    // Critical path optimization
+    forceSwcTransforms: true,
     // Disabled optimizeCss due to 'critters' module dependency issues in Netlify build environment
     // optimizeCss: true,
     turbo: {
@@ -81,34 +84,31 @@ const nextConfig = {
     // Production optimizations
     if (!dev) {
       // Optimize bundle splitting for better caching
-      config.optimization = {
-        ...config.optimization,
-        splitChunks: {
-          ...config.optimization.splitChunks,
-          cacheGroups: {
-            ...config.optimization.splitChunks.cacheGroups,
-            vendor: {
-              test: /[\\/]node_modules[\\/]/,
-              name: 'vendors',
-              chunks: 'all',
-              maxSize: 200000, // 200KB chunks for better loading
-              priority: 10,
-            },
-            common: {
-              name: 'common',
-              minChunks: 2,
-              chunks: 'all',
-              enforce: true,
-              maxSize: 200000,
-              priority: 5,
-            },
-            // Separate chunk for heavy components
-            appointments: {
-              test: /[\\/]components[\\/](.*AppointmentForm|.*Appointment.*)\\.tsx?$/,
-              name: 'appointments',
-              chunks: 'all',
-              priority: 15,
-            },
+      config.optimization.splitChunks = {
+        ...config.optimization.splitChunks,
+        cacheGroups: {
+          ...config.optimization.splitChunks.cacheGroups,
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+            maxSize: 200000, // 200KB chunks for better loading
+            priority: 10,
+          },
+          common: {
+            name: 'common',
+            minChunks: 2,
+            chunks: 'all',
+            enforce: true,
+            maxSize: 200000,
+            priority: 5,
+          },
+          // Separate chunk for heavy components
+          appointments: {
+            test: /[\\/]components[\\/](.*AppointmentForm|.*Appointment.*)\\.tsx?$/,
+            name: 'appointments',
+            chunks: 'all',
+            priority: 15,
           },
         },
       };

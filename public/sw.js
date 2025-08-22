@@ -1,5 +1,5 @@
-// Enhanced Service Worker for Performance Optimization
-const CACHE_VERSION = '1.3.0';
+// Enhanced Service Worker for Performance Optimization - SpineZone v2.0
+const CACHE_VERSION = '2.0.0';
 const STATIC_CACHE_NAME = `spinezone-static-v${CACHE_VERSION}`;
 const DYNAMIC_CACHE_NAME = `spinezone-dynamic-v${CACHE_VERSION}`;
 const IMAGE_CACHE_NAME = `spinezone-images-v${CACHE_VERSION}`;
@@ -8,7 +8,11 @@ const IMAGE_CACHE_NAME = `spinezone-images-v${CACHE_VERSION}`;
 const CRITICAL_ASSETS = [
   '/',
   '/manifest.json',
-  // These will be updated dynamically based on build output
+  '/_next/static/css/275ed64cc4367444.css',
+  '/_next/static/chunks/main-009c5e60c95ecccb.js',
+  '/_next/static/chunks/framework-8e0e0f4a6b83a956.js',
+  '/_next/static/chunks/react-vendor.js',
+  '/spinezone-logo-correct.png'
 ];
 
 // Routes to pre-cache for better navigation performance
@@ -43,8 +47,8 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(STATIC_CACHE_NAME)
       .then(cache => {
-        console.log('Service Worker: Caching static assets');
-        return cache.addAll(STATIC_ASSETS);
+        console.log('Service Worker: Caching critical assets');
+        return cache.addAll(CRITICAL_ASSETS);
       })
       .catch(error => {
         console.error('Service Worker: Cache addAll failed:', error);

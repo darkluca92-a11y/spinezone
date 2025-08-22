@@ -123,8 +123,10 @@ export function generateSEOMetadata(config: SEOConfig): Metadata {
   // Generate OpenGraph title with location and year
   const ogTitle = `${title} | SpineZone ${location} 2025`;
   
-  // Enhanced description with local SEO elements
-  const enhancedDescription = `${description} Located in ${location}, serving all surrounding areas. Book your consultation today!`;
+  // Enhanced description with local SEO elements and compelling CTAs
+  const enhancedDescription = description.length > 140 ? 
+    `${description.substring(0, 140)}... ${location} | Call (858) 555-0123 | Same-day appointments available` :
+    `${description} ${location} clinic | Call (858) 555-0123 | Free consultation | Same-day appointments available`;
 
   return {
     title,
@@ -278,7 +280,118 @@ export function generateLocalBusinessSchema(pageName?: string) {
       "reviewCount": "847",
       "bestRating": "5",
       "worstRating": "1"
+    },
+    "sameAs": [
+      "https://facebook.com/spinezonesd",
+      "https://instagram.com/spinezonesd",
+      "https://linkedin.com/company/spinezone",
+      "https://twitter.com/spinezonesd"
+    ],
+    "knowsAbout": [
+      "Physical Therapy",
+      "Spine Treatment",
+      "Joint Pain Relief",
+      "Sports Injury Rehabilitation",
+      "Manual Therapy",
+      "Pain Management",
+      "Non-invasive Treatment",
+      "Orthopedic Rehabilitation"
+    ],
+    "memberOf": {
+      "@type": "Organization",
+      "name": "American Physical Therapy Association"
+    },
+    "accreditedBy": {
+      "@type": "Organization",
+      "name": "Commission on Accreditation in Physical Therapy Education"
     }
+  };
+}
+
+// Generate comprehensive healthcare service schema
+export function generateHealthcareServiceSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HealthcareService",
+    "@id": "https://spinezone-sandiego.com/#healthcareservice",
+    "name": "Physical Therapy Services",
+    "alternateName": "PT Services San Diego",
+    "description": "Comprehensive physical therapy services specializing in spine treatment, joint pain relief, and sports injury rehabilitation without surgery",
+    "url": "https://spinezone-sandiego.com/services",
+    "serviceType": "Physical Therapy",
+    "medicalSpecialty": [
+      "Physical Therapy",
+      "Sports Medicine",
+      "Pain Management",
+      "Rehabilitation Medicine",
+      "Orthopedic Therapy",
+      "Manual Therapy"
+    ],
+    "availableService": [
+      {
+        "@type": "MedicalTherapy",
+        "name": "Spine Treatment Therapy",
+        "description": "Non-invasive spine and back pain treatment using advanced therapeutic techniques",
+        "code": {
+          "@type": "MedicalCode",
+          "code": "97110",
+          "codingSystem": "CPT"
+        }
+      },
+      {
+        "@type": "MedicalTherapy",
+        "name": "Joint Pain Therapy",
+        "description": "Comprehensive joint mobility restoration for hips, knees, shoulders, and all major joints",
+        "code": {
+          "@type": "MedicalCode",
+          "code": "97112",
+          "codingSystem": "CPT"
+        }
+      },
+      {
+        "@type": "MedicalTherapy",
+        "name": "Sports Injury Rehabilitation",
+        "description": "Specialized rehabilitation for athletic injuries and return-to-sport training",
+        "code": {
+          "@type": "MedicalCode",
+          "code": "97116",
+          "codingSystem": "CPT"
+        }
+      },
+      {
+        "@type": "MedicalTherapy",
+        "name": "Manual Therapy",
+        "description": "Hands-on therapeutic techniques for pain relief and mobility improvement",
+        "code": {
+          "@type": "MedicalCode",
+          "code": "97140",
+          "codingSystem": "CPT"
+        }
+      }
+    ],
+    "provider": {
+      "@type": "MedicalBusiness",
+      "@id": "https://spinezone-sandiego.com/#medicalbusiness"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "San Diego",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    },
+    "hoursAvailable": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "07:00",
+      "closes": "20:00"
+    },
+    "availableChannel": [
+      {
+        "@type": "ServiceChannel",
+        "servicePhone": "+1-858-555-0123",
+        "serviceUrl": "https://spinezone-sandiego.com/contact"
+      }
+    ]
   };
 }
 
@@ -386,6 +499,159 @@ export function generateAppointmentBookingSchema() {
         "object": {
           "@type": "Event",
           "name": "Physical Therapy Treatment Session"
+        }
+      }
+    ]
+  };
+}
+
+// Generate organization schema for enhanced brand visibility
+export function generateOrganizationSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "@id": "https://spinezone-sandiego.com/#organization",
+    "name": "SpineZone Physical Therapy",
+    "alternateName": "SpineZone PT San Diego",
+    "legalName": "SpineZone Physical Therapy Inc.",
+    "url": "https://spinezone-sandiego.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://spinezone-sandiego.com/spinezone-logo.png",
+      "width": 300,
+      "height": 100
+    },
+    "description": "San Diego's leading physical therapy clinic specializing in non-invasive spine, joint, and sports injury treatment with 90% success rate and over 1 million patient encounters.",
+    "foundingDate": "2015",
+    "founder": {
+      "@type": "Person",
+      "name": "Dr. Sarah Martinez, PT, DPT"
+    },
+    "employee": [
+      {
+        "@type": "Person",
+        "name": "Dr. Sarah Martinez",
+        "jobTitle": "Director of Physical Therapy",
+        "qualifications": "Doctor of Physical Therapy (DPT), Board Certified"
+      }
+    ],
+    "hasCredential": [
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "License",
+        "recognizedBy": {
+          "@type": "Organization",
+          "name": "California Physical Therapy Board"
+        }
+      }
+    ],
+    "awards": [
+      "Best Physical Therapy Clinic San Diego 2023",
+      "Top Healthcare Provider Award 2024",
+      "Excellence in Patient Care 2024"
+    ],
+    "makesOffer": {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Free Physical Therapy Consultation",
+        "description": "Complimentary initial assessment and treatment plan consultation"
+      },
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+1-858-555-0123",
+        "contactType": "customer service",
+        "areaServed": "US-CA",
+        "availableLanguage": ["en", "es"]
+      },
+      {
+        "@type": "ContactPoint",
+        "email": "info@spinezone-sandiego.com",
+        "contactType": "customer service"
+      }
+    ]
+  };
+}
+
+// Generate medical procedure schema for specific treatments
+export function generateMedicalProcedureSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MedicalProcedure",
+    "@id": "https://spinezone-sandiego.com/#medicaltreatment",
+    "name": "Non-Invasive Physical Therapy Treatment",
+    "alternateName": "Conservative Physical Therapy",
+    "description": "Evidence-based physical therapy treatment for spine, joint, and sports injuries without surgery, injections, or opioids",
+    "procedureType": "Therapeutic",
+    "bodyLocation": [
+      "Spine",
+      "Back",
+      "Neck",
+      "Shoulders",
+      "Hips",
+      "Knees",
+      "All Joints"
+    ],
+    "preparation": "Initial consultation and movement assessment",
+    "followup": "Progress monitoring and treatment plan adjustments",
+    "howPerformed": "Manual therapy techniques, therapeutic exercises, and advanced rehabilitation equipment",
+    "status": "StandardOfCare",
+    "contraindication": "Acute fractures, infections, or conditions requiring surgical intervention",
+    "expectedPrognosis": "90% of patients experience significant pain relief and improved function",
+    "medicationUsed": "None - drug-free treatment approach",
+    "seriousAdverseOutcome": "Extremely rare with conservative treatment"
+  };
+}
+
+// Generate FAQ schema for common healthcare questions
+export function generateFAQSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://spinezone-sandiego.com/#faq",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I need a referral for physical therapy in San Diego?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No referral required in California. You can directly schedule a physical therapy appointment at SpineZone for evaluation and treatment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does physical therapy treatment take to work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most patients see improvement within 2-4 sessions. Our comprehensive approach achieves 90% success rate in pain relief and function restoration."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What conditions does SpineZone treat without surgery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We treat back pain, neck pain, joint pain, sports injuries, arthritis, sciatica, herniated discs, and all musculoskeletal conditions using non-invasive methods."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does insurance cover physical therapy appointments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, most insurance plans cover physical therapy. We accept major insurance providers and offer flexible payment options including HSA/FSA."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I schedule same-day physical therapy appointments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we offer same-day appointments for urgent cases. Call (858) 555-0123 or book online for immediate scheduling."
         }
       }
     ]

@@ -6,6 +6,21 @@
   NODE_VERSION = "18.17.0"
   NPM_FLAGS = "--production=false"
   NEXT_TELEMETRY_DISABLED = "1"
+  NODE_OPTIONS = "--max-old-space-size=4096"
+  
+[build.processing]
+  skip_processing = false
+  
+[build.processing.css]
+  bundle = true
+  minify = true
+  
+[build.processing.js]
+  bundle = true
+  minify = true
+  
+[build.processing.html]
+  pretty_urls = true
 
 # For static export - SPA fallback for client-side routing
 [[redirects]]
@@ -43,13 +58,17 @@
     # Service Worker and PWA support
     Service-Worker-Allowed = "/"
     
-    # Preload critical resources
-    Link = '''</fonts/inter-var.woff2>; rel=preload; as=font; type=font/woff2; crossorigin,
+    # Enhanced preload and prefetch resources
+    Link = '''</_next/static/css/275ed64cc4367444.css>; rel=preload; as=style,
+              </_next/static/chunks/main-009c5e60c95ecccb.js>; rel=preload; as=script,
+              </_next/static/chunks/framework-8e0e0f4a6b83a956.js>; rel=preload; as=script,
+              </_next/static/chunks/react-vendor.js>; rel=preload; as=script,
               </manifest.json>; rel=preload; as=fetch; crossorigin,
-              </_next/static/css/>; rel=preload; as=style,
               </services>; rel=prefetch,
               </assessment>; rel=prefetch,
-              </contact>; rel=prefetch'''
+              </contact>; rel=prefetch,
+              </about>; rel=prefetch,
+              </testimonials>; rel=prefetch'''
 
 # Optimal caching for different asset types
 [[headers]]
@@ -126,4 +145,36 @@
   for = "/api/*"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
+    X-Content-Type-Options = "nosniff"
+
+# Advanced compression settings
+[[headers]]
+  for = "/_next/static/chunks/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Encoding = "br, gzip"
+    Vary = "Accept-Encoding"
+    X-Content-Type-Options = "nosniff"
+
+# Brotli compression for specific file types
+[[headers]]
+  for = "*.br"
+  [headers.values]
+    Content-Encoding = "br"
+    Content-Type = "application/javascript; charset=utf-8"
+
+# WebP and AVIF optimization
+[[headers]]
+  for = "/_next/static/media/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Vary = "Accept"
+    Access-Control-Allow-Origin = "*"
+
+# Critical CSS caching
+[[headers]]
+  for = "/_next/static/css/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "text/css; charset=utf-8"
     X-Content-Type-Options = "nosniff"

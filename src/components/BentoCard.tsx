@@ -1,6 +1,6 @@
 'use client';
 
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef, useState, useMemo } from 'react';
 import { motion, useInView, useAnimation } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
 
@@ -136,7 +136,8 @@ const BentoCard = memo(function BentoCard({
     }
   }[size];
 
-  const variants = {
+  // Memoized animation variants for performance
+  const variants = useMemo(() => ({
     hidden: { 
       opacity: 0, 
       y: 50, 
@@ -157,9 +158,10 @@ const BentoCard = memo(function BentoCard({
         damping: 15
       }
     }
-  };
+  }), [delay]);
 
-  const hoverVariants = {
+  // Memoized hover variants for performance
+  const hoverVariants = useMemo(() => ({
     hover: {
       scale: 1.05,
       rotateY: 5,
@@ -168,7 +170,7 @@ const BentoCard = memo(function BentoCard({
         ease: "easeOut" as const
       }
     }
-  };
+  }), []);
 
   return (
     <motion.div

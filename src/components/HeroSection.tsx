@@ -6,7 +6,7 @@ import { PrimaryContactCTA } from '@/components/ProfessionalContactCTA';
 import BentoCard from '@/components/BentoCard';
 import { GeometricBackground } from '@/components/ui/shape-landing-hero';
 import { StarBorder } from '@/components/ui/star-border';
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useState, useMemo, useCallback } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
@@ -21,11 +21,13 @@ function HeroSection() {
     setIsVisible(true);
   }, []);
 
+  // Memoized click handler for StarBorder CTA to prevent re-renders
+  const handleContactClick = useCallback(() => {
+    setShowContactDetails(prev => !prev);
+  }, []);
+
   // Custom StarBorder CTA Component that maintains PrimaryContactCTA functionality
-  const StarBorderCTA = () => {
-    const handleClick = () => {
-      setShowContactDetails(!showContactDetails);
-    };
+  const StarBorderCTA = useMemo(() => () => {
 
     return (
       <div className="w-full sm:w-auto max-w-xs sm:max-w-none">
@@ -34,7 +36,7 @@ function HeroSection() {
           color="hsl(197, 90%, 55%)" // Healthcare blue that matches the gradient
           speed="8s" // Professional, not too fast
           className="w-full sm:w-auto transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-3xl"
-          onClick={handleClick}
+          onClick={handleContactClick}
           aria-label="Contact SpineZone to schedule your appointment"
         >
           <div className="flex items-center justify-center py-2 px-4 sm:py-3 sm:px-6 min-h-[48px] sm:min-h-[56px] text-base sm:text-lg font-bold text-gray-900 bg-gradient-to-r from-blue-50 via-teal-50 to-green-50 rounded-[20px] w-full">
@@ -92,7 +94,7 @@ function HeroSection() {
             </div>
 
             <button
-              onClick={() => setShowContactDetails(false)}
+              onClick={handleContactClick}
               className="mt-4 w-full text-gray-500 hover:text-gray-700 text-sm font-medium transition-colors py-2"
             >
               Close
@@ -101,10 +103,10 @@ function HeroSection() {
         )}
       </div>
     );
-  };
+  }, [showContactDetails, handleContactClick]);
 
-  // Mobile-first hero stats for immediate impact
-  const heroStats = [
+  // Memoized hero stats to prevent recreation on each render
+  const heroStats = useMemo(() => [
     {
       id: 'success-rate',
       title: 'Success Rate',
@@ -140,7 +142,31 @@ function HeroSection() {
       icon: Award,
       gradient: 'purple' as const
     }
-  ];
+  ], []);
+
+  // Memoized animation variants to prevent recreation
+  const animationVariants = useMemo(() => ({
+    heroTitle: {
+      initial: { opacity: 0, y: 30 },
+      animate: { opacity: 1, y: 0 },
+      transition: { duration: 0.8, ease: "easeOut" as const }
+    },
+    heroParagraph: {
+      initial: { opacity: 0, y: 20 },
+      animate: { opacity: 1, y: 0 },
+      transition: { duration: 0.8, delay: 0.2 }
+    },
+    heroCTA: {
+      initial: { opacity: 0, scale: 0.9 },
+      animate: { opacity: 1, scale: 1 },
+      transition: { duration: 0.8, delay: 0.4 }
+    },
+    statsGrid: {
+      initial: { opacity: 0, y: 50 },
+      animate: { opacity: 1, y: 0 },
+      transition: { duration: 1, delay: 0.6 }
+    }
+  }), []);
 
   return (
     <GeometricBackground>
@@ -153,14 +179,16 @@ function HeroSection() {
           {/* Mobile-First Hero Content */}
           <div className="text-center mb-8 md:mb-12">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, ease: [0.4, 0.0, 0.2, 1] }}
+              initial={animationVariants.heroTitle.initial}
+              animate={isInView ? animationVariants.heroTitle.animate : animationVariants.heroTitle.initial}
+              transition={animationVariants.heroTitle.transition}
             >
               {/* Primary Brand Headline */}
               <h1 
                 id="hero-heading"
                 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black mb-4 leading-none text-rendering-optimized overflow-hidden mobile-text-safe tracking-tight"
+                role="banner"
+                aria-label="SpineZone Physical Therapy San Diego - Leading healthcare provider"
               >
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-teal-600 to-green-600 mb-2 drop-shadow-sm">
                   SpineZone
@@ -169,7 +197,8 @@ function HeroSection() {
               
               {/* Secondary Headlines */}
               <div className="mb-6">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 leading-tight text-gray-900">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 leading-tight text-gray-900"
+                    aria-describedby="hero-description">
                   Heal Naturally
                 </h2>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-3">
@@ -188,10 +217,17 @@ function HeroSection() {
             </motion.div>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              id="hero-description"
+              initial={animationVariants.heroParagraph.initial}
+              animate={isInView ? animationVariants.heroParagraph.animate : animationVariants.heroParagraph.initial}
+              transition={animationVariants.heroParagraph.transition}
               className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed px-2 sm:px-0 mobile-text-safe"
+              style={{
+                willChange: 'opacity, transform',
+                contain: 'layout style'
+              }}
+              role="banner"
+              aria-label="SpineZone clinic description and key benefits"
             >
               San Diego's #1 rated physical therapy clinic. Revolutionary non-invasive therapy 
               for <strong>all joint pain</strong> including spine, hips, shoulders, and knees.
@@ -202,9 +238,9 @@ function HeroSection() {
 
             {/* Mobile-Optimized StarBorder CTA */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              initial={animationVariants.heroCTA.initial}
+              animate={isInView ? animationVariants.heroCTA.animate : animationVariants.heroCTA.initial}
+              transition={animationVariants.heroCTA.transition}
               className="flex justify-center mb-12 px-2 sm:px-0"
             >
               <StarBorderCTA />
@@ -213,9 +249,9 @@ function HeroSection() {
 
           {/* Revolutionary Stats Grid - Mobile Impact */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 1, delay: 0.6 }}
+            initial={animationVariants.statsGrid.initial}
+            animate={isInView ? animationVariants.statsGrid.animate : animationVariants.statsGrid.initial}
+            transition={animationVariants.statsGrid.transition}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 px-2 sm:px-0"
           >
             {heroStats.map((stat, index) => (
@@ -314,7 +350,8 @@ function HeroSection() {
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3">
                   Why Choose SpineZone
                 </h3>
-                <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+                <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto"
+                   id="clinic-features">
                   Certified excellence in advanced rehabilitation technology
                 </p>
               </div>
