@@ -262,9 +262,9 @@ export default function TopRightDropdown({ className }: DropdownProps) {
               "w-80 sm:w-72 md:w-64",
               // Mobile-first positioning - ensure it fits on screen
               "max-w-[calc(100vw-1rem)] mr-2 sm:mr-0",
-              "bg-white/95 backdrop-blur-md",
-              "rounded-2xl shadow-xl border border-gray-200/50",
-              "py-2 z-50",
+              "bg-white border border-gray-300",
+              "rounded-2xl shadow-xl",
+              "py-2 z-[60]",
               // Professional healthcare styling
               "shadow-[0_8px_32px_rgba(0,0,0,0.08)]",
               // Safe area for mobile devices with notches
